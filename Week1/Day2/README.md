@@ -26,7 +26,7 @@ The resume page includes:
 - Typography and spacing handled entirely via Tailwind
 - Responsive and visually neat interface
 
-# Link: 
+# Link: https://laibaweek01day02task02.vercel.app/
 
 ## Author
 **Laiba Hameed**  
