@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-white text-black container mx-auto">
+    <main class="flex flex-col items-center justify-center px-4 md:px-20 md:py-20 py-10 space-y-6">
+
+        <!-- Header -->
+        <header class="text-center space-y-2">
+            <h1 class="text-3xl font-bold transition hover:scale-105">John Deo</h1>
+            <p class="my-2 text-lg">Creative and Innovative Web Developer</p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm">
+                <span><i class="text-cyan-500 fa-solid fa-location-dot pr-1"></i> Pleasantville, CA 94588</span>
+                <span><i class="text-cyan-500 fa-solid fa-phone pr-1"></i> (555) 123-4567</span>
+                <span class="cursor-pointer"><i class="text-cyan-500 fa-solid fa-at pr-1"></i> john.deo@gmail.com</span>
+                <span class="cursor-pointer"><i class="text-cyan-500 fa-solid fa-link pr-1"></i>
+                    https://johndoe.me/</span>
+            </div>
+        </header>
+
+        <hr class="border-t border-black w-full" />
+
+        <!-- Profiles -->
+        <section class="flex flex-col md:flex-row flex-wrap w-full gap-y-4">
+            <div class="w-full md:w-1/4 font-bold text-lg">Profiles</div>
+            <div class="w-full md:w-1/4 flex flex-col text-left hover:scale-105 transition cursor-pointer">
+                <span><i class="fa-brands fa-linkedin text-blue-800 pr-1"></i>johndoe</span>
+                <span class="text-sm">LinkedIn</span>
+            </div>
+            <div class="w-full md:w-1/4 flex flex-col text-left hover:scale-105 transition cursor-pointer">
+                <span><i class="fa-brands fa-github pr-1"></i>johndoe</span>
+                <span class="text-sm">GitHub</span>
+            </div>
+            <div class="w-full md:w-1/4 flex flex-col text-left hover:scale-105 transition cursor-pointer">
+                <span><i class="fa-brands fa-stack-overflow text-orange-500 pr-1"></i>johndoe</span>
+                <span class="text-sm">StackOverflow</span>
+            </div>
+        </section>
+
+        <hr class="border-t border-black w-full" />
+
+        <!-- Summary -->
+        <section class="flex flex-col md:flex-row w-full gap-y-4">
+            <div class="w-full md:w-1/4 font-bold text-lg">Summary</div>
+            <div class="w-full md:w-3/4 text-justify">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. <b>Delectus porro doloremque hic</b>
+                    voluptatem nihil fuga cum corrupti sapiente quasi amet eveniet natus, veniam molestiae veritatis
+                    aut.Deserunt beatae nisi dignissimos.voluptatem nihil fuga cum corrupti sapiente quasi amet eveniet
+                    natus, veniam molestiae veritatis aut.Deserunt beatae nisi dignissimos.
+                </p>
+            </div>
+        </section>
+
+        <hr class="border-t border-black w-full" />
+
+        <!-- Experience -->
+        <section class="flex flex-col md:flex-row w-full gap-y-4">
+            <div class="w-full md:w-1/4 font-bold text-lg">Experience</div>
+            <div class="w-full md:w-3/4 space-y-6">
+
+                <!-- Job 1 -->
+                <div>
+                    <div class="flex flex-col sm:flex-row justify-between font-bold text-lg">
+                        <h3>Creative Solutions Inc.</h3>
+                        <span>Jan 2019 – Present</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between">
+                        <p>Senior Web Developer</p>
+                        <p>San Francisco, CA</p>
+                    </div>
+                    <p class="mt-1 cursor-pointer"><i class="text-cyan-500 fa-solid fa-link pr-1"></i>
+                        https://creativesolutions.inc</p>
+                    <ul class="list-disc list-inside mt-2 space-y-2">
+                        <li>Led the frontend development of multiple web applications using modern JavaScript frameworks
+                            like React.js and Vue.js, ensuring responsive design and cross-browser compatibility.</li>
+                        <li>Optimized backend RESTful APIs resulting in a 40% improvement in response time.</li>
+                        <li>Coordinated agile sprint planning and review meetings, assigned tasks to team members, and
+                            provided mentorship to junior developers.
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!-- Job 2 -->
+                <div>
+                    <div class="flex flex-col sm:flex-row justify-between font-bold text-lg">
+                        <h3>TechAdvancers</h3>
+                        <span>Jun 2016 – Dec 2018</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between">
+                        <p>Web Developer</p>
+                        <p>San Jose, CA</p>
+                    </div>
+                    <p class="mt-1 cursor-pointer"><i class="text-cyan-500 fa-solid fa-link pr-1"></i>
+                        https://TechAdvancers.com</p>
+                    <ul class="list-disc list-inside mt-2 space-y-2">
+                        <li>Built reusable and scalable UI components in both React and Vue, following component-driven development and ensuring consistency across projects.
+                        </li>
+                        <li>Integrated RESTful APIs for seamless data flow between frontend and backend.</li>
+                        <li>Collaborated with UI/UX designers to align development with design systems and worked closely with QA teams to resolve issues during testing phases.</li>
+                    </ul>
+
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t border-black w-full" />
+
+        <!-- Education -->
+        <section class="flex flex-col md:flex-row w-full gap-y-4">
+            <div class="w-full md:w-1/4 font-bold text-lg">Education</div>
+            <div class="w-full md:w-3/4">
+                <div class="flex flex-col sm:flex-row justify-between font-bold text-lg">
+                    <span>University of California</span>
+                    <span>Aug 2012 – May 2016</span>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-between">
+                    <span>Berkeley, CA</span>
+                    <span>Bachelor’s in Computer Science</span>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t border-black w-full" />
+
+        <!-- Skills -->
+        <section class="flex flex-col md:flex-row flex-wrap w-full gap-y-4">
+            <div class="w-full md:w-1/4 font-bold text-lg">Skills</div>
+
+            <div class="w-full md:w-1/4 flex flex-col text-left hover:scale-105 transition">
+                <span class="font-bold text-lg">Web Technologies</span>
+                <span>Advanced</span>
+                <span>HTML5, JavaScript, PHP, Python</span>
+            </div>
+
+            <div class="w-full md:w-1/4 flex flex-col text-left hover:scale-105 transition">
+                <span class="font-bold text-lg">Frameworks</span>
+                <span>Intermediate</span>
+                <span>React.js, Angular, Vue.js, Laravel</span>
+            </div>
+
+            <div class="w-full md:w-1/4 flex flex-col text-left hover:scale-105 transition">
+                <span class="font-bold text-lg">Tools</span>
+                <span>Intermediate</span>
+                <span>Webpack, Git, Jenkins, Docker, JIRA</span>
+            </div>
+        </section>
+
+        <hr class="border-t border-black w-full" />
+
+        <!-- Certifications -->
+        <section class="flex flex-col md:flex-row w-full gap-y-4">
+            <div class="w-full md:w-1/4 font-bold text-lg">Certifications</div>
+            <div class="w-full md:w-3/4 flex flex-col md:flex-row justify-between gap-4">
+                <div class="w-full md:w-1/2 flex justify-between items-center">
+                    <div>
+                        <p class="font-bold text-lg">Full-Stack Web Development</p>
+                        <p>CodeAcademy</p>
+                    </div>
+                    <p class="font-bold text-lg">2020</p>
+                </div>
+
+                <div class="w-full md:w-1/2 flex justify-between items-center">
+                    <div>
+                        <p class="font-bold text-lg">AWS Certified Developer</p>
+                        <p>Amazon Web Services</p>
+                    </div>
+                    <p class="font-bold text-lg">2019</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t border-black w-full" />
+
+        <!-- Languages -->
+        <section class="flex flex-col md:flex-row w-full gap-y-4">
+            <div class="w-full md:w-1/4 font-bold text-lg">Languages</div>
+            <div class="w-full md:w-3/4 flex flex-col md:flex-row gap-4">
+                <div class="w-full md:w-1/2">
+                    <p class="font-bold text-lg">English</p>
+                    <p>Native Speaker</p>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <p class="font-bold text-lg">Spanish</p>
+                    <p>Intermediate</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t border-black w-full" />
+
+        <!-- References -->
+        <section class="flex flex-col md:flex-row w-full gap-y-4">
+            <div class="w-full md:w-1/4 font-bold text-lg">References</div>
+            <div class="w-full md:w-3/4 font-bold text-lg">Available upon request</div>
+        </section>
+    </main>
+</body>
+
+</html>
