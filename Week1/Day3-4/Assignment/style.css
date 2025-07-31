@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap');
+@tailwind utilities;
+
+@import "tailwindcss";
+/* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */
+@custom-variant dark (&:where(.dark, .dark *));
+
+* {
+    font-family: 'Poppins', sans-serif;
+    /* background-color: #000000; */
+}
+
+.heading-fancy {
+    font-family: 'Imperial Script', cursive;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.035em;
+}
+/* Ensure Poppins font is available */
+.font-poppins {
+    font-family: "Poppins", sans-serif;
+}
+
+.footer-color {
+    color: #222222;
+}
+
+.green{
+    color: #047F01;
+}
