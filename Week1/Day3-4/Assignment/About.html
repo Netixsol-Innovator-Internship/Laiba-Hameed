@@ -145,7 +145,7 @@
                             <div
                                 class="border border-white dark:border-black rounded-full p-1 transition-colors duration-300">
                                 <button
-                                    class="w-10 h-10 cursor-pointer bg-white bg-opacity-10 dark:bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-20 rounded-full flex items-center justify-center transition-all duration-200">
+                                    class="w-10 h-10 cursor-pointer bg-opacity-10 dark:bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-20 rounded-full flex items-center justify-center transition-all duration-200">
                                     <img src="./assets/arrow-down.png" alt=""
                                         class="dark:invert transition-all duration-300">
                                 </button>
@@ -169,7 +169,7 @@
                             <div
                                 class="border border-white dark:border-black rounded-full p-1 transition-colors duration-300">
                                 <button
-                                    class="w-10 h-10 cursor-pointer bg-white  bg-opacity-10 dark:bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-20 rounded-full flex items-center justify-center transition-all duration-200">
+                                    class="w-10 h-10 cursor-pointer bg-opacity-10 dark:bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-20 rounded-full flex items-center justify-center transition-all duration-200">
                                     <img src="./assets/arrow-down.png" alt=""
                                         class="dark:invert transition-all duration-300">
                                 </button>
@@ -307,28 +307,28 @@
     </footer>
 
     <!-- Scroll to Top Button -->
-    <button id="scrollToTopBtn"
-        class="cursor-pointer fixed bottom-6 right-6 z-50 group w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 2xl:w-24 2xl:h-24 rounded-full border-2 border-white/80 flex items-center justify-center group-hover:border-white group-hover:bg-white/10 group-hover:scale-110 transition-all duration-300 backdrop-blur-sm animate-pulse-slow group-hover:animate-bounce-gentle">
-
-        <!-- Rotating background ring -->
-        <div
-            class="absolute inset-0 rounded-full border-2 border-transparent border-t-white/20 animate-spin-slow group-hover:border-t-white/40">
-        </div>
-
-        <!-- Pulsing outer ring -->
-        <div class="absolute inset-0 rounded-full border border-white/20 animate-ping group-hover:animate-pulse"></div>
-
-        <!-- Arrow Up Icon -->
-        <svg class="relative z-10 w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-9 xl:h-9 2xl:w-10 2xl:h-10 text-white group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300"
-            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-        </svg>
-
-        <!-- Glowing hover effect -->
-        <div
-            class="absolute inset-0 rounded-full bg-white/0 group-hover:bg-white/5 group-hover:shadow-lg group-hover:shadow-white/20 transition-all duration-500">
-        </div>
-    </button>
+    <div class="w-full 2xl:w-[1536px]">
+        <button id="scrollToTopBtn"
+            class="cursor-pointer fixed bottom-6 right-6 z-50 group w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 2xl:w-24 2xl:h-24 rounded-full border-2 border-white/80 dark:border-black/80 flex items-center justify-center group-hover:border-white group-hover:bg-white/10 group-hover:scale-110 transition-all duration-300 backdrop-blur-sm animate-pulse-slow group-hover:animate-bounce-gentle">
+            <!-- Rotating background ring -->
+            <div
+                class="absolute inset-0 rounded-full border-2 border-transparent border-t-white/20 dark:border-t-black/20 animate-spin-slow group-hover:border-t-white/40 dark:group-hover:border-t-black/40">
+            </div>
+            <!-- Pulsing outer ring -->
+            <div
+                class="absolute inset-0 rounded-full border border-white/20 dark:border-black/20 animate-ping group-hover:animate-pulse">
+            </div>
+            <!-- Arrow Up Icon -->
+            <svg class="relative z-10 w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-9 xl:h-9 2xl:w-10 2xl:h-10 text-white dark:text-black group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+            </svg>
+            <!-- Glowing hover effect -->
+            <div
+                class="absolute inset-0 rounded-full bg-white/0 group-hover:bg-white/5 group-hover:shadow-lg group-hover:shadow-white/20 dark:group-hover:shadow-black/20 transition-all duration-500">
+            </div>
+        </button>
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
