@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+.font-poppins {
+    font-family: "Poppins", sans-serif;
+}
+
+*{
+    font-family: "Poppins", sans-serif;
+}
+
+.font-mono {
+    font-family: "Space Mono", monospace;
+}
+
+.font-worksans{
+    font-family: "Work Sans", sans-serif;
+}
+
+.font-clash{
+    font-family: "Clash Display", sans-serif;
+}
+.btn {
+    color: #DA8F4D;
+}
+
+.leading-px {
+    line-height: 100px;
+}
