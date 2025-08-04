@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <link href="./output.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            purple: {
+              600: '#854dff',
+              700: '#6d28d9'
+            },
+            red: {
+              500: '#ff5757'
+            }
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+
+<!-- only body content shown for brevity -->
+
+<body class="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 my-4 font-poppins">
+  <!-- Heading -->
+  <h1 class="font-poppins text-4xl sm:text-6xl font-extrabold tracking-tight italic text-purple-600 mb-16 text-center">
+    Calculate your Age</h1>
+  <div class="box bg-white py-12 px-4 sm:py-12 sm:px-12 w-full max-w-full sm:max-w-[680px]">
+    <form id="age-form">
+    <!-- Input Section -->
+    <div id="input-section" class="flex flex-row items-baseline gap-3 sm:gap-6 mb-6">
+      <!-- DAY -->
+      <div class="flex flex-col min-h-[90px] justify-between w-full sm:w-[140px]">
+        <label id="day-label" for="day"
+          class="text-sm font-semibold text-gray-600 tracking-widest mb-2 block transition-all duration-1000 ease-in-out">
+          DAY
+        </label>
+        <input id="day" type="number" placeholder="DD"
+          class="w-full font-poppins text-lg sm:text-2xl font-extrabold h-14 border border-gray-200 rounded-lg px-4
+          focus:outline-none ring-0 ring-transparent focus:ring-1 focus:ring-purple-600 focus:border-transparent transition-all duration-1000 ease-in-out" />
+        <p id="day-error" class="text-red-500 text-xs italic mt-1 invisible transition-all duration-1000 ease-in-out">
+          Must be a valid day</p>
+      </div>
+
+      <!-- MONTH -->
+      <div class="flex flex-col min-h-[90px] justify-between w-full sm:w-[140px]">
+        <label id="month-label" for="month"
+          class="text-sm font-semibold text-gray-600 tracking-widest mb-2 block transition-all duration-1000 ease-in-out ">
+          MONTH
+        </label>
+        <input id="month" type="number" placeholder="MM"
+          class="w-full font-poppins text-lg sm:text-2xl font-extrabold h-14 border border-gray-200 rounded-lg px-4
+          focus:outline-none ring-0 ring-transparent focus:ring-1 focus:ring-purple-600 focus:border-transparent transition-all duration-1000 ease-in-out" />
+        <p id="month-error" class="text-red-500 text-xs italic mt-1 invisible transition-all duration-1000 ease-in-out">
+          Must be
+          a valid month</p>
+      </div>
+
+      <!-- YEAR -->
+      <div class="flex flex-col min-h-[90px] justify-between w-full sm:w-[140px]">
+        <label id="year-label" for="year"
+          class="text-sm font-semibold text-gray-600 tracking-widest mb-2 block transition-all duration-1000 ease-in-out">
+          YEAR
+        </label>
+        <input id="year" type="number" placeholder="YYYY"
+          class="w-full font-poppins text-lg sm:text-2xl font-extrabold h-14 border border-gray-200 rounded-lg px-4
+          focus:outline-none ring-0 ring-transparent focus:ring-1 focus:ring-purple-600 focus:border-transparent transition-all duration-1000 ease-in-out" />
+        <p id="year-error" class="text-red-500 text-xs italic mt-1 invisible transition-all duration-1000 ease-in-out">
+          Must be
+          a valid year</p>
+      </div>
+    </div>
+
+    <!--Button -->
+    <div class="relative mb-10">
+      <!-- Divider Line -->
+      <hr class="border border-gray-300">
+
+      <button type="submit"
+        class="absolute left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-auto sm:right-0 -top-7 sm:top-1/2 sm:-translate-y-1/2
+    bg-purple-600 hover:bg-black rounded-full w-14 h-14 sm:w-18 sm:h-18 p-4 sm:p-5 flex items-center justify-center transition-all duration-1000 ease-in-out cursor-pointer">
+        <img src="./assets/images/icon-arrow.svg" alt="">
+      </button>
+    </div>
+    </form>
+
+
+    <!-- Results Section -->
+    <div class="space-y-2 mt-10 sm:mt-0">
+      <div class="flex items-center gap-3">
+        <span id="years-result"
+          class="text-4xl sm:text-6xl md:text-7xl font-extrabold font-poppins text-purple-600 tracking-widest italic transition-all duration-1000 ease-in-out">--</span>
+        <span
+          class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight italic text-black font-poppins ">years</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="months-result"
+          class="text-4xl sm:text-6xl md:text-7xl font-extrabold font-poppins text-purple-600 tracking-widest italic transition-all duration-1000 ease-in-out">--</span>
+        <span class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight italic text-black">months</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="days-result"
+          class="text-4xl sm:text-6xl md:text-7xl font-extrabold font-poppins text-purple-600 tracking-widest italic transition-all duration-1000 ease-in-out">--</span>
+        <span class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight italic text-black">days</span>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="main.js"></script>
+
+</html>
