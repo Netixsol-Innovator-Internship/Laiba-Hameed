@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notifications</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="./output.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&display=swap" rel="stylesheet">
   <style>
     body {
@@ -14,31 +14,40 @@
   </style>
 </head>
 
-<body class="bg-[#f0f4fa] sm:text-base text-[13px] text-gray-600 flex items-center justify-center">
+<body
+  class="bg-[#f0f4fa] dark:bg-gray-950 sm:text-base text-[13px] text-gray-600 dark:text-gray-300 flex items-center justify-center">
   <div class="w-full max-w-[800px] sm:my-20">
-    <div class="bg-white px-5 py-5 sm:px-8 sm:py-10 sm:rounded-lg shadow-lg sm:mx-6">
+    <div class="bg-white dark:bg-gray-900 px-5 py-5 sm:px-8 sm:py-10 sm:rounded-lg shadow-lg sm:mx-6">
+
       <!-- Top bar -->
       <div class="flex justify-between items-center mb-8">
         <div class="flex items-center">
-          <p class="text-xl sm:text-2xl font-extrabold text-[#1c202b]">Notifications</p>
+          <p class="text-xl sm:text-2xl font-extrabold text-[#1c202b] dark:text-white">Notifications</p>
           <p id="num" class="ml-2 bg-[#0a317b] text-white px-3 py-0.5 rounded-md font-extrabold">3</p>
         </div>
         <a href="#" id="read"
-          class="text-gray-400 sm:text-lg hover:text-[#0a317b] transition-all duration-300 ease-in-out">Mark all as
-          read</a>
+          class="read-btn text-gray-400 dark:text-gray-300 sm:text-lg hover:text-[#0a317b] transition-all duration-300 ease-in-out disabled:opacity-50 pointer-events-none">
+          Mark all as read
+        </a>
+
       </div>
 
       <!-- Notifications -->
       <div class="space-y-3">
 
         <!-- Notification 1 (Unread) -->
-        <div class="single-box unseen flex items-start p-4 bg-[#f0f4fa] cursor-pointer border rounded-lg border-transparent hover:border-gray-200 transition-all duration-400 ease-in-out">
+        <!-- Notification 1 (Unread) -->
+        <div id="no1"
+          class="group single-box unseen flex items-start p-4 bg-[#f0f4fa] dark:bg-gray-700 cursor-pointer border rounded-lg border-transparent hover:border-gray-200 dark:hover:border-gray-500 transition-all duration-400 ease-in-out">
           <img src="./assets/images/avatar-mark-webber.webp" class="w-12 h-12 mr-4" alt="">
           <div>
             <p>
-              <a href="#" class="font-extrabold text-[#1c202b] hover:text-[#0a317b]">Mark Webber</a>
+              <a href="#" class="font-extrabold text-[#1c202b] dark:text-white hover:text-[#0a317b]">Mark
+                Webber</a>
               reacted to your recent post
               <a href="#" class="font-extrabold hover:text-[#0a317b]">My first tournament today!</a>
+
+              <!-- Dot -->
               <span class="dot inline-block ml-2 w-2 h-2 bg-[#f65351] rounded-full"></span>
             </p>
             <p class="text-sm mt-1">1m ago</p>
@@ -47,11 +56,13 @@
 
 
         <!-- Notification 2 -->
-        <div class="single-box unseen flex items-start p-4 bg-[#f0f4fa] cursor-pointer border rounded-lg border-transparent hover:border-gray-200 transition-all duration-400 ease-in-out">
+        <div id="no2"
+          class="single-box unseen flex items-start p-4 bg-[#f0f4fa] dark:bg-gray-700 cursor-pointer border rounded-lg border-transparent hover:border-gray-200 dark:hover:border-gray-500 transition-all duration-400 ease-in-out">
           <img src="./assets/images/avatar-angela-gray.webp" class="w-12 h-12 mr-4" alt="">
           <div>
             <p>
-              <a href="#" class="font-extrabold text-[#1c202b] hover:text-[#0a317b]">Angela Gray</a>
+              <a href="#" class="font-extrabold text-[#1c202b] dark:text-white hover:text-[#0a317b]">Angela
+                Gray</a>
               followed you
               <span class="dot inline-block ml-2 w-2 h-2 bg-[#f65351] rounded-full"></span>
             </p>
@@ -60,11 +71,13 @@
         </div>
 
         <!-- Notification 3 -->
-        <div class="single-box unseen flex items-start p-4 bg-[#f0f4fa] cursor-pointer border rounded-lg border-transparent hover:border-gray-200 transition-all duration-400 ease-in-out">
+        <div id="no3"
+          class="single-box unseen flex items-start p-4 bg-[#f0f4fa] dark:bg-gray-700  cursor-pointer border rounded-lg border-transparent hover:border-gray-200 dark:hover:border-gray-500 transition-all duration-400 ease-in-out">
           <img src="./assets/images/avatar-jacob-thompson.webp" class="w-12 h-12 mr-4" alt="">
           <div>
             <p>
-              <a href="#" class="font-extrabold text-[#1c202b] hover:text-[#0a317b]">Jacob Thompson</a>
+              <a href="#" class="font-extrabold text-[#1c202b] dark:text-white hover:text-[#0a317b]">Jacob
+                Thompson</a>
               has joined your group
               <a href="#" class="font-extrabold hover:text-[#0a317b]">Chess Club</a>
               <span class="dot inline-block ml-2 w-2 h-2 bg-[#f65351] rounded-full"></span>
@@ -74,28 +87,34 @@
         </div>
 
         <!-- Notification 4 - Message -->
-        <div class="flex items-start p-4 cursor-pointer border rounded-lg border-transparent hover:border-gray-200 transition-all duration-400 ease-in-out">
+        <div
+          class="flex items-start p-4 cursor-pointer border rounded-lg border-transparent hover:border-gray-200 dark:hover:border-gray-500 transition-all duration-400 ease-in-out">
           <img src="./assets/images/avatar-rizky-hasanuddin.webp" class="w-12 h-12 mr-4" alt="">
           <div>
             <p>
-              <a href="#" class="font-extrabold text-[#1c202b] hover:text-[#0a317b]">Rizky Hasanuddin</a>
+              <a href="#" class="font-extrabold text-[#1c202b] dark:text-white hover:text-[#0a317b]">Rizky
+                Hasanuddin</a>
               sent you a private message
             </p>
             <p class="text-sm mt-1">5 days ago</p>
-            <div class="border border-[#dde7ee] p-4 rounded-md mt-3 text-base cursor-pointer hover:bg-[#f0f4fa]">
-              Hello, thanks for setting up the Chess Club. I've been a member for a few weeks now and I'm already having
+            <div
+              class="border border-[#dde7ee] dark:border-gray-600 p-4 rounded-md mt-3 text-base cursor-pointer hover:bg-[#f0f4fa] dark:hover:bg-[#2c2c44]">
+              Hello, thanks for setting up the Chess Club. I've been a member for a few weeks now and I'm
+              already having
               lots of fun and improving my game.
             </div>
           </div>
         </div>
 
         <!-- Notification 5 - Image Comment -->
-        <div class="flex justify-between items-start p-4 cursor-pointer border rounded-lg border-transparent hover:border-gray-200 transition-all duration-400 ease-in-out">
+        <div
+          class="flex justify-between items-start p-4 cursor-pointer border rounded-lg border-transparent hover:border-gray-200 dark:hover:border-gray-500 transition-all duration-400 ease-in-out">
           <div class="flex items-start">
             <img src="./assets/images/avatar-kimberly-smith.webp" class="w-12 h-12 mr-4" alt="">
             <div>
               <p>
-                <a href="#" class="font-extrabold text-[#1c202b] hover:text-[#0a317b]">Kimberly Smith</a>
+                <a href="#" class="font-extrabold text-[#1c202b] dark:text-white hover:text-[#0a317b]">Kimberly
+                  Smith</a>
                 commented on your picture
               </p>
               <p class="text-sm mt-1">1 week ago</p>
@@ -105,25 +124,29 @@
         </div>
 
         <!-- Notification 6 -->
-        <div class="flex items-start p-4 cursor-pointer border rounded-lg border-transparent hover:border-gray-200 transition-all duration-400 ease-in-out">
+        <div
+          class="flex items-start p-4 cursor-pointer border rounded-lg border-transparent hover:border-gray-200 dark:hover:border-gray-500 transition-all duration-400 ease-in-out">
           <img src="./assets/images/avatar-nathan-peterson.webp" class="w-12 h-12 mr-4" alt="">
           <div>
             <p>
-              <a href="#" class="font-extrabold text-[#1c202b] hover:text-[#0a317b]">Nathan Peterson</a>
+              <a href="#" class="font-extrabold text-[#1c202b] dark:text-white hover:text-[#0a317b]">Nathan
+                Peterson</a>
               reacted to your recent post
-              <a href="#" class="font-extrabold hover:text-[#0a317b]">5 end-game strategies to increase your win
-                rate</a>
+              <a href="#" class="font-extrabold hover:text-[#0a317b]">5 end-game strategies to increase
+                your win rate</a>
             </p>
             <p class="text-sm mt-1">2 weeks ago</p>
           </div>
         </div>
 
         <!-- Notification 7 -->
-        <div class="flex items-start p-4 cursor-pointer border rounded-lg border-transparent hover:border-gray-200 transition-all duration-400 ease-in-out">
+        <div
+          class="flex items-start p-4 cursor-pointer border rounded-lg border-transparent hover:border-gray-200 dark:hover:border-gray-500 transition-all duration-400 ease-in-out">
           <img src="./assets/images/avatar-anna-kim.webp" class="w-12 h-12 mr-4" alt="">
           <div>
             <p>
-              <a href="#" class="font-extrabold text-[#1c202b] hover:text-[#0a317b]">Anna Kim</a>
+              <a href="#" class="font-extrabold text-[#1c202b] dark:text-white hover:text-[#0a317b]">Anna
+                Kim</a>
               left the group
               <a href="#" class="font-extrabold hover:text-[#0a317b]">Chess Club</a>
             </p>
@@ -133,6 +156,10 @@
 
       </div>
     </div>
+    <button id="themeToggle"
+      class="fixed bottom-4 right-4 cursor-pointer p-2 bg-gray-200 dark:bg-gray-700 rounded-full">
+      <span id="toggleIcon">🌙</span>
+    </button>
   </div>
 
   <script src="main.js"></script>
