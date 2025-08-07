@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Mentor | Tip calculator app</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Space Mono', monospace;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-[#c5e4e7] flex flex-col items-center justify-start py-8 sm:py-20 gap-8">
+  <h2 class="text-[#00474b] uppercase tracking-[3px] text-2xl text-center">
+    spli <br /> tter
+  </h2>
+
+  <div class="bg-white w-[100%] max-w-[700px] rounded-2xl p-6 md:p-8">
+    <div class="flex flex-col md:flex-row gap-8">
+      <!-- Input Section -->
+      <div class="w-full md:w-1/2 flex flex-col gap-6">
+        <!-- Bill -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <label for="bill" class="text-sm text-[#00474b]">Bill</label>
+            <p id="billError" class="text-red-600 text-sm hidden">Can't be zero</p>
+          </div>
+          <div class="relative">
+            <input type="text" placeholder="0" id="bill"
+              class="w-full text-right px-4 py-2 text-lg text-[#00474b] bg-[#f4fafa] rounded-md outline-[#26c2ae]" />
+            <img src="./images/icon-dollar.svg" alt="dollar"
+              class="absolute top-1/2 left-4 transform -translate-y-1/2" />
+          </div>
+        </div>
+
+        <!-- Tip -->
+        <div class="flex flex-col gap-2">
+          <label for="tip" class="text-sm text-[#00474b]">Select Tip %</label>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4  tip-btns">
+            <button
+              class="bg-[#00474b] text-white py-2 rounded-md text-lg hover:bg-[#26c2ae] hover:text-[#00474b]">5%</button>
+            <button
+              class="bg-[#00474b] text-white py-2 rounded-md text-lg hover:bg-[#26c2ae] hover:text-[#00474b]">10%</button>
+            <button
+              class="bg-[#00474b] text-white py-2 rounded-md text-lg hover:bg-[#26c2ae] hover:text-[#00474b]">15%</button>
+            <button
+              class="bg-[#00474b] text-white py-2 rounded-md text-lg hover:bg-[#26c2ae] hover:text-[#00474b]">25%</button>
+            <button
+              class="bg-[#00474b] text-white py-2 rounded-md text-lg hover:bg-[#26c2ae] hover:text-[#00474b]">50%</button>
+            <input type="number" placeholder="Custom" id="custom"
+              class="bg-[#f4fafa] text-center text-lg rounded-md py-2 outline-[#26c2ae] transition-all duration-300 ease-in-out" />
+          </div>
+        </div>
+
+        <!-- People -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <label for="people" class="text-sm text-[#00474b]">Number of People</label>
+            <p id="peopleError" class="text-red-600 text-sm hidden">Can't be zero</p>
+          </div>
+          <div class="relative">
+            <input type="text" placeholder="0" id="people"
+              class="w-full text-right px-4 py-2 text-lg text-[#00474b] bg-[#f4fafa] rounded-md outline-[#26c2ae]" />
+            <img src="./images/icon-person.svg" alt="person"
+              class="absolute top-1/2 left-4 transform -translate-y-1/2" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Output Section -->
+      <div class="w-full md:w-1/2 bg-[#00474b] rounded-2xl p-6 flex flex-col gap-6">
+        <div class="flex justify-between items-center">
+          <p class="text-white text-sm">Tip Amount<br /><span class="text-xs text-[#7f9c9f]">/ person</span></p>
+          <h2 id="tipAmount" class="text-[#26c2ae] text-3xl">$0.00</h2>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="text-white text-sm">Total<br /><span class="text-xs text-[#7f9c9f]">/ person</span></p>
+          <h2 id="total" class="text-[#26c2ae] text-3xl">$0.00</h2>
+        </div>
+        <button id="resetBtn"
+          class="mt-auto bg-[#26c2ae] text-[#00474b] uppercase py-2 rounded-md opacity-40 hover:opacity-100">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
