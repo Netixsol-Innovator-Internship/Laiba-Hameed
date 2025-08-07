@@ -14,6 +14,8 @@ const tabs = [
 ];
 
 const tabsContainer = document.getElementById("tabsContainer");
+const scrollLeftBtn = document.getElementById("scrollLeft");
+const scrollRightBtn = document.getElementById("scrollRight");
 
 // Render tabs
 tabsContainer.innerHTML = tabs.map((tab, index) => `
@@ -24,17 +26,36 @@ tabsContainer.innerHTML = tabs.map((tab, index) => `
   </a>
 `).join("");
 
-// Handle click
+// Click behavior
 const tabButtons = document.querySelectorAll(".tab-btn");
 
 tabButtons.forEach((btn) => {
     btn.addEventListener("click", function (e) {
         e.preventDefault();
-
-        tabButtons.forEach(b => b.classList.remove("bg-[#03081F]")); // remove bg from all
-        this.classList.add("bg-[#03081F]"); // add to clicked
+        tabButtons.forEach(b => b.classList.remove("bg-[#03081F]"));
+        this.classList.add("bg-[#03081F]");
     });
 });
+
+// Scroll control
+const updateArrowsVisibility = () => {
+    const maxScrollLeft = tabsContainer.scrollWidth - tabsContainer.clientWidth;
+    scrollLeftBtn.classList.toggle("hidden", tabsContainer.scrollLeft <= 0);
+    scrollRightBtn.classList.toggle("hidden", tabsContainer.scrollLeft >= maxScrollLeft - 1);
+};
+
+tabsContainer.addEventListener("scroll", updateArrowsVisibility);
+window.addEventListener("resize", updateArrowsVisibility);
+window.addEventListener("DOMContentLoaded", updateArrowsVisibility);
+
+scrollLeftBtn.addEventListener("click", () => {
+    tabsContainer.scrollBy({ left: -200, behavior: "smooth" });
+});
+
+scrollRightBtn.addEventListener("click", () => {
+    tabsContainer.scrollBy({ left: 200, behavior: "smooth" });
+});
+
 
 // reviews
 const reviewsData = [
