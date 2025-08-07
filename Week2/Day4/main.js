@@ -21,8 +21,8 @@ function validateInputs() {
         billError.classList.remove("hidden");
         billAmount.classList.add("border", "border-red-600");
         isValid = false;
-    } else if (billAmount.value.length > 8) {
-        billError.textContent = "Max 8 digits allowed";
+    } else if (billAmount.value.length > 10) {
+        billError.textContent = "Max 10 digits allowed";
         billError.classList.remove("hidden");
         billAmount.classList.add("border", "border-red-600");
         isValid = false;
@@ -38,8 +38,8 @@ function validateInputs() {
         peopleError.classList.remove("hidden");
         numberOfPeople.classList.add("border", "border-red-600");
         isValid = false;
-    } else if (num > 9) {
-        peopleError.textContent = "Only 1–9 people allowed.";
+    } else if (num > 9999999999) {
+        peopleError.textContent = "Only 1–9999999999 people allowed.";
         peopleError.classList.remove("hidden");
         numberOfPeople.classList.add("border", "border-red-600");
         isValid = false;
@@ -101,17 +101,18 @@ buttons.forEach((button) => {
 // Custom tip input
 let debounce;
 customTipPercentage.addEventListener("input", (e) => {
+    let value = parseFloat(e.target.value);
+
+    if (!isNaN(value) && value > 100) {
+        customTipPercentage.value = "100";
+        value = 100;
+    }
+
     clearTimeout(debounce);
     debounce = setTimeout(() => {
         buttons.forEach((btn) => btn.classList.remove("bg-[#26c2ae]", "text-[#00474b]"));
 
-        let tipPercent = parseFloat(e.target.value);
-        if (tipPercent > 100) {
-            tipPercent = 100;
-            customTipPercentage.value = 100;
-        }
-
-        selectedTipPercentage = isNaN(tipPercent) ? 0 : tipPercent;
+        selectedTipPercentage = isNaN(value) ? 0 : value;
 
         if (!validateInputs()) return;
 
@@ -123,16 +124,16 @@ customTipPercentage.addEventListener("input", (e) => {
     }, 300);
 });
 
+
 // Live validation
 [billAmount, numberOfPeople].forEach((input) => {
     input.addEventListener("input", () => {
-        if (billAmount.value.length > 8) {
-            billAmount.value = billAmount.value.slice(0, 8);
+        if (billAmount.value.length > 10) {
+            billAmount.value = billAmount.value.slice(0, 10);
         }
-        if (numberOfPeople.value.length > 1) {
-            numberOfPeople.value = numberOfPeople.value.slice(0, 1);
+        if (numberOfPeople.value.length > 10) {
+            numberOfPeople.value = numberOfPeople.value.slice(0, 10);
         }
-
         validateInputs();
 
         if (!validateInputs()) return;

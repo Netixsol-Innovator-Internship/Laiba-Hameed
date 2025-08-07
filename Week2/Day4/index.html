@@ -19,7 +19,7 @@
     spli <br /> tter
   </h2>
 
-  <div class="bg-white w-[100%] max-w-[700px] rounded-2xl p-6 md:p-8">
+  <div class="bg-white w-[100%] max-w-[768px] rounded-2xl p-6 md:p-8">
     <div class="flex flex-col md:flex-row gap-8">
       <!-- Input Section -->
       <div class="w-full md:w-1/2 flex flex-col gap-6">
@@ -30,7 +30,7 @@
             <p id="billError" class="text-red-600 text-sm hidden">Can't be zero</p>
           </div>
           <div class="relative">
-            <input type="number" placeholder="0" id="bill" min="1" max="100000000"
+            <input type="number" placeholder="0" id="bill" min="1" max="9999999999"
               class="w-full text-right px-4 py-2 text-lg text-[#00474b] bg-[#f4fafa] rounded-md outline-[#26c2ae] appearance-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
             <img src="./images/icon-dollar.svg" alt="dollar"
               class="absolute top-1/2 left-4 transform -translate-y-1/2" />
@@ -63,7 +63,7 @@
             <p id="peopleError" class="text-red-600 text-sm hidden">Can't be zero</p>
           </div>
           <div class="relative">
-            <input type="number" placeholder="0" id="people" min="1" max="9" maxlength="1" 
+            <input type="number" placeholder="0" id="people" min="1" max="9999999999" maxlength="1" 
               class="w-full text-right px-4 py-2 text-lg text-[#00474b] bg-[#f4fafa] rounded-md outline-[#26c2ae] appearance-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
             <img src="./images/icon-person.svg" alt="person"
               class="absolute top-1/2 left-4 transform -translate-y-1/2" />
@@ -75,11 +75,11 @@
       <div class="w-full md:w-1/2 bg-[#00474b] rounded-2xl p-6 flex flex-col gap-6">
         <div class="flex justify-between items-center">
           <p class="text-white text-sm">Tip Amount<br /><span class="text-xs text-[#7f9c9f]">/ person</span></p>
-          <h2 id="tipAmount" class="text-[#26c2ae] text-3xl">$0.00</h2>
+          <h2 id="tipAmount" class="text-[#26c2ae] text-2xl sm:text-3xl">$0.00</h2>
         </div>
         <div class="flex justify-between items-center">
           <p class="text-white text-sm">Total<br /><span class="text-xs text-[#7f9c9f]">/ person</span></p>
-          <h2 id="total" class="text-[#26c2ae] text-3xl">$0.00</h2>
+          <h2 id="total" class="text-[#26c2ae] text-2xl sm:text-3xl">$0.00</h2>
         </div>
         <button id="resetBtn"
           class="mt-auto bg-[#26c2ae] text-[#00474b] uppercase py-2 rounded-md opacity-40 hover:opacity-100">Reset</button>
