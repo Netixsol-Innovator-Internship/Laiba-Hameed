@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Master</title>
+    <link href="./output.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class=" flex items-center justify-center border border-bottom border-[#F0F2F5] font-manrope">
+        <div
+            class="w-full max-w-[1728px] flex items-center justify-between text-black px-4 sm:px-10 md:px-16 lg:px-20 py-4 font-poppins relative">
+
+            <!-- Logo -->
+            <a href="#" id="goHome" class="font-manrope flex items-center gap-2 font-bold text-lg">
+                <img src="./assets/logo.png" alt="logo" class="">
+                QuizMaster
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="flex items-center gap-6">
+                <nav class="hidden lg:flex items-center justify-between gap-6 lg:gap-10 text-base 2xl:text-lg">
+                    <a href="#" id="Home"
+                        class="font-medium hover:text-[#0D78F2] xl:px-2 transition-all duration-300 ease-in-out">Home</a>
+                    <a href="#" id="quizSelection"
+                        class="font-medium hover:text-[#0D78F2] xl:px-2 transition-all duration-300 ease-in-out">Quizzes</a>
+                    <a href="#"
+                        class="font-medium hover:text-[#0D78F2] xl:px-2 transition-all duration-300 ease-in-out">LeaderBoard</a>
+                    <a href="#" id="goToProfile"
+                        class="font-medium hover:text-[#0D78F2] xl:px-2 transition-all duration-300 ease-in-out">Profile</a>
+                </nav>
+                <div class="flex items-center gap-6">
+                    <span class="bg-[#F0F2F5] rounded-lg hidden sm:inline-block">
+                        <img src="./assets/bell.png" alt="notification bell" class="p-3">
+                    </span>
+                    <span id="Profile">
+                        <img src="./assets/user.png" alt="user" class="w-10 rounded-full cursor-pointer">
+                    </span>
+                    <!-- Mobile Hamburger Button -->
+                    <button id="mobile-menu-button" aria-label="Toggle mobile menu"
+                        class="lg:hidden text-black hover:text-gray-700 focus:outline-none transition-colors">
+                        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <nav id="mobile-menu"
+                class="absolute top-20 right-0 z-50 lg:hidden hidden flex flex-col text-black px-6 pt-4 pb-6 space-y-3 w-[200px] border border-gray-300 shadow-md rounded-md mx-6 bg-[#D9D9D9]">
+                <a href="#" id="HomePage"
+                    class="font-medium hover:text-[#0D78F2] xl:px-2 transition-all duration-300 ease-in-out">Home</a>
+                <a href="#" id="QuizSelection"
+                    class="font-medium hover:text-[#0D78F2] xl:px-2 transition-all duration-300 ease-in-out">Quizzes</a>
+                <a href="#"
+                    class="font-medium hover:text-[#0D78F2] xl:px-2 transition-all duration-300 ease-in-out">LeaderBoard</a>
+                <a href="#" id="UserProfile"
+                    class="font-medium hover:text-[#0D78F2] xl:px-2 transition-all duration-300 ease-in-out">Profile</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+    <div id="app">
+
+    </div>
+
+
+    <script type="module" src="./js/script.js"></script>
+    <script type="module" src="./js/app.js"></script>
+</body>
+
+</html>

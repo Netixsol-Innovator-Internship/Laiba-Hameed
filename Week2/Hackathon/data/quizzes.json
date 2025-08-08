@@ -1,0 +1,552 @@
+[
+    {
+        "id": 1,
+        "title": "HTML Basics",
+        "category": "HTML",
+        "description": "Test your knowledge about the fundamentals of HTML.",
+        "image": "./assets/html.png",
+        "featured": true,
+        "questions": [
+            {
+                "question": "What does HTML stand for?",
+                "options": [
+                    "Hyper Text Markup Language",
+                    "Home Tool Markup Language",
+                    "Hyperlinks and Text Markup Language",
+                    "Hyperlinking Text Mark Language"
+                ],
+                "answer": "Hyper Text Markup Language"
+            },
+            {
+                "question": "Which HTML element is used to define the title of a document?",
+                "options": [
+                    "meta",
+                    "title",
+                    "head",
+                    "header"
+                ],
+                "answer": "title"
+            },
+            {
+                "question": "Which attribute specifies an image source?",
+                "options": [
+                    "src",
+                    "href",
+                    "alt",
+                    "link"
+                ],
+                "answer": "src"
+            },
+            {
+                "question": "What is the correct HTML element for inserting a line break?",
+                "options": [
+                    "break",
+                    "br",
+                    "lb",
+                    "newline"
+                ],
+                "answer": "br"
+            },
+            {
+                "question": "Which tag is used for the largest heading?",
+                "options": [
+                    "h1",
+                    "heading",
+                    "h6",
+                    "header"
+                ],
+                "answer": "h1"
+            },
+            {
+                "question": "Which attribute provides alternative text for an image?",
+                "options": [
+                    "title",
+                    "alt",
+                    "src",
+                    "text"
+                ],
+                "answer": "alt"
+            },
+            {
+                "question": "Which HTML element is used to define an unordered list?",
+                "options": [
+                    "ul",
+                    "ol",
+                    "li",
+                    "list"
+                ],
+                "answer": "ul"
+            },
+            {
+                "question": "What does the <p> tag define?",
+                "options": [
+                    "Paragraph",
+                    "Picture",
+                    "Preformatted text",
+                    "Print"
+                ],
+                "answer": "Paragraph"
+            },
+            {
+                "question": "Which tag is used to display a table row?",
+                "options": [
+                    "tr",
+                    "td",
+                    "th",
+                    "table-row"
+                ],
+                "answer": "tr"
+            },
+            {
+                "question": "Which tag is used to define a hyperlink?",
+                "options": [
+                    "a",
+                    "link",
+                    "href",
+                    "anchor"
+                ],
+                "answer": "a"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "CSS Fundamentals",
+        "category": "CSS",
+        "description": "Master the art of styling with CSS.",
+        "image": "./assets/css.jpeg",
+        "featured": true,
+        "questions": [
+            {
+                "question": "What does CSS stand for?",
+                "options": [
+                    "Colorful Style Sheets",
+                    "Cascading Style Sheets",
+                    "Computer Style Sheets",
+                    "Creative Style Sheets"
+                ],
+                "answer": "Cascading Style Sheets"
+            },
+            {
+                "question": "Which property changes text color?",
+                "options": [
+                    "color",
+                    "font-color",
+                    "text-color",
+                    "background-color"
+                ],
+                "answer": "color"
+            },
+            {
+                "question": "Which property controls font size?",
+                "options": [
+                    "font-style",
+                    "text-size",
+                    "font-size",
+                    "text-style"
+                ],
+                "answer": "font-size"
+            },
+            {
+                "question": "How do you select an element with id 'header'?",
+                "options": [
+                    "#header",
+                    ".header",
+                    "header",
+                    "*header"
+                ],
+                "answer": "#header"
+            },
+            {
+                "question": "Which property makes text bold?",
+                "options": [
+                    "font-weight",
+                    "bold",
+                    "text-weight",
+                    "font-bold"
+                ],
+                "answer": "font-weight"
+            },
+            {
+                "question": "What value of position makes an element stick to the top while scrolling?",
+                "options": [
+                    "absolute",
+                    "sticky",
+                    "fixed",
+                    "relative"
+                ],
+                "answer": "sticky"
+            },
+            {
+                "question": "Which property sets the background color?",
+                "options": [
+                    "bgcolor",
+                    "background-color",
+                    "color",
+                    "background"
+                ],
+                "answer": "background-color"
+            },
+            {
+                "question": "How do you select all <p> elements inside a div?",
+                "options": [
+                    "div p",
+                    "div.p",
+                    "div#p",
+                    "p div"
+                ],
+                "answer": "div p"
+            },
+            {
+                "question": "Which property changes the size of the text?",
+                "options": [
+                    "font-size",
+                    "text-style",
+                    "font-weight",
+                    "text-size"
+                ],
+                "answer": "font-size"
+            },
+            {
+                "question": "Which CSS property is used to change the left margin of an element?",
+                "options": [
+                    "margin-left",
+                    "padding-left",
+                    "margin",
+                    "left-margin"
+                ],
+                "answer": "margin-left"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "JavaScript Essentials",
+        "category": "JavaScript",
+        "description": "Learn the fundamentals of JavaScript programming.",
+        "image": "./assets/js.png",
+        "featured": true,
+        "questions": [
+            {
+                "question": "Which keyword is used to declare a variable?",
+                "options": [
+                    "var",
+                    "let",
+                    "const",
+                    "variable"
+                ],
+                "answer": "var"
+            },
+            {
+                "question": "Which symbol is used for comments in JavaScript?",
+                "options": [
+                    "//",
+                    "/*",
+                    "#",
+                    "<!-- -->"
+                ],
+                "answer": "//"
+            },
+            {
+                "question": "What is the correct way to write 'Hello World' in an alert box?",
+                "options": [
+                    "msg('Hello World')",
+                    "alert('Hello World')",
+                    "msgBox('Hello World')",
+                    "console.log('Hello World')"
+                ],
+                "answer": "alert('Hello World')"
+            },
+            {
+                "question": "Which method is used to parse a string to an integer?",
+                "options": [
+                    "parseInt()",
+                    "Number()",
+                    "parseFloat()",
+                    "toInteger()"
+                ],
+                "answer": "parseInt()"
+            },
+            {
+                "question": "Which operator is used to assign a value to a variable?",
+                "options": [
+                    "-",
+                    "=",
+                    "*",
+                    "+"
+                ],
+                "answer": "="
+            },
+            {
+                "question": "Which symbol is used for strict equality?",
+                "options": [
+                    "===",
+                    "==",
+                    "=",
+                    "!="
+                ],
+                "answer": "==="
+            },
+            {
+                "question": "How do you write a function in JavaScript?",
+                "options": [
+                    "function myFunction()",
+                    "func myFunction()",
+                    "def myFunction()",
+                    "function:myFunction()"
+                ],
+                "answer": "function myFunction()"
+            },
+            {
+                "question": "Which method adds an element to the end of an array?",
+                "options": [
+                    "push()",
+                    "append()",
+                    "add()",
+                    "insert()"
+                ],
+                "answer": "push()"
+            },
+            {
+                "question": "Which object is used for mathematical calculations?",
+                "options": [
+                    "Math",
+                    "Calc",
+                    "Number",
+                    "Maths"
+                ],
+                "answer": "Math"
+            },
+            {
+                "question": "Which event occurs when the user clicks an HTML element?",
+                "options": [
+                    "onclick",
+                    "onmouseover",
+                    "onchange",
+                    "onload"
+                ],
+                "answer": "onclick"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Python Basics",
+        "category": "Python",
+        "description": "Get started with Python programming fundamentals.",
+        "image": "./assets/img.png",
+        "featured": false,
+        "questions": [
+            {
+                "question": "Which keyword is used to define a function in Python?",
+                "options": [
+                    "def",
+                    "function",
+                    "func",
+                    "define"
+                ],
+                "answer": "def"
+            },
+            {
+                "question": "What is the correct file extension for Python files?",
+                "options": [
+                    ".py",
+                    ".python",
+                    ".pt",
+                    ".pyt"
+                ],
+                "answer": ".py"
+            },
+            {
+                "question": "Which method is used to get user input in Python 3?",
+                "options": [
+                    "input()",
+                    "read()",
+                    "scan()",
+                    "get()"
+                ],
+                "answer": "input()"
+            },
+            {
+                "question": "What is the output of: print(2**3)?",
+                "options": [
+                    "6",
+                    "8",
+                    "9",
+                    "5"
+                ],
+                "answer": "8"
+            },
+            {
+                "question": "Which data type is immutable?",
+                "options": [
+                    "list",
+                    "set",
+                    "tuple",
+                    "dictionary"
+                ],
+                "answer": "tuple"
+            },
+            {
+                "question": "How do you start a comment in Python?",
+                "options": [
+                    "//",
+                    "#",
+                    "/*",
+                    "--"
+                ],
+                "answer": "#"
+            },
+            {
+                "question": "Which keyword is used for loops?",
+                "options": [
+                    "repeat",
+                    "for",
+                    "loop",
+                    "while"
+                ],
+                "answer": "for"
+            },
+            {
+                "question": "Which operator is used for floor division?",
+                "options": [
+                    "/",
+                    "//",
+                    "%",
+                    "**"
+                ],
+                "answer": "//"
+            },
+            {
+                "question": "How do you create a list in Python?",
+                "options": [
+                    "[]",
+                    "{}",
+                    "()",
+                    "<>"
+                ],
+                "answer": "[]"
+            },
+            {
+                "question": "Which keyword is used to create a class?",
+                "options": [
+                    "class",
+                    "struct",
+                    "object",
+                    "define"
+                ],
+                "answer": "class"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "title": "C++ Fundamentals",
+        "category": "C++",
+        "description": "Learn the basics of C++ programming.",
+        "image": "./assets/c++.jpeg",
+        "featured": false,
+        "questions": [
+            {
+                "question": "Which symbol is used to end a statement in C++?",
+                "options": [
+                    ";",
+                    ".",
+                    ":",
+                    ","
+                ],
+                "answer": ";"
+            },
+            {
+                "question": "Which header file is needed for input/output in C++?",
+                "options": [
+                    "iostream",
+                    "stdio.h",
+                    "stdlib.h",
+                    "conio.h"
+                ],
+                "answer": "iostream"
+            },
+            {
+                "question": "Which keyword is used to define a constant?",
+                "options": [
+                    "final",
+                    "const",
+                    "define",
+                    "static"
+                ],
+                "answer": "const"
+            },
+            {
+                "question": "Which operator is used for scope resolution?",
+                "options": [
+                    "::",
+                    "->",
+                    ".",
+                    "..."
+                ],
+                "answer": "::"
+            },
+            {
+                "question": "Which function is the entry point of a C++ program?",
+                "options": [
+                    "start()",
+                    "main()",
+                    "begin()",
+                    "init()"
+                ],
+                "answer": "main()"
+            },
+            {
+                "question": "How do you write a single-line comment?",
+                "options": [
+                    "//",
+                    "#",
+                    "/*",
+                    "--"
+                ],
+                "answer": "//"
+            },
+            {
+                "question": "Which keyword is used to create an object?",
+                "options": [
+                    "create",
+                    "new",
+                    "malloc",
+                    "init"
+                ],
+                "answer": "new"
+            },
+            {
+                "question": "Which operator is used to access members of a structure?",
+                "options": [
+                    ".",
+                    "->",
+                    "::",
+                    "..."
+                ],
+                "answer": "."
+            },
+            {
+                "question": "Which loop is guaranteed to execute at least once?",
+                "options": [
+                    "for",
+                    "while",
+                    "do-while",
+                    "repeat"
+                ],
+                "answer": "do-while"
+            },
+            {
+                "question": "Which keyword is used to inherit a class?",
+                "options": [
+                    "extends",
+                    "inherits",
+                    "public",
+                    "private"
+                ],
+                "answer": "public"
+            }
+        ]
+    }
+]
