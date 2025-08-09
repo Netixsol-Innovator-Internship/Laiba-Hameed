@@ -28,10 +28,10 @@
             <nav class="hidden lg:flex items-center justify-between gap-6 lg:gap-10 text-base 2xl:text-lg">
                 <a href="#"
                     class="font-medium hover:text-[#FC8A06] xl:px-2 transition-all duration-300 ease-in-out">Home</a>
-                <a href="#"
+                <a href="#Burgers"
                     class="font-medium hover:text-[#FC8A06] xl:px-2 transition-all duration-300 ease-in-out">Special
                     Offers</a>
-                <a href="#"
+                <a href="#restros"
                     class="font-medium text-white bg-[#FC8A06] hover:bg-amber-600 px-6 py-2 rounded-full transition-all duration-300 ease-in-out">Restaurants</a>
                 <a href="#"
                     class="font-medium hover:text-[#FC8A06] xl:px-2 transition-all duration-300 ease-in-out">Track
@@ -48,7 +48,7 @@
                     Cart
                     <span id="totalItems"
                         class="absolute top-[-10px] left-[-10px] bg-[#FC8A06] rounded-full text-white text-xs w-6 h-6 flex items-center justify-center">
-                        10
+                        0
                     </span>
                 </div>
                 <button id="mobile-menu-button" aria-label="Toggle mobile menu"
@@ -69,8 +69,8 @@
         <nav id="mobile-menu"
             class="absolute top-20 right-0 z-50 lg:hidden hidden text-black px-6 pt-4 pb-6 space-y-3 w-[200px] border border-gray-300 shadow-md rounded-md mx-6 bg-[#D9D9D9]">
             <a href="#" class="block hover:text-[#FC8A06] font-medium">Home</a>
-            <a href="#" class="block hover:text-[#FC8A06] font-medium">Special Offers</a>
-            <a href="#" class="block hover:text-[#FC8A06] font-medium">Restaurants</a>
+            <a href="#Burgers" class="block hover:text-[#FC8A06] font-medium">Special Offers</a>
+            <a href="#restros" class="block hover:text-[#FC8A06] font-medium">Restaurants</a>
             <a href="#" class="block hover:text-[#FC8A06] font-medium">Track Order</a>
 
         </nav>
@@ -196,7 +196,7 @@
     <!-- Burgers -->
     <section class="flex flex-col items-center justify-center bg-white font-poppins">
         <div class="w-full max-w-[1728px] px-4 sm:px-10 md:px-16 lg:px-20 py-6 mb-10">
-            <h1 class="text-3xl sm:text-4xl font-bold py-8">Burgers</h1>
+            <h1 id="Burgers" class="text-3xl sm:text-4xl font-bold py-8">Burgers</h1>
             <div id="burgerContainer" class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4 sm:gap-6 mb-6">
 
             </div>
@@ -205,7 +205,7 @@
     <!-- Fries -->
     <section class="flex flex-col items-center justify-center bg-white font-poppins">
         <div class="w-full max-w-[1728px] px-4 sm:px-10 md:px-16 lg:px-20">
-            <h1 class="text-3xl sm:text-4xl font-bold py-8 text-[#FC8A06]">Fries</h1>
+            <h1 id="Fries" class="text-3xl sm:text-4xl font-bold py-8 text-[#FC8A06]">Fries</h1>
             <div id="friesContainer" class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4 sm:gap-6 mb-6">
 
             </div>
@@ -214,7 +214,7 @@
     <!-- Drinks -->
     <section class="flex flex-col items-center justify-center bg-white font-poppins">
         <div class="w-full max-w-[1728px] px-4 sm:px-10 md:px-16 lg:px-20 py-16">
-            <h1 class="text-3xl sm:text-4xl font-bold py-8 text-[#FC8A06]">Cold Drinks</h1>
+            <h1 id="ColdDrinks" class="text-3xl sm:text-4xl font-bold py-8 text-[#FC8A06]">Cold Drinks</h1>
             <div id="drinksContainer" class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4 sm:gap-6 mb-6">
 
             </div>
@@ -390,7 +390,7 @@
     </section>
 
     <!-- similar resturants -->
-    <section class="flex flex-col items-center justify-center bg-white font-poppins">
+    <section id="restros" class="flex flex-col items-center justify-center bg-white font-poppins">
         <div class="w-full max-w-[1728px] px-4 sm:px-10 md:px-16 lg:px-20 py-16">
             <h1 class="text-2xl sm:text-3xl font-bold py-8">Similar Restaurants</h1>
             <div id="restroContainer" class="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-6 mb-6">
@@ -457,7 +457,7 @@
             <div
                 class="w-full max-w-[1728px] text-white text-sm py-6 px-4 sm:px-10 md:px-16 lg:px-20 flex flex-col gap-4 lg:flex-row items-center justify-between ">
                 <p>Order.uk Copyright 2025, All Rights Reserved.</p>
-                <div class="flex items-center gap-6">
+                <div class="hidden items-center gap-6 sm:flex">
                     <a class="" href="#">Privacy Policy</a>
                     <a class="" href="#">Terms</a>
                     <a class="" href="#">Pricing</a>

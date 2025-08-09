@@ -366,7 +366,7 @@ products.products.forEach((item) => {
         <div class="relative lg:w-2/5 h-auto aspect-square rounded-xl overflow-hidden">
             <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" />
             <div class="bg-white opacity-90 absolute bottom-0 right-0 rounded-tl-[50%]">
-                <img src="./assets/shared/Plus.png" alt="plus" class="w-12 h-12 m-4 cursor-pointer add-to-cart" data-id="${item.id}" />
+                <img src="./assets/shared/Plus.png" alt="plus" class="w-12 h-12 m-4 cursor-pointer hover:scale-120 transition-all duration-300 ease-in-out add-to-cart" data-id="${item.id}" />
             </div>
         </div>
     `;
@@ -380,7 +380,3 @@ products.products.forEach((item) => {
         drinksContainer.appendChild(card);
     }
 });
-
-
-
-console.log("DOM loaded?", document.getElementById("burgerContainer"));

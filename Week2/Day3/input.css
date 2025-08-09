@@ -4,7 +4,7 @@
     font-family: "Poppins", sans-serif;
 }
 
-*{
+* {
     font-family: "Poppins", sans-serif;
 }
 
@@ -12,25 +12,31 @@
     font-family: "Space Mono", monospace;
 }
 
-.font-worksans{
+.font-worksans {
     font-family: "Work Sans", sans-serif;
 }
 
-.font-clash{
+.font-clash {
     font-family: "Clash Display", sans-serif;
 }
 
-.text-primary{
+.text-primary {
     color: #FC8A06;
 }
-.text-secondary{
+
+.text-secondary {
     color: #03081F;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
+
 .scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+html {
+    scroll-behavior: smooth;
 }

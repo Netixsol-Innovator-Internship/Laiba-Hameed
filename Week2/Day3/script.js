@@ -1,16 +1,16 @@
 // tabs
 const tabs = [
-    { id: 1, name: 'Offers' },
-    { id: 2, name: 'Burgers' },
-    { id: 3, name: 'Fries' },
-    { id: 4, name: 'Snacks' },
-    { id: 5, name: 'Salads' },
-    { id: 6, name: 'Cold drinks' },
-    { id: 7, name: 'Happy Meal®' },
-    { id: 8, name: 'Desserts' },
-    { id: 9, name: 'Hot drinks' },
-    { id: 10, name: 'Sauces' },
-    { id: 11, name: 'Orbit®' }
+    { id: 1, name: 'Offers', path:"#"},
+    { id: 2, name: 'Burgers' , path:"#Burgers"},
+    { id: 3, name: 'Fries' , path:"#Fries"},
+    { id: 4, name: 'Snacks' , path:"#"},
+    { id: 5, name: 'Salads' , path:"#"},
+    { id: 6, name: 'Cold drinks' , path:"#ColdDrinks"},
+    { id: 7, name: 'Happy Meal®' , path:"#"},
+    { id: 8, name: 'Desserts', path:"#" },
+    { id: 9, name: 'Hot drinks' , path:"#"},
+    { id: 10, name: 'Sauces' , path:"#"},
+    { id: 11, name: 'Orbit®' , path:"#"}
 ];
 
 const tabsContainer = document.getElementById("tabsContainer");
@@ -19,7 +19,7 @@ const scrollRightBtn = document.getElementById("scrollRight");
 
 // Render tabs
 tabsContainer.innerHTML = tabs.map((tab, index) => `
-  <a href="#"
+  <a href="${tab.path}"
      data-id="${tab.id}"
      class="tab-btn text-white font-bold text-lg px-5 py-1 rounded-full ${index === 0 ? 'bg-[#03081F]' : ''}">
      ${tab.name}
@@ -31,7 +31,6 @@ const tabButtons = document.querySelectorAll(".tab-btn");
 
 tabButtons.forEach((btn) => {
     btn.addEventListener("click", function (e) {
-        e.preventDefault();
         tabButtons.forEach(b => b.classList.remove("bg-[#03081F]"));
         this.classList.add("bg-[#03081F]");
     });
