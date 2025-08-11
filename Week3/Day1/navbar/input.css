@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+
+.font-poppins {
+    font-family: "Poppins", sans-serif;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-link {
+    position: relative;
+    transition: color .18s ease, transform .18s ease;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 2px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: black;
+    border-bottom: 1px solid transparent;
+    border-radius: 2px;
+    border-image: linear-gradient(to right, #0165d1, #00d0d0) 1;
+}
+
+
+#mobile-menu.menu-open {
+    max-height: 600px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#mobile-menu svg {
+    transform-origin: center;
+}
+
+/*  toggle animations */
+#mobile-theme-toggle svg {
+    transition: transform 0.3s ease;
+}
+
+#theme-toggle:hover svg,
+#mobile-theme-toggle:hover svg {
+    transform: rotate(15deg);
+}
+
+/* Fixed global transition to exclude display/visibility properties that interfere with dark mode icon switching */
+* {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}

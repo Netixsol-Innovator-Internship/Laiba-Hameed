@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar</title>
+    <link rel="stylesheet" href="./output.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="bg-white transition-colors duration-300 relative">
+    <header class="flex flex-col items-center justify-center border border-b-gray-100 shadow-2xs">
+        <nav
+            class="w-full bg-white px-6 sm:px-10 md:px-16 xl:px-[127px] py-3 max-w-[1920px]  flex items-center justify-between transition-colors duration-300">
+
+            <!-- Logo -->
+            <div class="flex items-center transition-all duration-300 ease-in-out hover:scale-105 active:scale-95">
+                <img src="./logo.png" alt="logo" class="w-24 sm:w-28 lg:w-32 h-auto">
+            </div>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden lg:flex items-center space-x-5 xl:space-x-8 text-sm text-gray-700">
+                <li><a href="#"
+                        class="nav-link flex items-center transition-colors duration-300 hover:text-[#0165D1]">Home</a>
+                </li>
+                <li><a href="#"
+                        class="nav-link flex items-center transition-colors duration-300 hover:text-[#0165D1]">About
+                        Us</a></li>
+                <li class="relative group">
+                    <a href="#"
+                        class="nav-link flex items-center gap-1 transition-colors duration-300 hover:text-[#0165D1]">
+                        Features
+                        <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </a>
+                </li>
+                <li class="relative group">
+                    <a href="#"
+                        class="nav-link flex items-center gap-1 transition-colors duration-300 hover:text-[#0165D1]">
+                        Our Services
+                        <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </a>
+                </li>
+                <li><a href="#"
+                        class="nav-link flex items-center transition-colors duration-300 hover:text-[#0165D1]">Why
+                        ADS?</a></li>
+            </ul>
+
+            <!-- Desktop Button -->
+            <div class="hidden lg:flex items-center gap-3 lg:gap-4">
+                <a href="#"
+                    class="px-5 py-2 rounded bg-gradient-to-r from-[#0165D1] to-[#00D0D0] text-white text-sm font-medium transition-transform duration-300 hover:scale-105 active:scale-95">Contact
+                    Us</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" aria-expanded="false"
+                class="lg:hidden bg-[#E7F3FA] p-2 rounded border border-gray-200 transition-colors duration-200 hover:bg-gray-100 active:bg-gray-200">
+                <svg id="menu-icon" class="w-5 h-5 text-[#0165D1]" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="lg:hidden absolute left-0 right-0 top-full bg-white px-6 py-4 space-y-4 shadow-lg overflow-hidden origin-top transition-all duration-300 ease-out max-h-0 opacity-0 pointer-events-none">
+        <a href="#" class="block text-center nav-link transition-colors duration-200 hover:text-[#0165D1]  rounded-sm">Home</a>
+        <a href="#" class="block text-center nav-link transition-colors duration-200 hover:text-[#0165D1]  rounded-sm">About
+            Us</a>
+        <a href="#"
+            class="flex justify-center items-center gap-1 nav-link group transition-colors duration-200 hover:text-[#0165D1]  rounded-sm">
+            Features
+            <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </a>
+        <a href="#"
+            class="flex justify-center items-center gap-1 nav-link group transition-colors duration-200 hover:text-[#0165D1]  rounded-sm">
+            Our Services
+            <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </a>
+        <a href="#" class="block text-center nav-link transition-colors duration-200 hover:text-[#0165D1]  rounded-sm">Why
+            ADS?</a>
+        <a href="#"
+            class="block text-center px-5 py-2 rounded bg-gradient-to-r from-[#0165D1] to-[#00D0D0] text-white text-sm font-medium transition-transform duration-200 hover:scale-105 active:scale-95 rounded-sm">Contact
+            Us</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
