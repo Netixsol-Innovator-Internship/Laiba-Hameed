@@ -1,8 +1,10 @@
 import dotenv from "dotenv";
-dotenv.config(); // Load environment variables early
+dotenv.config(); 
 
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors"; 
+
 import taskRoutes from "./routes/taskRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
@@ -12,12 +14,14 @@ import swaggerFile from "./swagger-output.json" with { type: "json" };
 const app = express();
 app.use(express.json());
 
+app.use(cors());
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("✅ MongoDB connected"))
+    .then(() => console.log("MongoDB connected"))
     .catch(err => {
-        console.error("❌ MongoDB connection error:", err);
-        process.exit(1); // Exit if DB connection fails
+        console.error("MongoDB connection error:", err);
+        process.exit(1);
     });
 
 // Swagger Docs
@@ -33,5 +37,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
