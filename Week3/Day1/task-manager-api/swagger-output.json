@@ -5,7 +5,7 @@
     "description": "In-memory CRUD API for tasks",
     "version": "1.0.0"
   },
-  "host": "https://laiba-hameed-week3-day1-backend.vercel.app/",
+  "host": "laiba-hameed-week3-day1-backend.vercel.app/",
   "basePath": "/",
   "schemes": [
     "http"

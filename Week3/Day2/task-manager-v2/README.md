@@ -43,7 +43,7 @@ A simple RESTful API built with **Node.js** & **Express** for managing tasks wit
 Visit http://localhost:3000/api-docs
 
 ## 🔗 Link  
-[Live Demo](https://laiba-hameed-week3-day2-backend.vercel.app/)
+[Live Demo](https://laiba-hameed-week3-day2-backend.vercel.app/api-docs/)
 
 ## 👩‍💻 Author  
 
