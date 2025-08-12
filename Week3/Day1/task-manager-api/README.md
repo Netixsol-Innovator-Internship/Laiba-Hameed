@@ -25,3 +25,11 @@ Simple RESTful API built with Node.js & Express for managing tasks in-memory.
 
 ## Swagger Docs
 Visit http://localhost:3000/api-docs
+
+## 🔗 Link  
+[Live Demo](https://laiba-hameed-week3-day1-backend.vercel.app/)
+
+## 👩‍💻 Author  
+
+**Laiba Hameed**  
+GitHub: [Laiba-Hameed](https://github.com/Netixsol-Innovator-Internship/Laiba-Hameed/tree/main)
