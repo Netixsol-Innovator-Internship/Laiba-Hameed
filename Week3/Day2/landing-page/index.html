@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristian Muñoz - Product Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton:wght@400&family=Work+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'anton': ['Anton', 'sans-serif'],
+                        'work': ['Work Sans', 'sans-serif'],
+                    },
+                    screens: {
+                        xs: "425px"
+                    },
+                    colors: {
+                        'purple-btn': '#925FF0',
+                        'dark-btn': '#292929',
+                    },
+                    spacing: {
+                        '15': '3.75rem', // 60px
+                        '22': '5.5rem', // 88px
+                        '30': '7.5rem', // 120px
+                        '50': '12.5rem', // 200px
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #FA709A 0%, #FEE140 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .theme-toggle {
+            width: 52px;
+            height: 28px;
+            border-radius: 14px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle-ball {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        .dark .theme-toggle-ball {
+            transform: translateX(24px);
+        }
+
+        /* Simple fade-in for hero content */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        main h1,
+        main h2 {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        main img {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
+    <!-- Header -->
+    <header class="flex items-center justify-center px-4 sm:px-6">
+        <div class="w-full max-w-[1728px] flex items-center justify-between py-6 px-4 md:px-6 lg:px-8">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <img src="images/Logo-dark.png" alt="Logo" class="h-8 dark:hidden">
+                <img src="images/Logo.png" alt="Logo" class="h-8 hidden dark:block">
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <span
+                    class="font-work cursor-pointer text-lg text-gray-900 dark:text-white hover:opacity-70 transition-opacity">Home</span>
+                <span
+                    class="font-work cursor-pointer text-lg text-gray-900 dark:text-white hover:opacity-70 transition-opacity">Portfolio</span>
+                <span
+                    class="font-work cursor-pointer text-lg text-gray-900 dark:text-white hover:opacity-70 transition-opacity">Skills</span>
+                <span
+                    class="font-work cursor-pointer text-lg text-gray-900 dark:text-white hover:opacity-70 transition-opacity">About
+                    Me</span>
+            </nav>
+
+            <!-- Desktop Theme Toggle & Contact -->
+            <div class="hidden lg:flex items-center gap-6">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="theme-toggle bg-gray-200 dark:bg-gray-700">
+                    <div class="theme-toggle-ball bg-white dark:bg-gray-300"></div>
+                </button>
+
+                <!-- Contact Button -->
+                <button
+                    class="px-6 py-3 bg-black dark:bg-purple-btn text-white rounded font-work text-base hover:opacity-90 transition-opacity">
+                    Contact Me
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button id="mobile-menu-toggle" class="lg:hidden w-10 h-10 flex flex-col justify-center items-center gap-1">
+                <span class="w-6 h-0.5 bg-gray-900 dark:bg-white transition-all duration-300"></span>
+                <span class="w-6 h-0.5 bg-gray-900 dark:bg-white transition-all duration-300"></span>
+                <span class="w-6 h-0.5 bg-gray-900 dark:bg-white transition-all duration-300"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="lg:hidden fixed inset-0 bg-white dark:bg-black z-50 h-fit sm:px-6 shadow-lg transform translate-x-full transition-transform duration-300">
+        <div class="flex flex-col p-6">
+            <div class="flex items-center justify-between">
+                <img src="images/Logo-dark.png" alt="Logo" class="h-8 dark:hidden">
+                <img src="images/Logo.png" alt="Logo" class="h-8 hidden dark:block">
+                <button id="mobile-menu-close" class="w-10 h-10 flex items-center justify-center">
+                    <span class="text-3xl text-gray-900 dark:text-white">×</span>
+                </button>
+            </div>
+            <nav class="flex flex-col items-center gap-8 mt-16">
+                <a href="#" class="font-work text-2xl text-gray-900 dark:text-white">Home</a>
+                <a href="#" class="font-work text-2xl text-gray-900 dark:text-white">Portfolio</a>
+                <a href="#" class="font-work text-2xl text-gray-900 dark:text-white">Skills</a>
+                <a href="#" class="font-work text-2xl text-gray-900 dark:text-white">About Me</a>
+            </nav>
+            <div class="mt-auto flex flex-col gap-4 py-6">
+                <button class="w-full py-3 bg-black dark:bg-purple-btn text-white rounded-lg font-work text-lg">
+                    Contact Me
+                </button>
+                <button class="w-full py-3 flex items-center justify-center gap-2">
+                    <span>Toggle Theme</span>
+                    <div class="theme-toggle bg-gray-200 dark:bg-gray-700">
+                        <div class="theme-toggle-ball bg-white dark:bg-gray-300"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="my-12 flex items-center justify-center px-10 sm:px-12">
+        <div class="flex flex-col lg:flex-row lg:items-stretch items-center justify-between max-w-[1728px] w-full">
+
+            <!-- Left Content -->
+            <div class="w-full lg:w-1/2 max-w-[660px] w-fit text-center  lg:pr-16 2xl:pr-0">
+                <!-- Hero Text -->
+                <div class="py-12 sm:text-left">
+                    <h1
+                        class="font-anton text-[80px] xs:text-[100px] sm:text-[200px] lg:text-[110px] xl:text-[150px] 2xl:text-[200px] leading-[0.9] tracking-[-0.03em] text-gray-900 dark:text-white mb-4">
+                        PRODUCT<br>DESIGNER
+                    </h1>
+                    <h2
+                        class="font-anton text-[40px] xs:text-[60px] sm:text-[114px] lg:text-[64px] xl:text-[80px] 2xl:text-[114px] leading-[0.9] tracking-[-0.03em] gradient-text">
+                        CRISTIAN MUÑOZ
+                    </h2>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex items-center justify-between">
+                    <img class="cursor-pointer w-[40px] sm:w-[52px] invert dark:invert-0" src="./images/instagram.png"
+                        alt="insta">
+                    <img class="cursor-pointer w-[40px] sm:w-[52px] invert dark:invert-0" src="./images/Figma.png"
+                        alt="figma">
+                    <img class="cursor-pointer w-[40px] sm:w-[52px] invert dark:invert-0" src="./images/LinkedIn.png"
+                        alt="linkedin">
+                    <img class="cursor-pointer w-[40px] sm:w-[52px] invert dark:invert-0" src="./images/Twitter.png"
+                        alt="twitter">
+                    <img class="cursor-pointer w-[40px] sm:w-[52px] invert dark:invert-0" src="./images/Telegram.png"
+                        alt="telegram">
+                    <img class="cursor-pointer w-[40px] sm:w-[52px] invert dark:invert-0" src="./images/Medium.png"
+                        alt="medium">
+                </div>
+
+                <!-- Download Button -->
+                <button
+                    class="w-full my-12 py-6 font-work text-white sm:text-xl flex items-center justify-center gap-4 bg-[#292929] transition-all duration-300 transform hover:scale-[1.02] hover:opacity-90">
+                    Download Curriculum Vitae
+                    <img src="./images/arrow-circle-right.png" alt="Right arrow"
+                        class="w-6 transition-transform duration-300 group-hover:translate-x-1">
+                </button>
+            </div>
+
+            <!-- Star section -->
+            <div class="hidden 2xl:block">
+                <img src="./images/star-dark.png" alt="" class="py-12 dark:invert">
+            </div>
+
+            <!-- Right Content - Image -->
+            <div class="hidden lg:block w-1/2 my-12 ml-4">
+                <img src="images/main.jpg" alt="Design"
+                    class="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105">
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
