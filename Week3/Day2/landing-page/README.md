@@ -29,7 +29,7 @@ The dark mode feature changes the color scheme instantly, enhancing user experie
 
 ## 🔗 Link  
 
-[Live Demo](https://laiba-hameed-week3-day2-dynav00m1-laiba-hameeds-projects.vercel.app/)
+[Live Demo](https://laiba-hameed-week3-day2-ivory.vercel.app/)
 
 ## 👩‍💻 Author  
 
