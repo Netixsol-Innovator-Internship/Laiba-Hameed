@@ -24,15 +24,19 @@ export const getTaskById = async (req, res) => {
 
 export const createTask = async (req, res) => {
     try {
-        const { title, completed } = req.body;
-        if (!title || title.trim() === "") {
+        const { title, description, completed } = req.body;
+
+        if (!title || !description || title.trim() === "" || description.trim() === "") {
             return res.status(400).json({ success: false, message: errors.VALIDATION_ERROR });
         }
+
         const newTask = await Task.create({
-            title,
+            title: title.trim(),
+            description: description?.trim() || "",
             completed: completed || false,
             userId: req.user.id
         });
+
         res.status(201).json({ success: true, data: newTask, message: success.TASK_CREATED });
     } catch (error) {
         console.error(error);
@@ -42,7 +46,7 @@ export const createTask = async (req, res) => {
 
 export const updateTask = async (req, res) => {
     try {
-        const { title, completed } = req.body;
+        const { title, description, completed } = req.body;
         const task = await Task.findOne({ _id: req.params.id, userId: req.user.id });
 
         if (!task) {
@@ -55,9 +59,41 @@ export const updateTask = async (req, res) => {
             }
             task.title = title.trim();
         }
+
+        if (description !== undefined) {
+            if (typeof description !== 'string') {
+                return res.status(400).json({ success: false, message: errors.VALIDATION_ERROR });
+            }
+            task.description = description.trim();
+        }
+
         if (completed !== undefined) task.completed = completed;
 
         await task.save();
+        res.json({ success: true, data: task, message: success.TASK_UPDATED });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: errors.SERVER_ERROR });
+    }
+};
+
+export const updateTaskStatus = async (req, res) => {
+    try {
+        const { completed } = req.body;
+
+        if (typeof completed !== "boolean") {
+            return res.status(400).json({ success: false, message: errors.VALIDATION_ERROR });
+        }
+
+        const task = await Task.findOne({ _id: req.params.id, userId: req.user.id });
+
+        if (!task) {
+            return res.status(404).json({ success: false, message: errors.TASK_NOT_FOUND });
+        }
+
+        task.completed = completed;
+        await task.save();
+
         res.json({ success: true, data: task, message: success.TASK_UPDATED });
     } catch (error) {
         console.error(error);
@@ -78,3 +114,5 @@ export const deleteTask = async (req, res) => {
         res.status(500).json({ success: false, message: errors.SERVER_ERROR });
     }
 };
+
+
