@@ -44,7 +44,7 @@ A **Task Manager** web application built using **React** with backend integratio
 4. npm run dev
 
 ## 🔗 Link  
-[Live Demo](https://laiba-hameed-week3-day2-backend.vercel.app/api-docs/)
+[Live Demo](https://laiba-hameed-week3-day3.vercel.app/)
 
 ## 👩‍💻 Author  
 
