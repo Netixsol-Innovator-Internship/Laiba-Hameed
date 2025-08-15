@@ -1,18 +1,37 @@
 import mongoose from "mongoose";
-const userSchema = new mongoose.Schema({
+import Cart from "./Cart";
+const userSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-        type: String,
-        required: true
-    }
-}, { timestamps: true })
+      type: String,
+      required: true,
+    },
+    cart: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Cart",
+    },
+  },
+  { timestamps: true }
+);
+
+userSchema.pre("save", async function (next) {
+  if (this.isNew) {
+    const cart = await Cart.create({ user: this._id, products: [] });
+
+    cart.save();
+
+    this.cart = cart._id;
+  }
+  next();
+});
 
 export default mongoose.model("User", userSchema);

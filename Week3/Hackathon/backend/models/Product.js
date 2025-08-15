@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema(
       trim: true,
       maxlength: [30, "Name must be less than 30 characters"],
     },
-    slug: { type: String, unique: true, lowercase: true },
+    slug: { type: String, unique: true, lowercase: true , required:true},
     description: { type: String, required: [true, "Description is required"] },
     collections: {
       type: String,
