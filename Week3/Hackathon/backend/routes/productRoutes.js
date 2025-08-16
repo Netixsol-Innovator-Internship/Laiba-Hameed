@@ -10,55 +10,18 @@ import {
   getProductBySlug,
   updateProductById,
 } from "../controllers/productController.js";
-import { body, param } from "express-validator";
-import { validationResult } from "express-validator";
+
 import { upload } from "../multer/multer.js";
+import { validateID, validateProduct, validateSlug } from "../validators/productValidator.js";
+import { validate } from "../middlewares/productValidate.js";
 const productRoutes = express.Router();
 
-const validate = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({
-      success: false,
-      message: errors.errors[0].msg,
-    });
-  }
 
-  next();
-};
 
 // Create a new Product
 productRoutes.post(
   "/",
-  [
-    body("name")
-      .notEmpty()
-      .withMessage("Name is required")
-      .isLength({ min: 5 })
-      .withMessage("Product name at least of 5 characters")
-      .isLength({ max: 30 })
-      .withMessage("Product name must be less than 30 characters"),
-    body("slug")
-      .notEmpty()
-      .withMessage("Slug is required")
-      .isLength({ min: 5 })
-      .withMessage("Slug name at least of 5 characters")
-      .isLength({ max: 30 })
-      .withMessage("Slug name must be less than 30 characters"),
-    body("description")
-      .notEmpty()
-      .withMessage("Description is required")
-      .isLength({ min: 10 })
-      .withMessage("Product description at least of 10 characters")
-      .isLength({ max: 200 })
-      .withMessage("Product description must be less than 200 characters"),
-    body("attributes").notEmpty().withMessage("Attributes are required"),
-    body("images").notEmpty().withMessage("Image is required"),
-    body("stock")
-      .optional()
-      .isInt({ min: 0 })
-      .withMessage("Stock value must be a positive integer"),
-  ],
+  validateProduct,
   validate,
   upload.array("images", 5),
   createProduct
@@ -76,7 +39,7 @@ productRoutes.get("/filter/search", getFilteredProductsByOption);
 // Get product by ID
 productRoutes.get(
   "/:id",
-  [param("id").isMongoId().withMessage("Invalid product ID format")],
+  validateID,
   validate,
   getProductByID
 );
@@ -84,7 +47,7 @@ productRoutes.get(
 // Get product by slug
 productRoutes.get(
   "/slug/:slug",
-  [param("slug").notEmpty().withMessage("Slug is required")],
+  validateSlug,
   validate,
   getProductBySlug
 );
@@ -96,7 +59,7 @@ productRoutes.delete("/", deleteAllProducts);
 // Delete Product by id
 productRoutes.delete(
   "/:id",
-  [param("id").isMongoId().withMessage("Invalid product ID format")],
+  validateID,
   validate,
   deleteProductById
 );
@@ -105,35 +68,7 @@ productRoutes.delete(
 
 productRoutes.put(
   "/",
-  [
-    body("name")
-      .notEmpty()
-      .withMessage("Name is required")
-      .isLength({ min: 5 })
-      .withMessage("Product name at least of 5 characters")
-      .isLength({ max: 30 })
-      .withMessage("Product name must be less than 30 characters"),
-    body("slug")
-      .notEmpty()
-      .withMessage("Slug is required")
-      .isLength({ min: 5 })
-      .withMessage("Slug name at least of 5 characters")
-      .isLength({ max: 30 })
-      .withMessage("Slug name must be less than 30 characters"),
-    body("description")
-      .notEmpty()
-      .withMessage("Description is required")
-      .isLength({ min: 10 })
-      .withMessage("Product description at least of 10 characters")
-      .isLength({ max: 200 })
-      .withMessage("Product description must be less than 200 characters"),
-    body("attributes").notEmpty().withMessage("Attributes are required"),
-    body("images").notEmpty().withMessage("Image is required"),
-    body("stock")
-      .optional()
-      .isInt({ min: 0 })
-      .withMessage("Stock value must be a positive integer"),
-  ],
+  validateProduct,
   validate,
   upload.array("images", 5),
   updateProductById
