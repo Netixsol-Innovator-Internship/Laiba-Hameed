@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 import authRoutes from "./routes/authRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerFile from "./swagger-output.json" with { type: "json" };
@@ -28,6 +29,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/products",productRoutes)
+
+
 
 // Global Error Handler
 app.use(errorHandler);
