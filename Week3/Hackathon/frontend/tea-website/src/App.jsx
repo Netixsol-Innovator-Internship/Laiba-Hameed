@@ -4,6 +4,7 @@ import Header from "./components/layouts/Header/page";
 import Footer from "./components/layouts/Footer/page";
 import Home from "./pages/home";
 
+
 function App() {
 
   return (
