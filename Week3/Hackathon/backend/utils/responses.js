@@ -11,6 +11,14 @@ export const success = {
   PRODUCT_RETRIEVED: "Product retrieved successfully",
   PRODUCT_UPDATED: "Product updated successfully",
   PRODUCT_DELETED: "Product deleted successfully",
+
+  // Cart
+  CART_CREATED: "Cart created successfully",
+  ITEM_ADDED: "Item added to cart successfully",
+  ITEM_UPDATED: "Cart item updated successfully",
+  ITEM_DELETED: "Item removed from cart successfully",
+  CART_CLEARED: "All items removed from cart successfully",
+  CART_RETRIEVED: "Cart retrieved successfully",
 };
 
 export const errors = {
@@ -32,4 +40,12 @@ export const errors = {
   PRODUCT_ALREADY_EXISTS: "Product with this name or slug already exists",
   INVALID_PRODUCT_ID: "Invalid product ID",
   OUT_OF_STOCK: "Product is out of stock",
+
+  // Cart
+  CART_NOT_FOUND: "Cart not found",
+  ITEM_NOT_FOUND: "Item not found in cart",
+  INVALID_CART_ID: "Invalid cart ID",
+  INVALID_PRODUCT_ID: "Invalid product ID",
+  OUT_OF_STOCK: "Product is out of stock",
+  SERVER_ERROR: "Something went wrong",
 };
