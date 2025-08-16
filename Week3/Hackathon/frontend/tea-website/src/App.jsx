@@ -6,6 +6,7 @@ import Home from "./pages/home";
 import PublicRoute from "./components/shared/common/PublicRoute";
 import LoginForm from "./components/forms/loginForm";
 import SignupForm from "./components/forms/signupForm";
+import ProductsPage from "./pages/productsPage";
 
 function App() {
 
@@ -14,8 +15,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/collections" element={<ProductsPage/> } />
         <Route path="/login" element={<PublicRoute><LoginForm /></PublicRoute>} />
-        <Route path="/signup" element={<PublicRoute><SignupForm/></PublicRoute>} />
+        <Route path="/signup" element={<PublicRoute><SignupForm /></PublicRoute>} />
       </Routes>
       <Footer />
     </Router>

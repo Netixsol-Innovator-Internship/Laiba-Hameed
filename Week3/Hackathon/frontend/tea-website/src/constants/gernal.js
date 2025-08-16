@@ -20,6 +20,14 @@ import oolong from "../assets/home/collections/Image Holder6.svg";
 import rooibos from "../assets/home/collections/Image Holder7.svg";
 import teaware from "../assets/home/collections/Image Holder8.svg";
 
+// Products
+import img1 from "../assets/collections/img1.jpg"
+import img2 from "../assets/collections/img2.jpg"
+import img3 from "../assets/collections/img3.jpg"
+import img4 from "../assets/collections/img4.jpg"
+import img5 from "../assets/collections/img5.jpg"
+import img6 from "../assets/collections/img6.jpg"
+
 export const NavList = {
     tea_collections: {
         id: 1,
@@ -36,9 +44,9 @@ export const NavList = {
         value: "blog",
         path: "/",
     },
-    contact_us :{
+    contact_us: {
         id: 4,
-        value:" contact us",
+        value: " contact us",
         path: "/"
     }
 };
@@ -67,25 +75,26 @@ export const Icons = {
 
 // home page feature list 
 export const Features = [
-    { id: 1 ,icon: teaCup, text: "450+ KIND OF LOOSEF TEA" },
-    { id: 2 ,icon: organicBadge, text: "CERTIFICATED ORGANIC TEAS" },
-    { id: 3 ,icon: deliveryTruck, text: "FREE DELIVERY" },
-    { id: 4 ,icon: sampleTag, text: "SAMPLE FOR ALL TEAS" }
+    { id: 1, icon: teaCup, text: "450+ KIND OF LOOSEF TEA" },
+    { id: 2, icon: organicBadge, text: "CERTIFICATED ORGANIC TEAS" },
+    { id: 3, icon: deliveryTruck, text: "FREE DELIVERY" },
+    { id: 4, icon: sampleTag, text: "SAMPLE FOR ALL TEAS" }
 ];
 
 
 // Collections data
 export const Collections = [
-    { id: 1 ,img: blackTea, title: "BLACK TEA" },
-    { id: 2 ,img: greenTea, title: "GREEN TEA" },
-    { id: 3 ,img: whiteTea, title: "WHITE TEA" },
-    { id: 4 ,img: matcha, title: "MATCHA" },
-    { id: 5 ,img: herbalTea, title: "HERBAL TEA" },
-    { id: 6 ,img: chai, title: "CHAI" },
-    { id: 7 ,img: oolong, title: "OOLONG" },
-    { id: 8 ,img: rooibos, title: "ROOIBOS" },
-    { id: 9 ,img: teaware, title: "TEAWARE" }
+    { id: 1, img: blackTea, title: "BLACK TEA" },
+    { id: 2, img: greenTea, title: "GREEN TEA" },
+    { id: 3, img: whiteTea, title: "WHITE TEA" },
+    { id: 4, img: matcha, title: "MATCHA" },
+    { id: 5, img: herbalTea, title: "HERBAL TEA" },
+    { id: 6, img: chai, title: "CHAI" },
+    { id: 7, img: oolong, title: "OOLONG" },
+    { id: 8, img: rooibos, title: "ROOIBOS" },
+    { id: 9, img: teaware, title: "TEAWARE" }
 ];
+
 
 
 
@@ -118,3 +127,54 @@ export const footerData = {
 export const Products = {
     
 }
+=======
+export const products = [
+    {
+        id: 1,
+        image: img1,
+        title: "Ceylon Ginger",
+        description: "Cinnamon chai tea",
+        price: "4.85",
+    },
+    {
+        id: 2,
+        image: img2,
+        title: "Ceylon Ginger",
+        description: "Cinnamon chai tea",
+        price: "5.20",
+    },
+    {
+        id: 3,
+        image: img3,
+        title: "Ceylon Ginger",
+        description: "Cinnamon chai tea",
+        price: "6.10",
+    },
+    {
+        id: 4,
+        image: img4,
+        title: "Ceylon Ginger",
+        description: "Cinnamon chai tea",
+        price: "7.50",
+    },
+    {
+        id: 5,
+        image: img5,
+        title: "Ceylon Ginger",
+        description: "Cinnamon chai tea",
+        price: "7.50",
+    },
+    {
+        id: 6,
+        image: img6,
+        title: "Ceylon Ginger",
+        description: "Cinnamon chai tea",
+        price: "7.50",
+    },
+]
+
+
+// filters
+export const filters = [
+    "black teas", " Green teas", "White teas", "chai", "matcha", "herbal teas", " oolong", "rooibos", " Teasware"
+]
