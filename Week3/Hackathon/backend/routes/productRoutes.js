@@ -12,6 +12,7 @@ import {
 } from "../controllers/productController.js";
 import { body, param } from "express-validator";
 import { validationResult } from "express-validator";
+import { upload } from "../multer/multer.js";
 const productRoutes = express.Router();
 
 const validate = (req, res, next) => {
@@ -59,6 +60,7 @@ productRoutes.post(
       .withMessage("Stock value must be a positive integer"),
   ],
   validate,
+  upload.array("images", 5),
   createProduct
 );
 
@@ -133,6 +135,7 @@ productRoutes.put(
       .withMessage("Stock value must be a positive integer"),
   ],
   validate,
+  upload.array("images", 5),
   updateProductById
 );
 

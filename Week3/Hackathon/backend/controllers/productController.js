@@ -3,14 +3,21 @@
 import Product from "../models/Product.js";
 import { errors, success } from "../utils/responses.js";
 
+import fs from "fs";
+
 export const createProduct = async (req, res) => {
   try {
     let data = req.body;
+
+    // Attach images paths
+    if (req.files) {
+      data.images = req.files.map((file) => file.path);
+    }
+
     let { name, slug } = data;
     const existingProduct = await Product.findOne({
       $or: [{ name }, { slug }],
     });
-
     if (existingProduct) {
       return res.status(400).json({
         success: false,
@@ -25,16 +32,12 @@ export const createProduct = async (req, res) => {
     return res.status(201).json({
       success: true,
       data: product,
-      message: success.PRODUCT_CREATED,
+      message: "Product created successfully",
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
-
 // Fetching all Products
 
 export const getAllProducts = async (req, res) => {
@@ -219,27 +222,30 @@ export const deleteAllProducts = async (req, res) => {
 // Delete by Id
 export const deleteProductById = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const product = await Product.findByIdAndDelete(id);
+    const product = await Product.findById(req.params.id);
 
     if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found",
+      return res
+        .status(404)
+        .json({ success: false, message: "Product not found" });
+    }
+
+    // Delete images from filesystem
+    if (product.images && product.images.length > 0) {
+      product.images.forEach((imgPath) => {
+        if (fs.existsSync(imgPath)) {
+          fs.unlinkSync(imgPath);
+        }
       });
     }
 
-    return res.status(200).json({
-      success: true,
-      message: "Product deleted successfully",
-      data: product,
-    });
+    await product.deleteOne();
+
+    return res
+      .status(200)
+      .json({ success: true, message: "Product deleted successfully" });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -247,30 +253,52 @@ export const deleteProductById = async (req, res) => {
 
 export const updateProductById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const updateData = req.body;
+    let data = req.body;
 
-    const updatedProduct = await Product.findByIdAndUpdate(id, updateData, {
-      new: true,
-      runValidators: true,
-    });
+    // Parse JSON if frontend sends nested objects
+    // if (typeof data.attributes === "string") {
+    //   data.attributes = JSON.parse(data.attributes);
+    // }
+    // if (typeof data.variants === "string") {
+    //   data.variants = JSON.parse(data.variants);
+    // }
 
-    if (!updatedProduct) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found",
-      });
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Product not found" });
     }
+
+    // If new images are uploaded → delete old ones first
+    if (req.files && req.files.length > 0) {
+      if (product.images && product.images.length > 0) {
+        product.images.forEach((imgPath) => {
+          if (fs.existsSync(imgPath)) {
+            fs.unlinkSync(imgPath);
+          }
+        });
+      }
+
+      data.images = req.files.map((file) => file.path);
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      data,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
     return res.status(200).json({
       success: true,
-      message: "Product updated successfully",
       data: updatedProduct,
+      message: "Product updated successfully",
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
