@@ -1,17 +1,8 @@
-import React from "react";
-
-const Button = ({ children, variant = "black", className = "", ...props }) => {
-  // Define styles for different variants
-  const baseStyles = "py-[10px] w-[281px] font-medium transition-colors duration-200";
-  const variants = {
-    black: "bg-[#282828] text-white hover:bg-gray-800",
-    white: "bg-white text-black border border-gray-300 hover:bg-gray-100",
-  };
+const Button = ({ children,  className = "" }) => {
 
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-      {...props}
+      className={`px-6 py-3 w-[224px] text-sm cursor-pointer font-montserrat font-medium transition-colors duration-200 ${className}`}
     >
       {children}
     </button>

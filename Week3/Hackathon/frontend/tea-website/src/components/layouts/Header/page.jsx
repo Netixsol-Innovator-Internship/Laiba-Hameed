@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <div className="flex items-center justify-center">
       <Container>
-        <header className="flex items-center justify-between my-7 px-4 sm:px-6 lg:px-8">
+        <header className="flex items-center justify-between my-7 px-6 sm:px-10 lg:px-12">
           {/* Logo area */}
           <div className="log gap-1 sm:gap-2 flex justify-center items-center flex-shrink-0">
             <img
@@ -18,7 +18,7 @@ const Header = () => {
               alt="Company Logo"
               className="h-8 w-8 sm:h-10 sm:w-10 md:h-[48px] md:w-[48px]"
             />
-            <h1 className="text-sm text-[#282828] sm:text-xl font-normal md:text-xl xs:block">
+            <h1 className="text-sm text-[#282828] sm:text-xl font-prosto font-normal md:text-xl xs:block">
               Brand Name
             </h1>
           </div>
@@ -29,7 +29,7 @@ const Header = () => {
               <a
                 key={key}
                 href={item.path}
-                className="text-[#282828] text-xs lg:text-sm hover:text-black uppercase whitespace-nowrap"
+                className="text-[#282828] text-xs lg:text-sm font-montserrat  hover:text-black uppercase whitespace-nowrap"
               >
                 {item.value}
               </a>

@@ -2,9 +2,9 @@ import Container from "../../shared/common/Container"
 
 const Footer = () => {
     return (
-        <div className="flex items-center justify-center bg-[#F4F4F4]">
+        <div className="flex items-center justify-center bg-[#F4F4F4] font-montserra">
             <Container>
-                <h1>Footer</h1>
+                <h1>footer</h1>
             </Container>
         </div>
     )
