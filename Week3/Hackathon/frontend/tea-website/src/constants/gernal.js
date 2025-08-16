@@ -96,6 +96,38 @@ export const Collections = [
 ];
 
 
+
+
+// footer content
+export const footerData = {
+  collections: [
+    "Black teas",
+    "Green teas",
+    "White teas",
+    "Herbal teas",
+    "Matcha",
+    "Chai",
+    "Oolong",
+    "Rooibos",
+    "Teaware",
+  ],
+  learn: [
+    "About us",
+    "About our teas",
+    "Tea academy",
+  ],
+  customerService: [
+    "Ordering and payment",
+    "Delivery",
+    "Privacy and policy",
+    "Terms & Conditions",
+  ],
+};
+
+export const Products = {
+    
+}
+=======
 export const products = [
     {
         id: 1,
