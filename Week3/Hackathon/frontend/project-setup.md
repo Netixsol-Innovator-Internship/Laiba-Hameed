@@ -23,7 +23,7 @@ src/
 
 npm i
 
-npm install express nodemon swagger-ui-express swagger-jsdoc swagger-autogen mongoose bcryptjs jsonwebtoken dotenv express-validator
+npm install express nodemon swagger-ui-express swagger-jsdoc swagger-autogen mongoose bcryptjs jsonwebtoken dotenv express-validator @hookform/resolvers
 
 - express – Create the Node.js web server and handle HTTP routes
 - nodemon – Automatically restart the server when file changes are detected (dev use only)
