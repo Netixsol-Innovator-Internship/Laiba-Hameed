@@ -86,6 +86,35 @@ export const Collections = [
     { id: 8 ,img: rooibos, title: "ROOIBOS" },
     { id: 9 ,img: teaware, title: "TEAWARE" }
 ];
+
+
+
+// footer content
+export const footerData = {
+  collections: [
+    "Black teas",
+    "Green teas",
+    "White teas",
+    "Herbal teas",
+    "Matcha",
+    "Chai",
+    "Oolong",
+    "Rooibos",
+    "Teaware",
+  ],
+  learn: [
+    "About us",
+    "About our teas",
+    "Tea academy",
+  ],
+  customerService: [
+    "Ordering and payment",
+    "Delivery",
+    "Privacy and policy",
+    "Terms & Conditions",
+  ],
+};
+
 export const Products = {
     
 }
