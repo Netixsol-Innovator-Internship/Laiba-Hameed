@@ -1,90 +1,23 @@
-import React from 'react'
-import Container from '../shared/common/Container'
-import {Collections} from '../../constants/gernal'
+import Button from "../shared/buttons/button";
 
 
 const Hero = () => {
   return (
-    <div className='flex items-center overflow-x-hidden justify-center'>
-        <Container>
-{/*collections area */}
-{/* <div className="colections overflow-x-hidden pb-14 pt-3 ">
-  <h2 className="text-center text-[32px] font-normal my-6">Our Collections</h2>
-  <div className="grid grid-cols-3 gap-7">
-    {Collections.map((item, index) => (
-      <div key={index} className="text-center">
-        <img src={item.img} alt={item.title} className="w-[360] h-[360px] rounded" />
-        <p className="mt-3.5 font-medium text-[16px]">{item.title}</p>
+    <div className='flex items-center justify-center'>
+            
+      {/* Top hero section */}
+      <div className='grid grid-cols-1 mb-24 md:grid-cols-2 mx-0 gap-32 overflow-x-hidden'>
+          <div className='w-[100%]'>
+            <img className='h-[628px] w-full  object-cover' src="src/assets/home/topHeroImg/Landing Main Image.png" alt="" />
+          </div>
+         <div className='flex flex-col justify-center px-3 md:pl-0 md:pr-18'>
+            <h3 className='font-prosto-one text-[36px] font-medium mb-10'>Every day is unique,<br /> just like our tea</h3>
+            <p className='text-[16px] mb-4'>Lorem ipsum dolor sit amet consectetur. Orci nibh nullam risus<br />  adipiscing odio. Neque lacus nibh eros in.</p>
+            <p className='text-[16px] mb-10'>Lorem ipsum dolor sit amet consectetur. Orci nibhnullam risus<br />  adipiscing odio. Neque lacus nibh eros in.</p>
+            <Button variant="black">BROWSE TEAS</Button>
+          </div>
       </div>
-    ))}
-  </div>
-</div> */}
-        {/* <div className="collections overflow-x-hidden pb-14 pt-3">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-center text-2xl sm:text-3xl lg:text-[32px] font-normal my-6">Our Collections</h2>
 
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-7">
-              {Collections.map((item, index) => (
-                <div
-                  key={index}
-                  className="text-center w-full xs:w-[calc(50%-0.5rem)] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1.167rem)] max-w-[360px]"
-                >
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="w-full h-auto aspect-square object-cover rounded mx-auto"
-                  />
-                  <p className="mt-3.5 font-medium text-sm sm:text-base">{item.title}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div> */}
-                {/* <div className="collections overflow-x-hidden pb-14 pt-3">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-center text-2xl sm:text-3xl lg:text-[32px] font-normal my-6">Our Collections</h2>
-
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-7">
-              {Collections.map((item, index) => (
-                <div
-                  key={index}
-                  className="text-center w-full xs:w-[calc(50%-0.5rem)] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1.167rem)] max-w-[360px]"
-                >
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="w-full h-auto aspect-square object-cover rounded mx-auto"
-                  />
-                  <p className="mt-3.5 font-medium text-sm sm:text-base">{item.title}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div> */}
-
-                {/*collections area */}
-        <div className="collections overflow-x-hidden flex-col justify-center items-center pb-14 pt-3">
-          <h2 className="text-center text-2xl sm:text-3xl lg:text-[32px] font-normal my-6">Our Collections</h2>
-
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-7">
-            {Collections.map((item, index) => (
-              <div
-                key={index}
-                className="text-center w-full xs:w-[calc(50%-0.5rem)] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] lg:w-[calc(33.333%-1.167rem)] max-w-[360px]"
-              >
-                <img
-                  src={item.img || "/placeholder.svg"}
-                  alt={item.title}
-                  className="w-full h-auto aspect-square object-cover rounded mx-auto"
-                />
-                <p className="mt-3.5 font-medium text-sm sm:text-base">{item.title}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-
-        </Container>
     </div>
   )
 }

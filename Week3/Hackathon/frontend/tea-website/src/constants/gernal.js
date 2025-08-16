@@ -22,18 +22,22 @@ import teaware from "../assets/home/collections/Image Holder8.svg";
 
 export const NavList = {
     tea_collections: {
+        id: 1,
         value: "TEA COLLECTIONS",
         path: "/",
     },
     accessories: {
+        id: 2,
         value: "accessories",
         path: "/",
     },
     blog: {
+        id: 3,
         value: "blog",
         path: "/",
     },
     contact_us :{
+        id: 4,
         value:" contact us",
         path: "/"
     }
@@ -42,39 +46,45 @@ export const NavList = {
 
 export const Icons = {
     search: {
+        id: 1,
         src: Search, // path to your image file
         alt: "Search Icon",
+        path: "/search"
     },
     user: {
+        id: 2,
         src: person,
         alt: "person Icon",
+        path: "/user"
     },
     mail: {
+        id: 3,
         src: local_mall,
         alt: "local Icon",
+        path: "/mail"
     }
 };
 
 // home page feature list 
 export const Features = [
-    { icon: teaCup, text: "450+ KIND OF LOOSEF TEA" },
-    { icon: organicBadge, text: "CERTIFICATED ORGANIC TEAS" },
-    { icon: deliveryTruck, text: "FREE DELIVERY" },
-    { icon: sampleTag, text: "SAMPLE FOR ALL TEAS" }
+    { id: 1 ,icon: teaCup, text: "450+ KIND OF LOOSEF TEA" },
+    { id: 2 ,icon: organicBadge, text: "CERTIFICATED ORGANIC TEAS" },
+    { id: 3 ,icon: deliveryTruck, text: "FREE DELIVERY" },
+    { id: 4 ,icon: sampleTag, text: "SAMPLE FOR ALL TEAS" }
 ];
 
 
 // Collections data
 export const Collections = [
-    { img: blackTea, title: "BLACK TEA" },
-    { img: greenTea, title: "GREEN TEA" },
-    { img: whiteTea, title: "WHITE TEA" },
-    { img: matcha, title: "MATCHA" },
-    { img: herbalTea, title: "HERBAL TEA" },
-    { img: chai, title: "CHAI" },
-    { img: oolong, title: "OOLONG" },
-    { img: rooibos, title: "ROOIBOS" },
-    { img: teaware, title: "TEAWARE" }
+    { id: 1 ,img: blackTea, title: "BLACK TEA" },
+    { id: 2 ,img: greenTea, title: "GREEN TEA" },
+    { id: 3 ,img: whiteTea, title: "WHITE TEA" },
+    { id: 4 ,img: matcha, title: "MATCHA" },
+    { id: 5 ,img: herbalTea, title: "HERBAL TEA" },
+    { id: 6 ,img: chai, title: "CHAI" },
+    { id: 7 ,img: oolong, title: "OOLONG" },
+    { id: 8 ,img: rooibos, title: "ROOIBOS" },
+    { id: 9 ,img: teaware, title: "TEAWARE" }
 ];
 export const Products = {
     

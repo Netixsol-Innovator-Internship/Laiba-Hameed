@@ -38,21 +38,15 @@ const Header = () => {
 
           {/* Side icons */}
           <div className="sideIcons flex gap-3 sm:gap-6 lg:gap-9 items-center justify-center flex-shrink-0">
-            <img
-              src={Icons.search.src}
-              alt={Icons.search.alt}
-              className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6"
-            />
-            <img
-              src={Icons.user.src}
-              alt={Icons.user.alt}
-              className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6"
-            />
-            <img
-              src={Icons.mail.src}
-              alt={Icons.mail.alt}
-              className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6"
-            />
+                    {Object.entries(Icons).map(([key, icon]) => (
+                      <img 
+                        key={key} 
+                        src={icon.src} 
+                        alt={icon.alt} 
+                        className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6"
+                      />
+                    ))}
+
 
             {/* Hamburger button (mobile only) */}
             <button
