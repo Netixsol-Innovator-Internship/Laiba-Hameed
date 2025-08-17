@@ -57,7 +57,7 @@ export const Icons = {
         id: 1,
         src: Search, // path to your image file
         alt: "Search Icon",
-        path: "/search"
+        path: "/"
     },
     user: {
         id: 2,
