@@ -7,7 +7,11 @@ import PublicRoute from "./components/shared/common/PublicRoute";
 import LoginForm from "./components/forms/loginForm";
 import SignupForm from "./components/forms/signupForm";
 import ProductsPage from "./pages/productsPage";
+
 import SingleProductPage from './pages/singleProductPage';
+
+import BagPage from "./pages/BagPage";
+
 
 function App() {
 
@@ -17,7 +21,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collections" element={<ProductsPage/> } />
+
         <Route path="/product/:slug" element={<SingleProductPage/>} />
+
+        <Route path="/cart" element={<BagPage/> } />
+
         <Route path="/login" element={<PublicRoute><LoginForm /></PublicRoute>} />
         <Route path="/signup" element={<PublicRoute><SignupForm /></PublicRoute>} />
       </Routes>

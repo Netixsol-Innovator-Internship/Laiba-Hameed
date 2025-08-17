@@ -2,7 +2,7 @@ const Button = ({ children,  className = "" }) => {
 
   return (
     <button
-      className={`px-6 py-3 w-[224px] text-sm cursor-pointer font-montserrat font-medium transition-colors duration-200 ${className}`}
+      className={`px-6 py-3 w-[224px] text-sm uppercase cursor-pointer font-montserrat font-medium transition-colors duration-200 ${className}`}
     >
       {children}
     </button>
