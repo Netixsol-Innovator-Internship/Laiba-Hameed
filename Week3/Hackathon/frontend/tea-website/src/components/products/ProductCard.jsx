@@ -1,8 +1,8 @@
-const ProductCard = ({ image, title, description, price }) => {
+const ProductCard = ({ image, title, price }) => {
     return (
-        <div className="w-auto bg-white shadow-md overflow-hidden font-montserrat cursor-pointer">
+        <div className="w-auto bg-white overflow-hidden font-montserrat cursor-pointer">
             {/* Image */}
-            <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
+            <div className="w-[172px] h-[172px] md:w-[264px] md:h-[264px] bg-gray-100 flex items-center justify-center">
                 <img
                     src={image || "/placeholder.svg"}
                     alt={title}
@@ -13,18 +13,13 @@ const ProductCard = ({ image, title, description, price }) => {
             {/* Content */}
             <div className="p-4 flex flex-col items-center justify-center font-montserrat space-y-2">
                 {/* Title */}
-                <h3 className="text-base  text-black truncate">
+                <h3 className="text-sm md:text-base text-center text-black max-w-[174px]">
                     {title}
                 </h3>
 
-                {/* Description */}
-                <p className="text-base xt-gray-600 line-clamp-2">
-                    {description}
-                </p>
-
                 {/* Price */}
-                <p className="text-base font-medium text-black">
-                    ${price} <span className="text-gray-500 text-sm">/ 50g</span>
+                <p className="text-sm md:text-base font-medium text-black">
+                    ${price} <span className="text-gray-500 text-xs md:text-sm">/ 50g</span>
                 </p>
             </div>
         </div>
