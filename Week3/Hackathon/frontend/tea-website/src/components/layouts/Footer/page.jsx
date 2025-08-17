@@ -5,9 +5,9 @@ const Footer = () => {
     return (
         <div className="flex items-center justify-center bg-[#F4F4F4] font-montserra">
             <Container>
-                 <div className="w-full py-12  px-6 sm:px-10 lg:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                 <div className="w-full py-12  px-6 sm:px-10 lg:px-12 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
                         {/* Collections */}
-                        <div>
+                        <div className="row-span-2">
                         <h3 className="font-medium mb-4 uppercase text-[#282828]  text-base leading-6">Collections</h3>
                         <ul className="space-y-2 text-sm font-normal leading-5 text-[#282828]">
                             {footerData.collections.map((item, index) => (
@@ -43,7 +43,7 @@ const Footer = () => {
                         </div>
 
                         {/* Contact Us */}
-                        <div>
+                        <div className="col-span-2 md:col-auto">
                         <h3 className="font-medium mb-4 uppercase text-[#282828]  text-base leading-6">Contact Us</h3>
                         <ul className="space-y-3 text-sm font-normal  leading-5 text-[#282828]">
                             <li className="flex items-start cursor-pointer gap-2">
