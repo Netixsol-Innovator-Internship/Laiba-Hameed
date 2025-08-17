@@ -8,7 +8,7 @@ const Breadcrumb = () => {
     return (
         <div className="flex items-center justify-center">
             <Container>
-                <nav className="flex items-center text-sm uppercase font-medium font-montserrat px-6 sm:px-10 lg:px-12 py-8">
+                <nav className="flex items-center text-xs md:text-sm uppercase font-medium font-montserrat px-6 sm:px-10 lg:px-12 py-2 md:py-8">
                     <Link to="/" className="hover:text-black transition-colors">
                         Home
                     </Link>

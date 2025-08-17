@@ -32,7 +32,7 @@ export const NavList = {
     tea_collections: {
         id: 1,
         value: "TEA COLLECTIONS",
-        path: "/",
+        path: "/collections",
     },
     accessories: {
         id: 2,
@@ -63,13 +63,13 @@ export const Icons = {
         id: 2,
         src: person,
         alt: "person Icon",
-        path: "/user"
+        path: "/login"
     },
     mail: {
         id: 3,
         src: local_mall,
         alt: "local Icon",
-        path: "/mail"
+        path: "/"
     }
 };
 
@@ -131,43 +131,37 @@ export const products = [
     {
         id: 1,
         image: img1,
-        title: "Ceylon Ginger",
-        description: "Cinnamon chai tea",
+        title: "Ceylon Ginger Cinnamon chai tea",
         price: "4.85",
     },
     {
         id: 2,
         image: img2,
-        title: "Ceylon Ginger",
-        description: "Cinnamon chai tea",
+        title: "Ceylon Ginger Cinnamon chai tea",
         price: "5.20",
     },
     {
         id: 3,
         image: img3,
-        title: "Ceylon Ginger",
-        description: "Cinnamon chai tea",
+        title: "Ceylon Ginger Cinnamon chai tea",
         price: "6.10",
     },
     {
         id: 4,
         image: img4,
-        title: "Ceylon Ginger",
-        description: "Cinnamon chai tea",
+        title: "Ceylon Ginger Cinnamon chai tea",
         price: "7.50",
     },
     {
         id: 5,
         image: img5,
-        title: "Ceylon Ginger",
-        description: "Cinnamon chai tea",
+        title: "Ceylon Ginger Cinnamon chai tea",
         price: "7.50",
     },
     {
         id: 6,
         image: img6,
-        title: "Ceylon Ginger",
-        description: "Cinnamon chai tea",
+        title: "Ceylon Ginger Cinnamon chai tea",
         price: "7.50",
     },
 ]
