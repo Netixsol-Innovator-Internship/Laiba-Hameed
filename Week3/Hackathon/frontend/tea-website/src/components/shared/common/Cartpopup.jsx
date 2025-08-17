@@ -5,13 +5,16 @@ import Button from "../buttons/button"
 
 const CartPopup = ({ onClose }) => {
     const [isVisible, setIsVisible] = useState(false)
+    const [cartProducts,setCartProducts] = useState([])
 
-    // Animate in when mounted
+
+
+ 
     useEffect(() => {
         setIsVisible(true)
     }, [])
 
-    // Close on ESC key
+
     useEffect(() => {
         const handleEsc = (e) => {
             if (e.key === "Escape") handleClose()
@@ -22,7 +25,7 @@ const CartPopup = ({ onClose }) => {
 
     const handleClose = () => {
         setIsVisible(false)
-        setTimeout(() => onClose(), 300) // match transition duration
+        setTimeout(() => onClose(), 300) 
     }
 
     return (
@@ -47,7 +50,7 @@ const CartPopup = ({ onClose }) => {
                         </button>
                     </div>
                     <div className="flex-1 overflow-y-auto">
-                        {products.map((product) => (
+                        {cartProducts.length > 0 ? cartProducts.map((product) => (
                             <div key={product.id} className="flex items-center gap-2 sm:gap-4 w-full py-3">
                                 {/* image - left*/}
                                 <div className="w-12 h-12 sm:w-[71px] sm:h-[71px]">
@@ -82,7 +85,7 @@ const CartPopup = ({ onClose }) => {
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        )) : <p>No Item in cart</p>}
                     </div>
                 </div>
                 <div className="flex-shrink-0 mt-6 sm:mt-0">

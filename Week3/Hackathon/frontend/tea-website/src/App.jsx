@@ -7,7 +7,8 @@ import PublicRoute from "./components/shared/common/PublicRoute";
 import LoginForm from "./components/forms/loginForm";
 import SignupForm from "./components/forms/signupForm";
 import ProductsPage from "./pages/productsPage";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import SingleProductPage from './pages/singleProductPage';
 
 import BagPage from "./pages/BagPage";
@@ -27,6 +28,19 @@ function App() {
         <Route path="/signup" element={<PublicRoute><SignupForm /></PublicRoute>} />
       </Routes>
       <Footer />
+
+      <ToastContainer
+        position="top-right"      
+        autoClose={3000}          
+        hideProgressBar={true}   
+        newestOnTop={false}       
+        closeOnClick              
+        rtl={false}               
+        pauseOnFocusLoss          
+        draggable
+        pauseOnHover
+        theme="light"             
+      />
     </Router>
   )
 }

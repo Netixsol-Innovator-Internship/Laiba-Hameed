@@ -1,8 +1,13 @@
 import React from 'react'
-import { products } from '../../constants/gernal'
+// import { products } from '../../constants/gernal'
 import ProductCard from './ProductCard'
+import { useNavigate } from 'react-router-dom'
 
-const ProductsGrid = () => {
+const ProductsGrid = ({products}) => {
+  const navigate = useNavigate();
+  const handleProductClick = (slug)=>{
+    navigate(`/product/${slug}`)
+  }
   return (
     <div className='w-full'>
       <div className='flex items-center justify-end font-montserrat'>
@@ -23,10 +28,12 @@ const ProductsGrid = () => {
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-12 my-6">
         {products.map((product) => (
           <ProductCard
-            key={product.id}
-            image={product.image}
-            title={product.title}
-            price={product.price}
+            onClick = {()=>handleProductClick(product.slug)}
+            key={product._id}
+            image={`${import.meta.env.VITE_API_URL}/uploads/${product.images[0]}`}
+            title={product.name}
+            price={product.variants[0].price}
+            weight = {product.variants[0].weight}
           />
         ))}
       </div>
@@ -34,4 +41,4 @@ const ProductsGrid = () => {
   )
 }
 
-export default ProductsGrid
+export default React.memo(ProductsGrid)

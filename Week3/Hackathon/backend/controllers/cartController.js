@@ -8,12 +8,15 @@ import User from "../models/User.js";
 export const addToCart = async (req, res) => {
   try {
     const { id } = req.user;
-    const { prod_id, variant } = req.body;
+    console.log(req.body)
+    const { prod_id, variant, quantity } = req.body;
 
+    // Check if product with that variant exists
     const existence = await Product.findOne({
       _id: prod_id,
       "variants.weight": variant,
     });
+
     if (!existence) {
       return res.status(400).json({
         success: false,
@@ -22,29 +25,40 @@ export const addToCart = async (req, res) => {
       });
     }
 
+    // Find or create user cart
     let userCart = await Cart.findOne({ user: id });
-
     if (!userCart) {
       const cart = await Cart.create({ user: id, products: [] });
       await User.findByIdAndUpdate(id, { cart: cart._id });
       userCart = cart;
     }
 
+    // Check if item already exists in cart
     const itemIndex = userCart.products.findIndex(
       (p) => p.product.toString() === prod_id && p.variant === variant
     );
 
     if (itemIndex > -1) {
-      if (existence.stock < userCart.products[itemIndex].quantity) {
+      // Existing item: update quantity
+      const newQuantity = userCart.products[itemIndex].quantity + quantity;
+      if (existence.stock < newQuantity) {
         return res.status(400).json({
           success: false,
           data: null,
           message: "Requested quantity exceeds available stock",
         });
       }
-      userCart.products[itemIndex].quantity += 1;
+      userCart.products[itemIndex].quantity = newQuantity;
     } else {
-      userCart.products.push({ product: prod_id, variant });
+      // New item: push to cart
+      if (existence.stock < quantity) {
+        return res.status(400).json({
+          success: false,
+          data: null,
+          message: "Requested quantity exceeds available stock",
+        });
+      }
+      userCart.products.push({ product: prod_id, variant, quantity });
     }
 
     await userCart.save();
@@ -52,7 +66,7 @@ export const addToCart = async (req, res) => {
     return res.status(201).json({
       success: true,
       data: userCart,
-      message: success.ITEM_ADDED,
+      message: "Item added to cart successfully",
     });
   } catch (error) {
     res.status(500).json({
@@ -61,6 +75,7 @@ export const addToCart = async (req, res) => {
     });
   }
 };
+
 
 // Increase Quantity of Product
 
