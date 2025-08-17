@@ -60,7 +60,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed top-0 right-0 w-[267px] h-full bg-white shadow-lg z-50 flex flex-col">
+          <div className="fixed top-0 right-0 w-[267px] h-auto bg-white shadow-lg z-50 flex flex-col">
             {/* Scrollable content container */}
             <div className="overflow-y-auto flex-1 flex flex-col justify-between">
               {/* Close button + Search */}
