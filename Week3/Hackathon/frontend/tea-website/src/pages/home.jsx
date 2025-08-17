@@ -1,9 +1,20 @@
-import React from 'react'
+import Collection from '../components/home/collection'
+import Hero from '../components/home/hero';
+import Feature from '../components/home/feature';
 
-const home = () => {
+
+
+const Home = () => {
   return (
-    <div>home</div>
+    <>
+        {/* hero section */}
+        <Hero />
+        {/* feaures section */}
+        <Feature />
+        {/* collections section */}
+        <Collection />
+    </>
   )
 }
 
-export default home
+export default Home

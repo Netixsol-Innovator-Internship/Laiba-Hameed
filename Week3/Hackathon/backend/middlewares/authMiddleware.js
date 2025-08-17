@@ -12,7 +12,7 @@ export const protect = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("Decoded JWT:", decoded);
+        // console.log("Decoded JWT:", decoded);
         req.user = { id: decoded.id || decoded._id }; // store whole payload, not just id
         next();
     } catch (err) {
