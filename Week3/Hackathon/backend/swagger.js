@@ -2,8 +2,8 @@ import swaggerAutogen from 'swagger-autogen';
 
 const doc = {
     info: {
-        title: 'Task Manager API',
-        description: 'In-memory CRUD API for tasks',
+        title: 'Ecommerce API',
+        description: 'In-memory CRUD API for Ecommerce',
     },
     host: 'localhost:3000',
     schemes: ['http'],

@@ -4,6 +4,7 @@ dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import path from "path";
 
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
@@ -16,6 +17,8 @@ const app = express();
 app.use(express.json());
 
 app.use(cors());
+
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
