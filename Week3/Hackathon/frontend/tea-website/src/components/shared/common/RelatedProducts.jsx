@@ -1,7 +1,7 @@
 import { products } from "../../../constants/gernal"
 import ProductCard from "../../products/ProductCard"
 
-const RelatedProducts = (title) => {
+const RelatedProducts = ({title}) => {
     return (
         <div className="flex flex-col items-center justify-center my-12">
             <h1 className="text-2xl md:text-[32px] font-prosto mb-6">{title}</h1>
