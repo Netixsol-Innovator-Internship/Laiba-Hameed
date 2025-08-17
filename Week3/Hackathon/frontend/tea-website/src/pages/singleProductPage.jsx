@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "../components/shared/common/Container";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import Breadcrumb from "../components/shared/common/Breadcrumb";
 import ProductOverview from "../components/singleProduct/ProductOverview";
 import ProductImage from "../components/singleProduct/ProductImage";
@@ -11,7 +11,7 @@ import SteepingInstructions from "../components/singleProduct/SteepingInstructio
 import ProductDescription from "../components/singleProduct/ProductDescription";
 import RelatedProducts from "../components/shared/common/RelatedProducts";
 const SingleProductPage = () => {
-  const { slug } = useParams();
+  // const { slug } = useParams();
   return (
     <div className="">
       <Breadcrumb />

@@ -3,7 +3,7 @@ import { footerData } from "../../../constants/gernal"
 
 const Footer = () => {
     return (
-        <div className="flex items-center justify-center bg-[#F4F4F4] font-montserra">
+        <div className="flex items-center justify-center bg-[#F4F4F4] font-montserrat">
             <Container>
                  <div className="w-full py-12  px-6 sm:px-10 lg:px-12 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
                         {/* Collections */}

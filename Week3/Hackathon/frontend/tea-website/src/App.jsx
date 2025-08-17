@@ -20,12 +20,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/collections" element={<ProductsPage/> } />
-
-        <Route path="/product/:slug" element={<SingleProductPage/>} />
-
-        <Route path="/cart" element={<BagPage/> } />
-
+        <Route path="/collections" element={<ProductsPage />} />
+        <Route path="/product/:slug" element={<SingleProductPage />} />
+        <Route path="/cart" element={<BagPage />} />
         <Route path="/login" element={<PublicRoute><LoginForm /></PublicRoute>} />
         <Route path="/signup" element={<PublicRoute><SignupForm /></PublicRoute>} />
       </Routes>
