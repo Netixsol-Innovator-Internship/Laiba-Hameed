@@ -1,13 +1,15 @@
 import { useState } from "react";
 import Container from "../../shared/common/Container";
 import logo from "../../../assets/header/logo.svg";
-import hamburgerIcon from "../../../assets/header/hamburger.svg"; // your hamburger image
+import hamburgerIcon from "../../../assets/header/hamburger.svg";
 import closeIcon from "../../../assets/header/close.svg"
 import { NavList, Icons } from "../../../constants/gernal";
 import { Link } from "react-router-dom";
+import CartPopup from "../../shared/common/CartPopup"; // import your popup
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false); // state for cart
 
   return (
     <div className="flex items-center justify-center">
@@ -35,16 +37,25 @@ const Header = () => {
           {/* Side Icons + Hamburger */}
           <div className="flex items-center gap-3 sm:gap-6 lg:gap-9 flex-shrink-0">
             {/* Desktop icons */}
-            {Object.entries(Icons).map(([key, icon]) => (
-              <Link to={`${icon.path}`}>
-                <img
+            {Object.entries(Icons).map(([key, icon]) =>
+              icon.alt === "cart Icon" ? (
+                <button
                   key={key}
-                  src={icon.src}
-                  alt={icon.alt}
-                  className="hidden md:block h-5 w-5 sm:h-6 sm:w-6"
-                />
-              </Link>
-            ))}
+                  onClick={() => setIsCartOpen(!isCartOpen)}
+                  className="hidden md:block cursor-pointer"
+                >
+                  <img src={icon.src} alt={icon.alt} className="h-5 w-5 sm:h-6 sm:w-6" />
+                </button>
+              ) : (
+                <Link key={key} to={icon.path}>
+                  <img
+                    src={icon.src}
+                    alt={icon.alt}
+                    className="hidden md:block h-5 w-5 sm:h-6 sm:w-6 cursor-pointer"
+                  />
+                </Link>
+              )
+            )}
 
             {/* Hamburger (mobile only) */}
             <button
@@ -62,7 +73,6 @@ const Header = () => {
           {/* Mobile Menu */}
           {isMenuOpen && (
             <div className="absolute right-0 top-10 mt-2 w-48 md:hidden bg-gray-50 rounded shadow-md z-50 p-2 space-y-2">
-              {/* Navigation links */}
               {Object.entries(NavList).map(([key, item]) => (
                 <a
                   key={key}
@@ -74,22 +84,31 @@ const Header = () => {
                 </a>
               ))}
 
-              {/* Side icons */}
               <div className="flex items-center gap-4 mt-2">
-                {Object.entries(Icons).map(([key, icon]) => (
-                  <img
-                    key={key}
-                    src={icon.src}
-                    alt={icon.alt}
-                    className="h-5 w-5 sm:h-6 sm:w-6"
-                  />
-                ))}
+                {Object.entries(Icons).map(([key, icon]) =>
+                  icon.alt === "cart Icon" ? (
+                    <button
+                      key={key}
+                      onClick={() => setIsCartOpen(!isCartOpen)}
+                    >
+                      <img src={icon.src} alt={icon.alt} className="h-5 w-5 sm:h-6 sm:w-6" />
+                    </button>
+                  ) : (
+                    <img
+                      key={key}
+                      src={icon.src}
+                      alt={icon.alt}
+                      className="h-5 w-5 sm:h-6 sm:w-6"
+                    />
+                  )
+                )}
               </div>
             </div>
           )}
         </header>
 
-
+        {/* Cart Popup */}
+        {isCartOpen && <CartPopup onClose={() => setIsCartOpen(false)} />}
       </Container>
     </div>
   );

@@ -65,10 +65,10 @@ export const Icons = {
         alt: "person Icon",
         path: "/login"
     },
-    mail: {
+    bag: {
         id: 3,
         src: local_mall,
-        alt: "local Icon",
+        alt: "cart Icon",
         path: "/"
     }
 };
