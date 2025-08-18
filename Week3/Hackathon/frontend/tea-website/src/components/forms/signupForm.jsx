@@ -5,6 +5,7 @@ import { useState } from "react";
 import api from "../../services/api";
 import { signUpSchema } from "../../schemas/authSchema";
 import LoadingSpinner from "../shared/common/LoadingSpinner";
+import { toast } from 'react-toastify';
 
 const SignupForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -20,16 +21,18 @@ const SignupForm = () => {
         setErrorMsg("");
         setSuccessMsg("");
         try {
-            await api.post("/auth/register", {
+            let result = await api.post("/auth/register", {
                 name: data.name,
                 email: data.email,
                 password: data.password,
             });
 
             setSuccessMsg("Account created successfully! Redirecting to login...");
-            setTimeout(() => navigate("/login"), 2000);
+            toast.success(result?.data?.message)
+            setTimeout(() => navigate("/login"), 1000);
         } catch (err) {
             setErrorMsg(err.response?.data?.message || "Signup failed");
+             toast.error(err.response?.data?.message)
         } finally {
             setLoading(false);
         }

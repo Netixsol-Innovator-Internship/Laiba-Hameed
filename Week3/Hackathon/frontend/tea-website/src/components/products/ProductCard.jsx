@@ -1,6 +1,6 @@
-const ProductCard = ({ image, title, price }) => {
+const ProductCard = ({ image, title, price,weight,onClick }) => {
     return (
-        <div className="w-auto bg-white overflow-hidden font-montserrat cursor-pointer">
+        <div className="w-auto bg-white overflow-hidden font-montserrat cursor-pointer" onClick={onClick}>
             {/* Image */}
             <div className="w-[172px] h-[172px] md:w-[264px] md:h-[264px] bg-gray-100 flex items-center justify-center">
                 <img
@@ -19,7 +19,7 @@ const ProductCard = ({ image, title, price }) => {
 
                 {/* Price */}
                 <p className="text-sm md:text-base font-medium text-black">
-                    ${price} <span className="text-gray-500 text-xs md:text-sm">/ 50g</span>
+                    ${price} <span className="text-gray-500 text-xs md:text-sm">/ {weight}</span>
                 </p>
             </div>
         </div>

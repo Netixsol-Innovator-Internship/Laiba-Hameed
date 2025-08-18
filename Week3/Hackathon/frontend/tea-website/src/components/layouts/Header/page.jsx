@@ -59,12 +59,12 @@ const Header = () => {
                   <button
                     key={key}
                     onClick={() => setIsCartOpen(!isCartOpen)}
-                    className="hidden md:block"
+                    className="hidden md:block cursor-pointer"
                   >
                     <img src={icon.src} alt={icon.alt} className="h-5 w-5 sm:h-6 sm:w-6" />
                   </button>
                 ) : (
-                  <Link key={key} to={icon.path}>
+                  <Link key={key} to={icon.path} className="cursor-pointer">
                     <img
                       src={icon.src}
                       alt={icon.alt}
