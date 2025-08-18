@@ -14,6 +14,7 @@ const Header = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -135,9 +136,11 @@ const Header = () => {
                   className="h-7 w-7 sm:h-6 sm:w-6"
                 />
               </button>
+
             </div>
           </header>
         )}
+
 
         {/* Mobile Menu */}
         {isMenuOpen && (
@@ -148,6 +151,7 @@ const Header = () => {
             onLogout={handleLogout}
           />
         )}
+
 
         {isCartOpen && <CartPopup onClose={() => setIsCartOpen(false)} />}
       </Container>

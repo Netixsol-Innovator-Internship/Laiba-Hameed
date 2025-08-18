@@ -22,6 +22,7 @@ const TopSection = () => {
     };
 
     return (
+
         <div className="w-full relative font-montserrat">
             {/* Background Image */}
             <div className="w-full h-[180px] md:h-[308px]">
@@ -45,6 +46,7 @@ const TopSection = () => {
 
             {/* Filter Drawer */}
             {isFilterOpen && <FilterModal handleClose={handleClose} isVisible={isVisible} />}
+
         </div>
     );
 };

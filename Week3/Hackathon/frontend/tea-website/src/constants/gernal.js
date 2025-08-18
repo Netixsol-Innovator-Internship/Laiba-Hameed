@@ -65,7 +65,9 @@ export const Icons = {
         alt: "person Icon",
         path: "/login"
     },
+
     cart: {
+
         id: 3,
         src: local_mall,
         alt: "cart Icon",

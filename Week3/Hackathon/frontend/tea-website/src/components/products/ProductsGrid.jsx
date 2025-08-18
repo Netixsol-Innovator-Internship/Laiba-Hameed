@@ -39,6 +39,7 @@ const ProductsGrid = ({ products }) => {
     setVisibleCount((prev) => prev + 10); // load 10 more each time
   };
 
+
   return (
     <div className="w-full">
       <div className="hidden lg:flex items-center justify-end font-montserrat">
@@ -55,6 +56,7 @@ const ProductsGrid = ({ products }) => {
           <option>Z - A</option>
           <option>Default</option>
         </select>
+
       </div>
 
       {/* Products grid */}
