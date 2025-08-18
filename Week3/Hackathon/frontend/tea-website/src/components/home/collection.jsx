@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Collections } from "../../constants/gernal";
 import Container from "../shared/common/Container";
 import { getAllCollections } from "../../services/productService";
+import { Link } from "react-router-dom";
 
 const Collection = () => {
   const [collections, setCollections] = useState([]);
@@ -24,8 +25,8 @@ const Collection = () => {
           </h2>
 
           <div className="w-full flex flex-wrap justify-start sm:justify-between items-center gap-4 sm:gap-6 lg:gap-7">
-            {collections?.map((item, index) => (
-              <div
+            {Array.isArray(collections) && collections.map((item, index) => (
+              <Link to={'/collections'}
                 key={index}
                 className="
     text-center 
@@ -47,7 +48,7 @@ const Collection = () => {
                 <p className="mt-3.5 font-medium font-montserrat text-sm sm:text-base">
                   {item.collection}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

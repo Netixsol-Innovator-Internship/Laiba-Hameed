@@ -41,12 +41,17 @@ const ProductDetails = ({ product }) => {
       variant: selectedVariant.weight,
       quantity: quantity,
     };
-    console.log("Adding to cart:", data);
+    // console.log("Adding to cart:", data);
 
     const result = await addToCart(data);
-    console.log(result)
+    // console.log(result)
     if (result?.success) {
       toast.success(result?.message);
+    }
+    else{
+      if(result.message === "Not authorized, no token provided"){
+        toast.error("Login First")
+      }
     }
   };
 

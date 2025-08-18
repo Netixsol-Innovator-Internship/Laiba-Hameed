@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Minus, Plus } from "lucide-react";
 import { products } from "../../constants/gernal";
 import Button from "../shared/buttons/button";
@@ -10,9 +10,8 @@ import {
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const CartItems = ({ cartProducts, fetchCartProducts,subtotal }) => {
-
-    const navigate = useNavigate()
+const CartItems = ({ cartProducts, fetchCartProducts, subtotal }) => {
+  const navigate = useNavigate();
   const handleIncreaseQuantity = async (id) => {
     let result = await increaseQuantity(id);
     if (result?.success) {
@@ -36,13 +35,13 @@ const CartItems = ({ cartProducts, fetchCartProducts,subtotal }) => {
     }
   };
 
-  const handleShoppingBtn = ()=>{
-    navigate('/collections')
-  }
+  const handleShoppingBtn = () => {
+    navigate("/collections");
+  };
   return (
     <div className="sm:w-[455px] font-montserrat mb-12">
       {/* cart item */}
-      {cartProducts.length > 0 ? (
+      {Array.isArray(cartProducts) && cartProducts.length > 0 ? (
         cartProducts.map((product) => (
           <div
             key={product.cartItemId}
@@ -105,7 +104,10 @@ const CartItems = ({ cartProducts, fetchCartProducts,subtotal }) => {
         <span className="font-medium">€{subtotal}</span>
       </div>
       <div className="flex items-center justify-center w-full">
-        <Button className="border" onClick={handleShoppingBtn}> back to shopping </Button>
+        <Button className="border" onClick={handleShoppingBtn}>
+          {" "}
+          back to shopping{" "}
+        </Button>
       </div>
     </div>
   );

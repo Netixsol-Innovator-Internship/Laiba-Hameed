@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import api from "./api";
 
 export const addToCart = async (data) => {
@@ -6,7 +7,7 @@ export const addToCart = async (data) => {
     const res = await api.post("/cart", data);
     return res.data;
   } catch (error) {
-    return error?.response;
+    return  error.response.data
   }
 };
 
@@ -15,7 +16,7 @@ export const getCartProducts = async () => {
     const res = await api.get("/cart");
     return res.data;
   } catch (error) {
-    return error?.response;
+    return  error.response.data
   }
 };
 
@@ -26,7 +27,7 @@ export const increaseQuantity = async (id) => {
     const res = await api.patch(`/cart/increase/${id}`,);
     return res.data;
   } catch (error) {
-    return error?.response;
+    return toast.error(error?.response?.data?.message)
   }
 };
 
@@ -37,7 +38,7 @@ export const decreaseQuantity = async (id) => {
     const res = await api.patch(`/cart/decrease/${id}`,);
     return res.data;
   } catch (error) {
-    return error?.response;
+    return  toast.error(error?.response?.data?.message)
   }
 };
 
@@ -48,6 +49,8 @@ export const removeItemFromCart = async (id) => {
     const res = await api.delete(`/cart/${id}`,);
     return res.data;
   } catch (error) {
-    return error?.response;
+    return (
+      toast.error(error?.response?.data?.message)
+    );
   }
 };

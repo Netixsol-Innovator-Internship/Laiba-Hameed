@@ -3,7 +3,7 @@ import { products } from "../../../constants/gernal";
 import { useEffect, useState } from "react";
 import Button from "../buttons/button";
 import {
-    decreaseQuantity,
+  decreaseQuantity,
   getCartProducts,
   increaseQuantity,
   removeItemFromCart,
@@ -18,19 +18,24 @@ const CartPopup = ({ onClose }) => {
   const [delivery, setDelivery] = useState(3.5);
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
-  const handlePurchaseBtn = ()=>{
-    navigate('/cart')
-    handleClose()
-  }
+  const handlePurchaseBtn = () => {
+    navigate("/cart");
+    handleClose();
+  };
   useEffect(() => {
-    let t = cartProducts.reduce((total, current) => total + current.total, 0);
-    setSubTotal(t);
-    setTotal(delivery + t);
+    if (Array.isArray(cartProducts)) {
+      let t = cartProducts.reduce(
+        (total, current) => total + (current.total || 0),
+        0
+      );
+      setSubTotal(t);
+      setTotal(delivery + t);
+    }
   }, [cartProducts]);
   const fetchCartProducts = async () => {
     let result = await getCartProducts();
-    console.log(result.data);
-    setCartProducts(result.data);
+    // console.log(result.data);
+     setCartProducts(result?.data || []);
   };
   useEffect(() => {
     setIsVisible(true);
@@ -53,26 +58,26 @@ const CartPopup = ({ onClose }) => {
 
   const handleIncreaseQuantity = async (id) => {
     let result = await increaseQuantity(id);
-    if(result?.success){
-        fetchCartProducts()
-                toast.success(result?.message)
+    if (result?.success) {
+      fetchCartProducts();
+      toast.success(result?.message);
     }
   };
   const handledecreaseQuantity = async (id) => {
     let result = await decreaseQuantity(id);
-    if(result?.success){
-        fetchCartProducts()
-        toast.success(result?.message)
+    if (result?.success) {
+      fetchCartProducts();
+      toast.success(result?.message);
     }
   };
 
-  const handleRemoveBtn = async(id)=>{
+  const handleRemoveBtn = async (id) => {
     let result = await removeItemFromCart(id);
-    if(result?.success){
-        fetchCartProducts()
-        toast.success(result?.message)
+    if (result?.success) {
+      fetchCartProducts();
+      toast.success(result?.message);
     }
-  }
+  };
 
   return (
     // overlay
@@ -98,7 +103,7 @@ const CartPopup = ({ onClose }) => {
             </button>
           </div>
           <div className="flex-1 overflow-y-auto">
-            {cartProducts.length > 0 ? (
+            {Array.isArray(cartProducts) && cartProducts.length > 0 ? (
               cartProducts.map((product) => (
                 <div
                   key={product.cartItemId}
@@ -123,22 +128,33 @@ const CartPopup = ({ onClose }) => {
                         {product.name} - {product?.variant}
                       </p>
                       <div className="flex items-center justify-between w-[50px] sm:w-[70px]">
-                        <span className="cursor-pointer" onClick={()=>handledecreaseQuantity(product.cartItemId)}>
+                        <span
+                          className="cursor-pointer"
+                          onClick={() =>
+                            handledecreaseQuantity(product.cartItemId)
+                          }
+                        >
                           <Minus size={14} />
                         </span>
                         <span className="text-sm sm:text-xl">
                           {product.quantity}
                         </span>
-                        <span className="cursor-pointer" onClick={()=>handleIncreaseQuantity(product.cartItemId)}>
+                        <span
+                          className="cursor-pointer"
+                          onClick={() =>
+                            handleIncreaseQuantity(product.cartItemId)
+                          }
+                        >
                           <Plus size={14} />
                         </span>
                       </div>
                     </div>
                     {/* remove btn + price */}
                     <div className="flex items-center justify-between text-sm">
-                      <button 
-                      onClick={()=>handleRemoveBtn(product.cartItemId)}
-                      className="uppercase cursor-pointer text-[10px] sm:text-sm text-gray-600 hover:text-red-600">
+                      <button
+                        onClick={() => handleRemoveBtn(product.cartItemId)}
+                        className="uppercase cursor-pointer text-[10px] sm:text-sm text-gray-600 hover:text-red-600"
+                      >
                         remove
                       </button>
                       <span className="text-[12px] sm:text-sm">
@@ -180,9 +196,10 @@ const CartPopup = ({ onClose }) => {
             </span>
           </div>
 
-          <Button 
-          onClick={handlePurchaseBtn}
-          className="bg-[#282828] text-white w-full my-3">
+          <Button
+            onClick={handlePurchaseBtn}
+            className="bg-[#282828] text-white w-full my-3"
+          >
             purchase
           </Button>
         </div>

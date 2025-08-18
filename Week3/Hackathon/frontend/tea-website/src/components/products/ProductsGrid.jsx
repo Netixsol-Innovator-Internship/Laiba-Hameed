@@ -26,7 +26,7 @@ const ProductsGrid = ({products}) => {
 
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-12 my-6">
-        {products.map((product) => (
+        {products.slice(0,10).map((product) => (
           <ProductCard
             onClick = {()=>handleProductClick(product.slug)}
             key={product._id}

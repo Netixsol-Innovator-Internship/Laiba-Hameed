@@ -9,21 +9,30 @@ const MainSection = () => {
   const [delivery, setDelivery] = useState(3.5);
   const [total, setTotal] = useState(0);
   useEffect(() => {
-    let t = cartProducts.reduce((total, current) => total + current.total, 0);
-    setSubTotal(t);
-    setTotal(delivery + t);
+    if (Array.isArray(cartProducts)) {
+      let t = cartProducts.reduce(
+        (total, current) => total + (current.total || 0),
+        0
+      );
+      setSubTotal(t);
+      setTotal(delivery + t);
+    }
   }, [cartProducts]);
   const fetchCartProducts = async () => {
     let result = await getCartProducts();
     console.log(result.data);
-    setCartProducts(result.data);
+    setCartProducts(result.data || []);
   };
   useEffect(() => {
     fetchCartProducts();
   }, []);
   return (
     <div className="py-6 flex flex-col lg:flex-row items-center lg:items-start justify-between">
-      <CartItems subtotal={subtotal} cartProducts={cartProducts} fetchCartProducts={fetchCartProducts} />
+      <CartItems
+        subtotal={subtotal}
+        cartProducts={cartProducts}
+        fetchCartProducts={fetchCartProducts}
+      />
       <OrderSummary subtotal={subtotal} total={total} delivery={delivery} />
     </div>
   );

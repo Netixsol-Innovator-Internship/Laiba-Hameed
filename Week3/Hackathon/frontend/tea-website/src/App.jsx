@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import SingleProductPage from './pages/singleProductPage';
 
 import BagPage from "./pages/BagPage";
+import ProtectedRoute from "./components/shared/common/ProtectedRoute";
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/collections" element={<ProductsPage />} />
         <Route path="/product/:slug" element={<SingleProductPage />} />
-        <Route path="/cart" element={<BagPage />} />
+        <Route path="/cart" element={<ProtectedRoute><BagPage /></ProtectedRoute>} />
         <Route path="/login" element={<PublicRoute><LoginForm /></PublicRoute>} />
         <Route path="/signup" element={<PublicRoute><SignupForm /></PublicRoute>} />
       </Routes>
