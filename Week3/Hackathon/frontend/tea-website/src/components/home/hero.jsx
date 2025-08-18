@@ -1,8 +1,13 @@
 import Button from "../shared/buttons/button";
 import Container from "../shared/common/Container";
+import { useNavigate } from 'react-router-dom';
 
 
 const Hero = () => {
+  const navigate = useNavigate();
+  const handleBtn = ()=>{
+    navigate('/collections')
+  }
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
@@ -20,7 +25,7 @@ const Hero = () => {
                   Lorem ipsum dolor sit amet consectetur. Orci nibhnullam risus adipiscing odio. Neque lacus nibherosin.
                 </p>
                 <p className='text-[16px] max-w-md text-base font-montserrat '></p>
-                <Button className="bg-[#282828] self-start text-white"> BROWSE TEAS</Button>
+                <Button className="bg-[#282828] self-start text-white hover:bg-transparent border hover:text-[#282828]" onClick={handleBtn}> BROWSE TEAS</Button>
               </div>
             </div>
           </div>

@@ -1,3 +1,5 @@
+
+import React from 'react'
 import { ChevronRightIcon } from 'lucide-react'
 import Button from '../shared/buttons/button'
 import visa from "../../assets/cart/visa.png"
@@ -6,7 +8,7 @@ import mastercard from "../../assets/cart/mastecard.png" // you wrote mastecard,
 import ideal from "../../assets/cart/ideal.png"
 
 
-const OrderSummary = () => {
+const OrderSummary = ({delivery,subtotal,total}) => {
   return (
     <div className='sm:w-[455px] font-montserrat py-3'>
       {/* ordersummary box */}
@@ -15,23 +17,23 @@ const OrderSummary = () => {
         {/* sub total */}
         <div className='flex items-center justify-between w-full pb-2 pt-6'>
           <span>Subtotal</span>
-          <span className='font-medium'>€3.90</span>
+          <span className='font-medium'>€{subtotal}</span>
         </div>
         {/* delivery */}
         <div className='flex items-center justify-between w-full pb-2 pt-2'>
           <span>Delivery</span>
-          <span className='font-medium'>€3.95</span>
+          <span className='font-medium'>€{delivery}</span>
         </div>
         {/* divider */}
         <div className="border-b border-[#A0A0A0] my-4 mx-6 "></div>
         {/* total */}
         <div className='flex items-center justify-between w-full pb-2'>
           <span className='font-medium'>Total</span>
-          <span className='font-medium text-xl'>€7.85</span>
+          <span className='font-medium text-xl'>€{total}</span>
         </div>
 
         <p className='text-[#282828c0] py-2'>Estimated shipping time: 2 days</p>
-        <Button className='bg-[#282828] text-white w-full mt-3'>Check out</Button>
+        <Button className='bg-[#282828] text-white hover:bg-transparent border hover:text-[#282828] w-full mt-3'>Check out</Button>
       </div>
 
       {/* payment type */}
@@ -74,4 +76,4 @@ const OrderSummary = () => {
   )
 }
 
-export default OrderSummary
+export default React.memo(OrderSummary)

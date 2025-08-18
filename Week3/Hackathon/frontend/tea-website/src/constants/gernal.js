@@ -55,9 +55,9 @@ export const NavList = {
 export const Icons = {
     search: {
         id: 1,
-        src: Search, // path to your image file
+        src: Search,
         alt: "Search Icon",
-        path: "/search"
+        path: "/"
     },
     user: {
         id: 2,
@@ -65,7 +65,9 @@ export const Icons = {
         alt: "person Icon",
         path: "/login"
     },
-    bag: {
+
+    cart: {
+
         id: 3,
         src: local_mall,
         alt: "cart Icon",

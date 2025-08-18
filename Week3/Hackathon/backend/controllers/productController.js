@@ -302,3 +302,46 @@ export const updateProductById = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+
+
+
+// Get collections
+
+export const getCollections = async (req, res) => {
+  try {
+    const collections = await Product.aggregate([
+      {
+        $unwind: "$attributes.collections" // break array into separate docs
+      },
+      {
+        $group: {
+          _id: "$attributes.collections", // group by collection name
+          productId: { $first: "$_id" },  // pick first product
+          name: { $first: "$name" },      // pick first product name
+          image: { $first: { $arrayElemAt: ["$images", 0] } } // pick first image
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          collection: "$_id",
+          productId: 1,
+          name: 1,
+          image: 1
+        }
+      }
+    ]);
+
+    res.status(200).json({
+      success: true,
+      collections
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch collections",
+      error: error.message
+    });
+  }
+};

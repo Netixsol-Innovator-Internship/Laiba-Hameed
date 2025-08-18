@@ -5,6 +5,7 @@ import { useState } from "react";
 import api from "../../services/api";
 import { signUpSchema } from "../../schemas/authSchema";
 import LoadingSpinner from "../shared/common/LoadingSpinner";
+import { toast } from 'react-toastify';
 
 const SignupForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -20,23 +21,25 @@ const SignupForm = () => {
         setErrorMsg("");
         setSuccessMsg("");
         try {
-            await api.post("/auth/register", {
+            let result = await api.post("/auth/register", {
                 name: data.name,
                 email: data.email,
                 password: data.password,
             });
 
             setSuccessMsg("Account created successfully! Redirecting to login...");
-            setTimeout(() => navigate("/login"), 2000);
+            toast.success(result?.data?.message)
+            setTimeout(() => navigate("/login"), 1000);
         } catch (err) {
             setErrorMsg(err.response?.data?.message || "Signup failed");
+             toast.error(err.response?.data?.message)
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-[#f1faee]">
+        <div className="flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="bg-white shadow-2xl p-6 sm:p-8 lg:p-10 w-full max-w-md sm:max-w-lg font-montserrat"

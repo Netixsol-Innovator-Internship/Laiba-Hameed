@@ -5,6 +5,7 @@ import {
   deleteProductById,
   getAllProducts,
   getAvailableFilterOptions,
+  getCollections,
   getFilteredProductsByOption,
   getProductByID,
   getProductBySlug,
@@ -30,6 +31,9 @@ productRoutes.post(
 // Get all Products
 productRoutes.get("/", getAllProducts);
 
+// Get Collections
+productRoutes.get('/collections',getCollections)
+
 // Get Filter Options
 productRoutes.get("/filters/options", getAvailableFilterOptions);
 
@@ -52,6 +56,7 @@ productRoutes.get(
   getProductBySlug
 );
 
+
 // Delete All Products
 
 productRoutes.delete("/", deleteAllProducts);
@@ -73,5 +78,10 @@ productRoutes.put(
   upload.array("images", 5),
   updateProductById
 );
+
+
+
+
+
 
 export default productRoutes;

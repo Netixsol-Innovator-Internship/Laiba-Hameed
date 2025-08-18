@@ -1,40 +1,91 @@
-import { products } from '../../constants/gernal'
-import ProductCard from './ProductCard'
+import React, { useMemo, useState } from "react";
+import ProductCard from "./ProductCard";
+import { useNavigate } from "react-router-dom";
+import Button from "../shared/buttons/button";
 
-const ProductsGrid = () => {
+const ProductsGrid = ({ products }) => {
+  const navigate = useNavigate();
+  const handleProductClick = (slug) => {
+    navigate(`/product/${slug}`);
+  };
+
+  const [sortBy, setSortBy] = useState("Default");
+  const [visibleCount, setVisibleCount] = useState(9);
+  const sortedProducts = useMemo(() => {
+    let sorted = [...products];
+
+    switch (sortBy) {
+      case "High Price":
+        sorted.sort((a, b) => b.variants[0].price - a.variants[0].price);
+        break;
+      case "Low Price":
+        sorted.sort((a, b) => a.variants[0].price - b.variants[0].price);
+        break;
+      case "A - Z":
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "Z - A":
+        sorted.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      default:
+        break;
+    }
+
+    return sorted;
+  }, [products, sortBy]);
+
+  // Load more handler
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 10); // load 10 more each time
+  };
+
+
   return (
-    <div className='w-full'>
-      <div className='flex items-center justify-end font-montserrat'>
-        {/* filter */}
+    <div className="w-full">
+      <div className="hidden lg:flex items-center justify-end font-montserrat">
         {/* sortings */}
         <select
-          defaultValue="default"
           className="w-32 p-2 bg-white text-gray-700 focus:outline-none focus:ring-0 cursor-pointer"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
         >
-          <option value="default" disabled className="uppercase cursor-pointer">
-            Sort By
-          </option>
-          <option value="high" className="uppercase cursor-pointer">High Price</option>
-          <option value="low" className="uppercase cursor-pointer">Low Price</option>
-          <option value="az" className="uppercase cursor-pointer">A - Z</option>
-          <option value="za" className="uppercase cursor-pointer">Z - A</option>
-          <option value="reset" className="uppercase cursor-pointer">Default</option>
+          <option disabled>Sort By</option>
+          <option>High Price</option>
+          <option>Low Price</option>
+          <option>A - Z</option>
+          <option>Z - A</option>
+          <option>Default</option>
         </select>
 
-
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-12 my-6">
-        {products.map((product) => (
+
+      {/* Products grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 lg:mt-6 mb-6">
+        {sortedProducts.slice(0, visibleCount).map((product) => (
           <ProductCard
-            key={product.id}
-            image={product.image}
-            title={product.title}
-            price={product.price}
+            onClick={() => handleProductClick(product.slug)}
+            key={product._id}
+            image={`${import.meta.env.VITE_API_URL}/uploads/${product.images[0]}`}
+            title={product.name}
+            price={product.variants[0].price}
+            weight={product.variants[0].weight}
           />
         ))}
       </div>
-    </div>
-  )
-}
 
-export default ProductsGrid
+      {/* Load more button */}
+      {visibleCount < sortedProducts.length && (
+        <div className="flex justify-center">
+          <Button
+            onClick={handleLoadMore}
+            className="bg-[#282828] self-start text-white hover:bg-transparent border hover:text-[#282828]"
+          >
+            Load More
+          </Button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default React.memo(ProductsGrid);
