@@ -1,6 +1,5 @@
 import React from "react";
 import { Minus, Plus } from "lucide-react";
-import { products } from "../../constants/gernal";
 import Button from "../shared/buttons/button";
 import {
   decreaseQuantity,
@@ -51,6 +50,7 @@ const CartItems = ({ cartProducts, fetchCartProducts, subtotal }) => {
             <div className="w-12 h-12 sm:w-[71px] sm:h-[71px]">
               <img
                 src={
+                  // eslint-disable-next-line no-constant-binary-expression
                   `${import.meta.env.VITE_API_URL}/uploads/${product.image}` ||
                   "/placeholder.svg"
                 }
@@ -94,17 +94,18 @@ const CartItems = ({ cartProducts, fetchCartProducts, subtotal }) => {
           </div>
         ))
       ) : (
-        <p>No Item in cart</p>
+        <p className="text-center py-12 text-lg">No Item in cart</p>
       )}
 
-      <div className="border-b border-[#A0A0A0] mt-4 mx-6"></div>
 
+      <div className="border-b border-[#A0A0A0] mt-4 mx-6"></div>
       <div className="flex items-center justify-between py-8 w-full">
         <span>subtotal</span>
         <span className="font-medium">€{subtotal}</span>
       </div>
+
       <div className="flex items-center justify-center w-full">
-        <Button className="border" onClick={handleShoppingBtn}>
+        <Button className="border hover:bg-[#282828] hover:text-white" onClick={handleShoppingBtn}>
           {" "}
           back to shopping{" "}
         </Button>

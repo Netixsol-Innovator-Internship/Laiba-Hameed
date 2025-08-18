@@ -33,7 +33,7 @@ const OrderSummary = ({delivery,subtotal,total}) => {
         </div>
 
         <p className='text-[#282828c0] py-2'>Estimated shipping time: 2 days</p>
-        <Button className='bg-[#282828] text-white w-full mt-3'>Check out</Button>
+        <Button className='bg-[#282828] text-white hover:bg-transparent border hover:text-[#282828] w-full mt-3'>Check out</Button>
       </div>
 
       {/* payment type */}
