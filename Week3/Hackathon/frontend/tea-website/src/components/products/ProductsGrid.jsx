@@ -49,7 +49,7 @@ const ProductsGrid = ({ products }) => {
           <option>Default</option>
         </select>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-12 my-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 my-6">
         {sortedProducts.slice(0, 10).map((product) => (
           <ProductCard
             onClick={() => handleProductClick(product.slug)}

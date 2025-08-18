@@ -1,6 +1,6 @@
 const ProductCard = ({ image, title, price,weight,onClick }) => {
     return (
-        <div className="w-auto bg-white overflow-hidden font-montserrat cursor-pointer" onClick={onClick}>
+        <div className="w-auto flex flex-col items-center justify-center bg-white overflow-hidden font-montserrat cursor-pointer" onClick={onClick}>
             {/* Image */}
             <div className="w-[172px] h-[172px] md:w-[264px] md:h-[264px] bg-gray-100 flex items-center justify-center">
                 <img

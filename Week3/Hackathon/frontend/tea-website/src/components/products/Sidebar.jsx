@@ -34,7 +34,7 @@ const Sidebar = ({ onProductsFiltered }) => {
       }
     };
     fetchFilteredProducts();
-  }, [selectedFilters, enabled]);
+  }, [selectedFilters, enabled, onProductsFiltered]);
 
   const handleCheckboxChange = (category, value) => {
     setSelectedFilters((prev) => {
@@ -58,7 +58,7 @@ const Sidebar = ({ onProductsFiltered }) => {
   };
 
   return (
-    <div className="hidden md:flex flex-col gap-4">
+    <div className="hidden lg:flex flex-col gap-4">
       {/* Dynamic attribute filters */}
       {filterOptions.attributes?.map((item) => (
         <div key={item._id}>

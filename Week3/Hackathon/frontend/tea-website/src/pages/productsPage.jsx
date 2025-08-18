@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import MainPage from "../components/products/MainPage"
 import TopSection from "../components/products/topSection"
 import Breadcrumb from "../components/shared/common/Breadcrumb"
