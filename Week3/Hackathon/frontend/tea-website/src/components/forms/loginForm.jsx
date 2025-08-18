@@ -6,6 +6,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { loginInSchema } from "../../schemas/authSchema";
 import LoadingSpinner from "../shared/common/LoadingSpinner";
 import api from "../../services/api";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -23,10 +24,12 @@ const LoginForm = () => {
             const res = await api.post("/auth/login", data);
             const token = res.data.data.token;
             const userData = res.data.data;
+            toast.success(res?.data?.message)
             login(token, userData);
             navigate("/dashboard");
         } catch (err) {
             setErrorMsg(err.response?.data?.message || "Login failed");
+            toast.error(err.response?.data?.message)
         } finally {
             setLoading(false);
         }

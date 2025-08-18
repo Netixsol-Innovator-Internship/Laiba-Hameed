@@ -4,6 +4,7 @@ import Container from "../components/shared/common/Container"
 import RelatedProducts from "../components/shared/common/RelatedProducts"
 
 const BagPage = () => {
+    
     return (
         <div className="flex items-center justify-center">
             <Container>

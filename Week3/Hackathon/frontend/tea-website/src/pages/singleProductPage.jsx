@@ -18,7 +18,7 @@ const SingleProductPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       let result = await getProductBySlug(slug);
-      console.log(result.data);
+      // console.log(result.data);
       setProduct(result.data);
     };
     fetchProduct()

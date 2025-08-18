@@ -8,7 +8,6 @@ import User from "../models/User.js";
 export const addToCart = async (req, res) => {
   try {
     const { id } = req.user;
-    console.log(req.body)
     const { prod_id, variant, quantity } = req.body;
 
     // Check if product with that variant exists
@@ -270,7 +269,7 @@ export const clearCart = async (req, res) => {
 export const getUserCartProducts = async (req, res) => {
   try {
     const { id } = req.user;
-    console.log(id);
+  
     const userCart = await Cart.findOne({ user: id }).populate(
       "products.product"
     );
@@ -283,15 +282,15 @@ export const getUserCartProducts = async (req, res) => {
       });
     }
 
-    console.log(userCart.products[0].product);
-
+    // console.log(userCart.products[0].product);
+    // console.log(userCart)
     const cartItems = userCart.products.map((item) => {
       const variantObj = item.product.variants.find(
         (v) => v.weight === item.variant
       );
 
       const price = variantObj ? variantObj.price : 0;
-
+     
       return {
         productId: item.product._id,
         cartItemId: item._id,

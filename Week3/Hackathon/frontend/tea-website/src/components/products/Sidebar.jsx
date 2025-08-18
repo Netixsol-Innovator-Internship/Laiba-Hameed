@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { getFilterOptions, getFilteredProducts } from "../../services/productService";
 
