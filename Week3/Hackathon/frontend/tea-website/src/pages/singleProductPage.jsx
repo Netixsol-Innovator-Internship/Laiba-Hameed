@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "../components/shared/common/Container";
-// import { useParams } from "react-router-dom";
 import Breadcrumb from "../components/shared/common/Breadcrumb";
 import ProductOverview from "../components/singleProduct/ProductOverview";
 import ProductImage from "../components/singleProduct/ProductImage";
 import ProductDetails from "../components/singleProduct/ProductDetails";
-import img from "../assets/collections/img1.jpg";
 import ProductInfoSection from "../components/singleProduct/ProductInfoSection";
 import SteepingInstructions from "../components/singleProduct/SteepingInstructions";
 import ProductDescription from "../components/singleProduct/ProductDescription";

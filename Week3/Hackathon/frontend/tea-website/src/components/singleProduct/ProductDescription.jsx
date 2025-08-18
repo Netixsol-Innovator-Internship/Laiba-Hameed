@@ -56,13 +56,13 @@ const ProductDescription = ({ product }) => {
                 {" "}
                 <li>
                   <h5 className="text-sm font-montserrat sm:leading-5 text-[#282828] font-medium">
-                     ALLERGENS
+                    ALLERGENS
                   </h5>
                   <p className="text-sm font-montserrat leading-5 text-[#282828]">
                     {product?.attributes?.allergens[0]}
                   </p>
                 </li>
-                
+
               </>
             )}
           </ul>
@@ -72,7 +72,7 @@ const ProductDescription = ({ product }) => {
         <h3 className="md:text-[32px] text-2xl leading-7 font-montserrat text-[#282828]">
           Ingredient
         </h3>
-        <p className="text-sm leading-5">
+        <p className="text-sm leading-5 font-montserrat">
           {product?.ingredients}
         </p>
       </div>

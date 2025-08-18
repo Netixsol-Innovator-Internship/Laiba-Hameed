@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Collections } from "../../constants/gernal";
 import Container from "../shared/common/Container";
 import { getAllCollections } from "../../services/productService";
 import { Link } from "react-router-dom";
@@ -9,7 +8,6 @@ const Collection = () => {
   useEffect(() => {
     const fetchCollections = async () => {
       const result = await getAllCollections();
-      console.log(result);
       setCollections(result.collections);
     };
 
@@ -29,19 +27,17 @@ const Collection = () => {
               <Link to={'/collections'}
                 key={index}
                 className="
-    text-center 
-    mb-6
-    w-[calc(50%-0.5rem)]   /* 2 columns for small screens */
-    sm:w-[calc(50%-0.75rem)] 
-    md:w-[calc(33.333%-1rem)] 
-    lg:w-[calc(33.333%-1.167rem)] 
-    max-w-[360px]"
+                  text-center 
+                  mb-6
+                  w-[calc(50%-0.5rem)]   /* 2 columns for small screens */
+                  sm:w-[calc(50%-0.75rem)] 
+                  md:w-[calc(33.333%-1rem)] 
+                  lg:w-[calc(33.333%-1.167rem)] 
+                  max-w-[360px]"
               >
                 <img
-                  src={
-                    `${import.meta.env.VITE_API_URL}/uploads/${item.image}` ||
-                    "/placeholder.svg"
-                  }
+                  // eslint-disable-next-line no-constant-binary-expression
+                  src={`${import.meta.env.VITE_API_URL}/uploads/${item.image}` || "/placeholder.svg"}
                   alt={item.collection}
                   className="w-full aspect-square object-cover rounded mx-auto"
                 />

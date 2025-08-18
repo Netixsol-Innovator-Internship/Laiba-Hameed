@@ -1,5 +1,4 @@
 import { Minus, Plus, X } from "lucide-react";
-import { products } from "../../../constants/gernal";
 import { useEffect, useState } from "react";
 import Button from "../buttons/button";
 import {
@@ -31,7 +30,7 @@ const CartPopup = ({ onClose }) => {
       setSubTotal(t);
       setTotal(delivery + t);
     }
-  }, [cartProducts]);
+  }, [cartProducts, delivery]);
   const fetchCartProducts = async () => {
     let result = await getCartProducts();
     // console.log(result.data);
@@ -83,7 +82,7 @@ const CartPopup = ({ onClose }) => {
     // overlay
     <div
       onClick={handleClose}
-      className={`fixed inset-0 bg-black/30 backdrop-blur-sm flex justify-end z-50 transition-opacity duration-300 ${
+      className={`fixed inset-0  bg-[#282828]/50 flex justify-end z-50 transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
     >
@@ -102,7 +101,7 @@ const CartPopup = ({ onClose }) => {
               <X />
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto">
+          <div className="flex-1 overflow-y-auto font-montserrat">
             {Array.isArray(cartProducts) && cartProducts.length > 0 ? (
               cartProducts.map((product) => (
                 <div
@@ -113,6 +112,7 @@ const CartPopup = ({ onClose }) => {
                   <div className="w-12 h-12 sm:w-[71px] sm:h-[71px]">
                     <img
                       src={
+                        // eslint-disable-next-line no-constant-binary-expression
                         `${import.meta.env.VITE_API_URL}/uploads/${
                           product.image
                         }` || "/placeholder.svg"
@@ -198,7 +198,7 @@ const CartPopup = ({ onClose }) => {
 
           <Button
             onClick={handlePurchaseBtn}
-            className="bg-[#282828] text-white w-full my-3"
+            className="bg-[#282828] text-white w-full my-3 hover:bg-transparent border hover:text-[#282828] "
           >
             purchase
           </Button>

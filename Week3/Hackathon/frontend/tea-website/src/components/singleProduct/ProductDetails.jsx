@@ -142,7 +142,7 @@ const ProductDetails = ({ product }) => {
           </button>
         </div>
         <Button
-          className="flex items-center gap-2 bg-[#282828] text-white justify-center  max-w-[264px] md:h-[56px] h-[40px]"
+          className="flex items-center gap-2 bg-[#282828] text-white hover:bg-transparent border hover:text-[#282828] justify-center  max-w-[264px] md:h-[56px] h-[40px]"
           onClick={handleAddBag}
         >
           <IoBagHandleOutline /> ADD TO BAG{" "}

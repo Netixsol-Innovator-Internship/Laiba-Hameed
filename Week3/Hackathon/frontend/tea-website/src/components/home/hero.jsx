@@ -25,7 +25,7 @@ const Hero = () => {
                   Lorem ipsum dolor sit amet consectetur. Orci nibhnullam risus adipiscing odio. Neque lacus nibherosin.
                 </p>
                 <p className='text-[16px] max-w-md text-base font-montserrat '></p>
-                <Button className="bg-[#282828] self-start text-white" onClick={handleBtn}> BROWSE TEAS</Button>
+                <Button className="bg-[#282828] self-start text-white hover:bg-transparent border hover:text-[#282828]" onClick={handleBtn}> BROWSE TEAS</Button>
               </div>
             </div>
           </div>

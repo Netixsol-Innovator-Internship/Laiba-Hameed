@@ -1,19 +1,18 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Container from "../../shared/common/Container";
 import hamburgerIcon from "../../../assets/header/hamburger.svg";
 import { NavList, Icons } from "../../../constants/gernal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartPopup from "../../shared/common/CartPopup";
 import { MobileMenu } from "./MobileMenu";
 import logo from "../../../assets/header/logo.svg";
 
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-
+  const [showUserPopup, setShowUserPopup] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,17 +25,41 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+    setShowUserPopup(false);
+    setIsMenuOpen(false);
+    navigate("/");
+  };
+
+  const handleUserClick = () => {
+    if (token) {
+      // Logged in → toggle popup
+      setShowUserPopup(!showUserPopup);
+    } else {
+      // Guest → go to login
+      navigate("/login");
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center font-montserrat">
+    <div className="flex items-center justify-center font-montserrat relative">
       <Container>
         {/* Header - hidden when menu is open */}
         {!isMenuOpen && (
           <header className="flex items-center justify-between my-2 px-6 sm:px-2 md:my-7 lg:px-12 w-full">
             {/* Logo */}
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <img src={logo} alt="Company Logo" className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12" />
-              <h1 className="text-sm sm:text-xl md:text-xl font-prosto font-normal">Brand Name</h1>
-            </div>
+            <Link to="/" className="flex items-center gap-2 flex-shrink-0">
+              <img
+                src={logo}
+                alt="Company Logo"
+                className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12"
+              />
+              <h1 className="text-sm sm:text-xl md:text-xl font-prosto font-normal">
+                Brand Name
+              </h1>
+            </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex gap-3 lg:gap-6">
@@ -44,7 +67,7 @@ const Header = () => {
                 <Link
                   key={key}
                   to={item.path}
-                  className="text-[#282828] text-xs lg:text-sm font-montserrat hover:text-black uppercase whitespace-nowrap"
+                  className="text-[#282828] text-xs lg:text-sm font-montserrat font-medium hover:text-black uppercase whitespace-nowrap"
                 >
                   {item.value}
                 </Link>
@@ -52,34 +75,65 @@ const Header = () => {
             </nav>
 
             {/* Side Icons + Hamburger */}
-            <div className="flex items-center gap-3 sm:gap-6 lg:gap-9 flex-shrink-0">
-              {/* Desktop icons */}
-              {Object.entries(Icons).map(([key, icon]) =>
-                icon.alt === "cart Icon" ? (
+            <div className="flex items-center gap-3 sm:gap-6 lg:gap-9 flex-shrink-0 relative">
+              {/* User Icon */}
+              <button
+                // onClick={handleUserClick}
+                className="hidden md:block cursor-pointer"
+              >
+                <img
+                  src={Icons.search.src}
+                  alt={Icons.search.alt}
+                  className="h-5 w-5 sm:h-6 sm:w-6"
+                />
+              </button>
+              {/* User Icon */}
+              <button
+                onClick={handleUserClick}
+                className="hidden md:block cursor-pointer"
+              >
+                <img
+                  src={Icons.user.src}
+                  alt={Icons.user.alt}
+                  className="h-5 w-5 sm:h-6 sm:w-6"
+                />
+              </button>
+
+              {/* Popup (only if logged in) */}
+              {showUserPopup && token && (
+                <div className="absolute top-10 right-12 bg-white shadow-lg p-3 w-40">
+                  <p className="text-xs text-gray-700 mb-2">You are logged in</p>
                   <button
-                    key={key}
-                    onClick={() => setIsCartOpen(!isCartOpen)}
-                    className="hidden md:block cursor-pointer"
+                    onClick={handleLogout}
+                    className="text-sm text-red-600 hover:underline cursor-pointer"
                   >
-                    <img src={icon.src} alt={icon.alt} className="h-5 w-5 sm:h-6 sm:w-6" />
+                    Logout
                   </button>
-                ) : (
-                  <Link key={key} to={icon.path} className="cursor-pointer">
-                    <img
-                      src={icon.src}
-                      alt={icon.alt}
-                      className="hidden md:block h-5 w-5 sm:h-6 sm:w-6"
-                    />
-                  </Link>
-                )
+                </div>
               )}
+
+              {/* Cart Icon */}
+              <button
+                onClick={() => setIsCartOpen(!isCartOpen)}
+                className="hidden md:block cursor-pointer"
+              >
+                <img
+                  src={Icons.cart.src}
+                  alt={Icons.cart.alt}
+                  className="h-5 w-5 sm:h-6 sm:w-6"
+                />
+              </button>
 
               {/* Hamburger (mobile only) */}
               <button
                 onClick={() => setIsMenuOpen(true)}
                 className="md:hidden relative focus:outline-none"
               >
-                <img src={hamburgerIcon} alt="Menu" className="h-7 w-7 sm:h-6 sm:w-6" />
+                <img
+                  src={hamburgerIcon}
+                  alt="Menu"
+                  className="h-7 w-7 sm:h-6 sm:w-6"
+                />
               </button>
             </div>
           </header>
@@ -87,7 +141,12 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <MobileMenu onClose={() => setIsMenuOpen(false)} />
+          <MobileMenu
+            onClose={() => setIsMenuOpen(false)}
+            setIsCartOpen={setIsCartOpen}
+            token={token}
+            onLogout={handleLogout}
+          />
         )}
 
         {isCartOpen && <CartPopup onClose={() => setIsCartOpen(false)} />}
