@@ -1,28 +1,36 @@
-import React,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Minus, Plus } from "lucide-react";
-import { getFilterOptions, getFilteredProducts } from "../../services/productService";
+import {
+  getFilterOptions,
+  getFilteredProducts,
+} from "../../services/productService";
 
 const Sidebar = ({ onProductsFiltered }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [enabled, setEnabled] = useState(false); // organic
+  const [enabled, setEnabled] = useState(false);
   const [filterOptions, setFilterOptions] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({});
+  const [openSections, setOpenSections] = useState({});
 
   useEffect(() => {
     const fetchOptions = async () => {
       let result = await getFilterOptions();
       setFilterOptions(result);
+
+      const initialOpenState = {};
+      result.attributes?.forEach((attr) => {
+        initialOpenState[attr._id] = false; 
+      });
+      initialOpenState["caffeine"] = false;
+      setOpenSections(initialOpenState);
     };
     fetchOptions();
   }, []);
-
 
   useEffect(() => {
     const fetchFilteredProducts = async () => {
       const result = await getFilteredProducts(selectedFilters);
       if (result?.success) {
-        onProductsFiltered(result.data); 
-        console.log(result.data)
+        onProductsFiltered(result.data);
       }
     };
     fetchFilteredProducts();
@@ -42,24 +50,33 @@ const Sidebar = ({ onProductsFiltered }) => {
     });
   };
 
+  const toggleSection = (sectionId) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [sectionId]: !prev[sectionId],
+    }));
+  };
+
   return (
-    <div className="hidden md:flex flex-col">
+    <div className="hidden md:flex flex-col gap-4">
       {/* Dynamic attribute filters */}
       {filterOptions.attributes?.map((item) => (
         <div key={item._id}>
           <div
             className="flex items-center justify-between cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => toggleSection(item._id)}
           >
             <p className="text-base font-medium uppercase w-[216px]">
               {item._id}{" "}
               <span className="text-[#C3B212]">({item.values.length})</span>
             </p>
-            {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+            {openSections[item._id] ? <Minus size={20} /> : <Plus size={20} />}
           </div>
           <div
             className={`transition-all duration-300 overflow-hidden ${
-              isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+              openSections[item._id]
+                ? "max-h-96 opacity-100"
+                : "max-h-0 opacity-0"
             }`}
           >
             <div className="mt-2">
@@ -80,26 +97,40 @@ const Sidebar = ({ onProductsFiltered }) => {
       ))}
 
       {/* Caffeine */}
-      <div className="flex items-center justify-between cursor-pointer">
-        <p className="text-base font-medium uppercase w-[216px]">
-          CAFFEINE{" "}
-          <span className="text-[#C3B212]">
-            ({filterOptions.caffeineLevels?.length})
-          </span>
-        </p>
-      </div>
-      <div className="mt-2">
-        {filterOptions.caffeineLevels?.map((level, index) => (
-          <label key={index} className="flex items-center gap-2 my-2">
-            <input
-              type="checkbox"
-              onChange={() => handleCheckboxChange("caffeine", level)}
-              checked={selectedFilters["caffeine"] === level}
-              className="w-4 h-4 accent-black border-2 border-black rounded"
-            />
-            <span className="text-sm">{level}</span>
-          </label>
-        ))}
+      <div>
+        <div
+          className="flex items-center justify-between cursor-pointer"
+          onClick={() => toggleSection("caffeine")}
+        >
+          <p className="text-base font-medium uppercase w-[216px]">
+            CAFFEINE{" "}
+            <span className="text-[#C3B212]">
+              ({filterOptions.caffeineLevels?.length})
+            </span>
+          </p>
+          {openSections["caffeine"] ? <Minus size={20} /> : <Plus size={20} />}
+        </div>
+        <div
+          className={`transition-all duration-300 overflow-hidden ${
+            openSections["caffeine"]
+              ? "max-h-96 opacity-100"
+              : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="mt-2">
+            {filterOptions.caffeineLevels?.map((level, index) => (
+              <label key={index} className="flex items-center gap-2 my-2">
+                <input
+                  type="checkbox"
+                  onChange={() => handleCheckboxChange("caffeine", level)}
+                  checked={selectedFilters["caffeine"] === level}
+                  className="w-4 h-4 accent-black border-2 border-black rounded"
+                />
+                <span className="text-sm">{level}</span>
+              </label>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Organic toggle */}

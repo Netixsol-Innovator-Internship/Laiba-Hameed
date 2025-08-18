@@ -1,11 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import MainPage from "../components/products/MainPage"
 import TopSection from "../components/products/topSection"
 import Breadcrumb from "../components/shared/common/Breadcrumb"
 import RelatedProducts from "../components/shared/common/RelatedProducts"
+import { useLocation } from "react-router-dom"
 
 const ProductsPage = () => {
-  
+   const { pathname } = useLocation();
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [pathname]);
   return (
     <>
     <TopSection/>

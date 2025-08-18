@@ -1,7 +1,9 @@
 import Container from "../../shared/common/Container"
 import { footerData } from "../../../constants/gernal"
+import { Link } from "react-router-dom"
 
 const Footer = () => {
+
     return (
         <div className="flex items-center justify-center bg-[#F4F4F4] font-montserrat">
             <Container>
@@ -11,8 +13,8 @@ const Footer = () => {
                         <h3 className="font-medium mb-4 uppercase text-[#282828]  text-base leading-6">Collections</h3>
                         <ul className="space-y-2 text-sm font-normal leading-5 text-[#282828]">
                             {footerData.collections.map((item, index) => (
-                            <li key={index} className=" hover:text-black cursor-pointer">
-                                {item}
+                            <li key={index} className=" hover:text-black cursor-pointer" onClick={()=> window.scrollTo({ top: 0, behavior: "smooth" })}>
+                               <Link to={'/collections'}>{item}</Link>
                             </li>
                             ))}
                         </ul>
