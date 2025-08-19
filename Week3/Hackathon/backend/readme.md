@@ -39,7 +39,7 @@ This is the backend API for the Tea E-Commerce project. It provides secure endpo
 
 
 ## 🔗 Link  
-[Live Demo](https://laiba-hameed-week3-hackathon-backend.vercel.app/)
+[Live Demo](https://laiba-hameed-week3-hackathon-backen.vercel.app/)
 
 ## 👩‍💻 Author  
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Minus, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import Button from "../buttons/button";
@@ -34,7 +35,7 @@ const CartPopup = ({ onClose }) => {
   const fetchCartProducts = async () => {
     let result = await getCartProducts();
     // console.log(result.data);
-     setCartProducts(result?.data || []);
+    setCartProducts(result?.data || []);
   };
   useEffect(() => {
     setIsVisible(true);
@@ -82,16 +83,14 @@ const CartPopup = ({ onClose }) => {
     // overlay
     <div
       onClick={handleClose}
-      className={`fixed inset-0  bg-[#282828]/50 flex justify-end z-50 transition-opacity duration-300 ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
+      className={`fixed inset-0  bg-[#282828]/50 flex justify-end z-50 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"
+        }`}
     >
       {/* popup drawer */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`bg-white w-[261px] sm:w-[500px] h-screen flex flex-col shadow-xl py-6 sm:py-11 px-3 sm:px-6 font-sans transform transition-transform duration-300 ${
-          isVisible ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`bg-white w-[261px] sm:w-[500px] h-screen flex flex-col shadow-xl py-6 sm:py-11 px-3 sm:px-6 font-sans transform transition-transform duration-300 ${isVisible ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         {/* cart items */}
         <div className="flex-1 flex flex-col min-h-0">
@@ -113,8 +112,7 @@ const CartPopup = ({ onClose }) => {
                     <img
                       src={
                         // eslint-disable-next-line no-constant-binary-expression
-                        `${import.meta.env.VITE_API_URL}/uploads/${
-                          product.image
+                        `${import.meta.env.VITE_API_URL}/uploads/${product.image
                         }` || "/placeholder.svg"
                       }
                       className="h-full w-full object-cover rounded"
