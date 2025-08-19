@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Minus, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import Button from "../buttons/button";
+import Button from "../../shared/buttons/button";
 import {
     decreaseQuantity,
     getCartProducts,

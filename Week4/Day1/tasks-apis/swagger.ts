@@ -1,4 +1,5 @@
 import swaggerJsdoc, { Options } from "swagger-jsdoc";
+import path from "path";
 
 const options: Options = {
     definition: {
@@ -8,9 +9,12 @@ const options: Options = {
             version: "1.0.0",
             description: "Task API with Express + TypeScript",
         },
-        servers: [{ url: "http://localhost:5000" }],
+        // servers: [{ url: "https://laiba-hameed-week4-day1-backend.vercel.app" }],
     },
-    apis: ["./routes/*.ts"],
+    apis: [
+        path.join(__dirname, "./routes/*.ts"), // for dev
+        path.join(__dirname, "./routes/*.js"), // for production build
+    ],
 };
 
 export default swaggerJsdoc(options);

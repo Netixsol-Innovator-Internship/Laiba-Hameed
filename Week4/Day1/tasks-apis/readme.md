@@ -33,7 +33,7 @@ It supports creating, reading, updating, and deleting tasks, as well as partial 
 # 1. Clone the repo
 # 2. cd task-manager-api
 # 3. npm install
-# 4. npx ts-node-dev src/server.ts
+# 4. npx ts-node-dev server.ts
 
 ## Endpoints
 Base URL: http://localhost:5000/api/tasks
