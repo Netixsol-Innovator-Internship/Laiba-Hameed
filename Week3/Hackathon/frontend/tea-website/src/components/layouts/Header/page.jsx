@@ -5,6 +5,7 @@ import { NavList, Icons } from "../../../constants/gernal";
 import { Link, useNavigate } from "react-router-dom";
 import { MobileMenu } from "./MobileMenu";
 import logo from "../../../assets/header/logo.svg";
+import CartPopup from "../../shared/common/Cartpopup";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
