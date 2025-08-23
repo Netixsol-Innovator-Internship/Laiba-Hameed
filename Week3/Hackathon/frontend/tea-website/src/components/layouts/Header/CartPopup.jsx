@@ -1,96 +1,75 @@
-/* eslint-disable no-unused-vars */
-import { Minus, Plus, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import Button from "../../shared/buttons/button";
-import {
-    decreaseQuantity,
-    getCartProducts,
-    increaseQuantity,
-    removeItemFromCart,
-} from "../../../services/cartServices";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+"use client"
+
+import { Minus, Plus, X } from "lucide-react"
+import { useEffect, useState } from "react"
+import Button from "../../shared/buttons/button"
+import { useSelector, useDispatch } from "react-redux"
+import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
+import { removeFromCart, updateQuantity, selectCartItems, selectCartTotalAmount } from "../../../redux/slices/cart/cartSlice"
 
 const CartPopup = ({ onClose }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const [cartProducts, setCartProducts] = useState([]);
-    const [subtotal, setSubTotal] = useState(0);
-    const [delivery, setDelivery] = useState(3.5);
-    const [total, setTotal] = useState(0);
-    const navigate = useNavigate();
-    const handlePurchaseBtn = () => {
-        navigate("/cart");
-        handleClose();
-    };
-    useEffect(() => {
-        if (Array.isArray(cartProducts)) {
-            let t = cartProducts.reduce(
-                (total, current) => total + (current.total || 0),
-                0
-            );
-            setSubTotal(t);
-            setTotal(delivery + t);
-        }
-    }, [cartProducts, delivery]);
-    const fetchCartProducts = async () => {
-        let result = await getCartProducts();
-        // console.log(result.data);
-        setCartProducts(result?.data || []);
-    };
-    useEffect(() => {
-        setIsVisible(true);
+    const [isVisible, setIsVisible] = useState(false)
+    const cartProducts = useSelector(selectCartItems)
+    const subtotal = useSelector(selectCartTotalAmount)
+    const dispatch = useDispatch()
+    const [delivery] = useState(3.5)
+    const total = subtotal + delivery
+    const navigate = useNavigate()
 
-        fetchCartProducts();
-    }, []);
+    useEffect(() => {
+        setIsVisible(true)
+    }, [])
 
     useEffect(() => {
         const handleEsc = (e) => {
-            if (e.key === "Escape") handleClose();
-        };
-        window.addEventListener("keydown", handleEsc);
-        return () => window.removeEventListener("keydown", handleEsc);
-    }, []);
+            if (e.key === "Escape") handleClose()
+        }
+        window.addEventListener("keydown", handleEsc)
+        return () => window.removeEventListener("keydown", handleEsc)
+    }, [])
 
     const handleClose = () => {
-        setIsVisible(false);
-        setTimeout(() => onClose(), 300);
-    };
+        setIsVisible(false)
+        setTimeout(() => onClose(), 300)
+    }
 
-    const handleIncreaseQuantity = async (id) => {
-        let result = await increaseQuantity(id);
-        if (result?.success) {
-            fetchCartProducts();
-            toast.success(result?.message);
+    const handleIncreaseQuantity = (id) => {
+        const item = cartProducts.find((p) => p.id === id)
+        if (item) {
+            dispatch(updateQuantity({ itemId: id, quantity: item.quantity + 1 }))
+            toast.success("Quantity updated!")
         }
-    };
-    const handledecreaseQuantity = async (id) => {
-        let result = await decreaseQuantity(id);
-        if (result?.success) {
-            fetchCartProducts();
-            toast.success(result?.message);
-        }
-    };
+    }
 
-    const handleRemoveBtn = async (id) => {
-        let result = await removeItemFromCart(id);
-        if (result?.success) {
-            fetchCartProducts();
-            toast.success(result?.message);
+    const handledecreaseQuantity = (id) => {
+        const item = cartProducts.find((p) => p.id === id)
+        if (item && item.quantity > 1) {
+            dispatch(updateQuantity({ itemId: id, quantity: item.quantity - 1 }))
+            toast.success("Quantity updated!")
         }
-    };
+    }
+
+    const handleRemoveBtn = (id) => {
+        dispatch(removeFromCart(id))
+        toast.success("Item removed from cart!")
+    }
+
+    const handlePurchaseBtn = () => {
+        navigate("/cart")
+        handleClose()
+    }
 
     return (
         // overlay
         <div
             onClick={handleClose}
-            className={`fixed inset-0  bg-[#282828]/50 flex justify-end z-50 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"
-                }`}
+            className={`fixed inset-0 bg-[#282828]/50 flex justify-end z-50 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
         >
             {/* popup drawer */}
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-white w-[261px] sm:w-[500px] h-screen flex flex-col shadow-xl py-6 sm:py-11 px-3 sm:px-6 font-sans transform transition-transform duration-300 ${isVisible ? "translate-x-0" : "translate-x-full"
-                    }`}
+                className={`bg-white w-[261px] sm:w-[500px] h-screen flex flex-col shadow-xl py-6 sm:py-11 px-3 sm:px-6 font-sans transform transition-transform duration-300 ${isVisible ? "translate-x-0" : "translate-x-full"}`}
             >
                 {/* cart items */}
                 <div className="flex-1 flex flex-col min-h-0">
@@ -103,18 +82,11 @@ const CartPopup = ({ onClose }) => {
                     <div className="flex-1 overflow-y-auto font-montserrat">
                         {Array.isArray(cartProducts) && cartProducts.length > 0 ? (
                             cartProducts.map((product) => (
-                                <div
-                                    key={product.cartItemId}
-                                    className="flex items-center gap-2 sm:gap-4 w-full py-3"
-                                >
+                                <div key={product.id} className="flex items-center gap-2 sm:gap-4 w-full py-3">
                                     {/* image - left*/}
                                     <div className="w-12 h-12 sm:w-[71px] sm:h-[71px]">
                                         <img
-                                            src={
-                                                // eslint-disable-next-line no-constant-binary-expression
-                                                `${import.meta.env.VITE_API_URL}/uploads/${product.image
-                                                }` || "/placeholder.svg"
-                                            }
+                                            src={ product.image|| "/placeholder.svg"}
                                             className="h-full w-full object-cover rounded"
                                         />
                                     </div>
@@ -126,23 +98,11 @@ const CartPopup = ({ onClose }) => {
                                                 {product.name} - {product?.variant}
                                             </p>
                                             <div className="flex items-center justify-between w-[50px] sm:w-[70px]">
-                                                <span
-                                                    className="cursor-pointer"
-                                                    onClick={() =>
-                                                        handledecreaseQuantity(product.cartItemId)
-                                                    }
-                                                >
+                                                <span className="cursor-pointer" onClick={() => handledecreaseQuantity(product.id)}>
                                                     <Minus size={14} />
                                                 </span>
-                                                <span className="text-sm sm:text-xl">
-                                                    {product.quantity}
-                                                </span>
-                                                <span
-                                                    className="cursor-pointer"
-                                                    onClick={() =>
-                                                        handleIncreaseQuantity(product.cartItemId)
-                                                    }
-                                                >
+                                                <span className="text-sm sm:text-xl">{product.quantity}</span>
+                                                <span className="cursor-pointer" onClick={() => handleIncreaseQuantity(product.id)}>
                                                     <Plus size={14} />
                                                 </span>
                                             </div>
@@ -150,14 +110,12 @@ const CartPopup = ({ onClose }) => {
                                         {/* remove btn + price */}
                                         <div className="flex items-center justify-between text-sm">
                                             <button
-                                                onClick={() => handleRemoveBtn(product.cartItemId)}
+                                                onClick={() => handleRemoveBtn(product.id)}
                                                 className="uppercase cursor-pointer text-[10px] sm:text-sm text-gray-600 hover:text-red-600"
                                             >
                                                 remove
                                             </button>
-                                            <span className="text-[12px] sm:text-sm">
-                                                €{product.price}
-                                            </span>
+                                            <span className="text-[12px] sm:text-sm">€{product.price}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -173,37 +131,31 @@ const CartPopup = ({ onClose }) => {
                     {/* sub total */}
                     <div className="flex items-center justify-between w-full py-2">
                         <span className="text-xs sm:text-base">Subtotal</span>
-                        <span className="font-medium text-base">
-                            €{cartProducts.length > 0 ? subtotal : 0}
-                        </span>
+                        <span className="font-medium text-base">€{subtotal}</span>
                     </div>
                     {/* delivery */}
                     <div className="flex items-center justify-between w-full pb-2 pt-2">
                         <span className="text-xs sm:text-base">Delivery</span>
-                        <span className="font-medium text-base">
-                            €{cartProducts.length > 0 ? delivery : 0}
-                        </span>
+                        <span className="font-medium text-base">€{delivery}</span>
                     </div>
                     {/* divider */}
                     <div className="border-b border-[#A0A0A0] my-4"></div>
                     {/* total */}
                     <div className="flex items-center justify-between w-full pb-2">
                         <span className="font-medium text-base">Total</span>
-                        <span className="font-medium text-xl">
-                            €{cartProducts.length > 0 ? total : 0}
-                        </span>
+                        <span className="font-medium text-xl">€{total}</span>
                     </div>
 
                     <Button
                         onClick={handlePurchaseBtn}
-                        className="bg-[#282828] text-white w-full my-3 hover:bg-transparent border hover:text-[#282828] "
+                        className="bg-[#282828] text-white w-full my-3 hover:bg-transparent border hover:text-[#282828]"
                     >
                         purchase
                     </Button>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default CartPopup;
+export default CartPopup

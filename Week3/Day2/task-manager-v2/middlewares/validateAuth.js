@@ -4,6 +4,11 @@ import { errors } from "../utils/responses.js";
 // ===== Validate Registration =====
 export const validateRegister = (req, res, next) => {
     const { name, email, password } = req.body;
+    
+    // name length check
+    if (name.length < 3) {
+        return res.status(400).json({ message: "Name should be at least 3 charcters" });
+    }
 
     if (!name || !email || !password) {
         return res.status(400).json({ message: errors.VALIDATION_ERROR });

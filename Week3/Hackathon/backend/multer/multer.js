@@ -1,20 +1,11 @@
 import multer from "multer";
-import path from "path";
 
-// Storage config
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/products"); // Folder where images will be saved
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)); // Unique name
-  },
-});
+// Memory storage (images RAM me store hoti hain, Cloudinary upload ke liye)
+const storage = multer.memoryStorage();
 
-// File filter (optional: only images allowed)
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|webp/;
-  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+  const extname = allowedTypes.test(file.mimetype); // MIME type check
   if (extname) {
     cb(null, true);
   } else {

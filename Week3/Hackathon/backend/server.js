@@ -12,6 +12,7 @@ import cartRoutes from "./routes/cartRoutes.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerFile from "./swagger-output.json" with { type: "json" };
+import adminRoutes from "./routes/adminRoutes.js";
 
 const app = express();
 app.use(express.json());
@@ -33,6 +34,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/users", adminRoutes)
 app.use("/api/products",productRoutes)
 app.use("/api/cart",cartRoutes)
 

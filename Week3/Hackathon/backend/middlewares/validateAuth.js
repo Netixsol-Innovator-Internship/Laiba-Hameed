@@ -9,6 +9,11 @@ export const validateRegister = (req, res, next) => {
         return res.status(400).json({ message: errors.VALIDATION_ERROR });
     }
 
+    // name length check
+    if (name.length < 3) {
+        return res.status(400).json({ message: "Name must be at least 3 characters" });
+    }
+
     // Basic email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {

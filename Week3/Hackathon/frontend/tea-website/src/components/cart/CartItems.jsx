@@ -1,89 +1,73 @@
-import React from "react";
-import { Minus, Plus } from "lucide-react";
-import Button from "../shared/buttons/button";
-import {
-  decreaseQuantity,
-  increaseQuantity,
-  removeItemFromCart,
-} from "../../services/cartServices";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+"use client"
 
-const CartItems = ({ cartProducts, fetchCartProducts, subtotal }) => {
-  const navigate = useNavigate();
-  const handleIncreaseQuantity = async (id) => {
-    let result = await increaseQuantity(id);
-    if (result?.success) {
-      fetchCartProducts();
-      toast.success(result?.message);
-    }
-  };
-  const handledecreaseQuantity = async (id) => {
-    let result = await decreaseQuantity(id);
-    if (result?.success) {
-      fetchCartProducts();
-      toast.success(result?.message);
-    }
-  };
+import React from "react"
+import { Minus, Plus } from "lucide-react"
+import Button from "../shared/buttons/button"
+import { useDispatch } from "react-redux"
+import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
+import { removeFromCart, updateQuantity } from "../../redux/slices/cart/cartSlice"
 
-  const handleRemoveBtn = async (id) => {
-    let result = await removeItemFromCart(id);
-    if (result?.success) {
-      fetchCartProducts();
-      toast.success(result?.message);
+const CartItems = ({ cartProducts, subtotal }) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleIncreaseQuantity = (id) => {
+    const item = cartProducts.find((p) => p.id === id)
+    if (item) {
+      dispatch(updateQuantity({ itemId: id, quantity: item.quantity + 1 }))
+      toast.success("Quantity updated!")
     }
-  };
+  }
+
+  const handledecreaseQuantity = (id) => {
+    const item = cartProducts.find((p) => p.id === id)
+    if (item && item.quantity > 1) {
+      dispatch(updateQuantity({ itemId: id, quantity: item.quantity - 1 }))
+      toast.success("Quantity updated!")
+    }
+  }
+
+  const handleRemoveBtn = (id) => {
+    dispatch(removeFromCart(id))
+    toast.success("Item removed from cart!")
+  }
 
   const handleShoppingBtn = () => {
-    navigate("/collections");
-  };
+    navigate("/collections")
+  }
+
   return (
     <div className="sm:w-[455px] font-montserrat mb-12">
-      {/* cart item */}
       {Array.isArray(cartProducts) && cartProducts.length > 0 ? (
         cartProducts.map((product) => (
-          <div
-            key={product.cartItemId}
-            className="flex items-center gap-2 sm:gap-4 w-full py-3"
-          >
-            {/* image - left*/}
+          <div key={product.id} className="flex items-center gap-2 sm:gap-4 w-full py-3">
             <div className="w-12 h-12 sm:w-[71px] sm:h-[71px]">
               <img
                 src={
-                  // eslint-disable-next-line no-constant-binary-expression
-                  `${import.meta.env.VITE_API_URL}/uploads/${product.image}` ||
-                  "/placeholder.svg"
+                  product.image || "/placeholder.svg"
                 }
                 className="h-full w-full object-cover rounded"
               />
             </div>
-            {/* right */}
             <div className="flex flex-col sm:gap-3 justify-between w-full">
-              {/* description + items btn */}
               <div className="flex justify-between w-full">
                 <p className="text-[8px] sm:text-sm w-[100px] sm:w-[200px]">
                   {product.name} - {product?.variant}
                 </p>
                 <div className="flex items-center justify-between w-[50px] sm:w-[70px]">
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => handledecreaseQuantity(product.cartItemId)}
-                  >
+                  <span className="cursor-pointer" onClick={() => handledecreaseQuantity(product.id)}>
                     <Minus size={14} />
                   </span>
                   <span className="text-sm sm:text-xl">{product.quantity}</span>
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => handleIncreaseQuantity(product.cartItemId)}
-                  >
+                  <span className="cursor-pointer" onClick={() => handleIncreaseQuantity(product.id)}>
                     <Plus size={14} />
                   </span>
                 </div>
               </div>
-              {/* remove btn + price */}
               <div className="flex items-center justify-between text-sm">
                 <button
-                  onClick={() => handleRemoveBtn(product.cartItemId)}
+                  onClick={() => handleRemoveBtn(product.id)}
                   className="uppercase cursor-pointer text-[10px] sm:text-sm text-gray-600 hover:text-red-600"
                 >
                   remove
@@ -96,7 +80,6 @@ const CartItems = ({ cartProducts, fetchCartProducts, subtotal }) => {
       ) : (
         <p className="text-center py-12 text-lg">No Item in cart</p>
       )}
-
 
       <div className="border-b border-[#A0A0A0] mt-4 mx-6"></div>
       <div className="flex items-center justify-between py-8 w-full">
@@ -111,7 +94,7 @@ const CartItems = ({ cartProducts, fetchCartProducts, subtotal }) => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default React.memo(CartItems);
+export default React.memo(CartItems)

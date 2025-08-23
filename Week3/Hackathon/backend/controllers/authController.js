@@ -5,11 +5,14 @@ import { success, errors } from "../utils/responses.js";
 import Cart from "../models/Cart.js";
 
 // Helper to create JWT
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
+const generateToken = (user) => {
+  return jwt.sign(
+    { id: user._id, role: user.role, blocked: user.blocked },
+    process.env.JWT_SECRET,
+    { expiresIn: "30d" }
+  );
 };
+
 
 // POST /api/auth/register
 export const registerUser = async (req, res) => {
@@ -65,26 +68,36 @@ export const loginUser = async (req, res) => {
 
     const user = await User.findOne({ email });
 
-    if (user && (await bcrypt.compare(password, user.password))) {
-      res.json({
-        success: true,
-        message: success.USER_LOGGED_IN,
-        data: {
-          _id: user.id,
-          name: user.name,
-          email: user.email,
-          token: generateToken(user.id),
-        },
-      });
-    } else {
-      res
-        .status(401)
-        .json({ success: false, message: errors.INVALID_CREDENTIALS });
+    if (!user) {
+      return res.status(401).json({ success: false, message: errors.INVALID_CREDENTIALS });
     }
+
+    if (user.blocked) {
+      return res.status(403).json({ success: false, message: "User is blocked. Contact admin." });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: errors.INVALID_CREDENTIALS });
+    }
+
+    res.json({
+      success: true,
+      message: success.USER_LOGGED_IN,
+      data: {
+        _id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        cart: user.cart,
+        token: generateToken(user),
+      },
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: errors.SERVER_ERROR });
   }
 };
+
 
 // GET /api/auth/profile
 export const getProfile = async (req, res) => {

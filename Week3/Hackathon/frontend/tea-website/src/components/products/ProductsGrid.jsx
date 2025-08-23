@@ -1,44 +1,54 @@
-import React, { useMemo, useState } from "react";
-import ProductCard from "./ProductCard";
-import { useNavigate } from "react-router-dom";
-import Button from "../shared/buttons/button";
+"use client"
+
+import React, { useMemo, useState } from "react"
+import { useDispatch } from "react-redux"
+import ProductCard from "./ProductCard"
+import { useNavigate } from "react-router-dom"
+import { actions } from "../../redux/slices/product/productsSlice"
+import Button from "../shared/buttons/button"
 
 const ProductsGrid = ({ products }) => {
-  const navigate = useNavigate();
-  const handleProductClick = (slug) => {
-    navigate(`/product/${slug}`);
-  };
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const [sortBy, setSortBy] = useState("Default");
-  const [visibleCount, setVisibleCount] = useState(9);
+  const handleProductClick = (slug) => {
+    navigate(`/product/${slug}`)
+  }
+
+  const handleAddToCart = (product) => {
+    dispatch(actions.addToCart(product))
+  }
+
+  const [sortBy, setSortBy] = useState("Default")
+  const [visibleCount, setVisibleCount] = useState(9)
+
   const sortedProducts = useMemo(() => {
-    let sorted = [...products];
+    const sorted = [...products]
 
     switch (sortBy) {
       case "High Price":
-        sorted.sort((a, b) => b.variants[0].price - a.variants[0].price);
-        break;
+        sorted.sort((a, b) => b.variants[0].price - a.variants[0].price)
+        break
       case "Low Price":
-        sorted.sort((a, b) => a.variants[0].price - b.variants[0].price);
-        break;
+        sorted.sort((a, b) => a.variants[0].price - b.variants[0].price)
+        break
       case "A - Z":
-        sorted.sort((a, b) => a.name.localeCompare(b.name));
-        break;
+        sorted.sort((a, b) => a.name.localeCompare(b.name))
+        break
       case "Z - A":
-        sorted.sort((a, b) => b.name.localeCompare(a.name));
-        break;
+        sorted.sort((a, b) => b.name.localeCompare(a.name))
+        break
       default:
-        break;
+        break
     }
 
-    return sorted;
-  }, [products, sortBy]);
+    return sorted
+  }, [products, sortBy])
 
   // Load more handler
   const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 10); // load 10 more each time
-  };
-
+    setVisibleCount((prev) => prev + 10) // load 10 more each time
+  }
 
   return (
     <div className="w-full">
@@ -56,7 +66,6 @@ const ProductsGrid = ({ products }) => {
           <option>Z - A</option>
           <option>Default</option>
         </select>
-
       </div>
 
       {/* Products grid */}
@@ -64,8 +73,9 @@ const ProductsGrid = ({ products }) => {
         {sortedProducts.slice(0, visibleCount).map((product) => (
           <ProductCard
             onClick={() => handleProductClick(product.slug)}
+            onAddToCart={() => handleAddToCart(product)}
             key={product._id}
-            image={`${import.meta.env.VITE_API_URL}/uploads/${product.images[0]}`}
+            image={product.image}
             title={product.name}
             price={product.variants[0].price}
             weight={product.variants[0].weight}
@@ -85,7 +95,7 @@ const ProductsGrid = ({ products }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default React.memo(ProductsGrid);
+export default React.memo(ProductsGrid)

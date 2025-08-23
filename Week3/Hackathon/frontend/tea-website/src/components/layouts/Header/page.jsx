@@ -6,14 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { MobileMenu } from "./MobileMenu";
 import logo from "../../../assets/header/logo.svg";
 import CartPopup from "./CartPopup";
-
+import { useDispatch, useSelector } from "react-redux";
+import { actions as authActions, getToken, getUser } from "../../../redux/slices/auth/authSlice";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showUserPopup, setShowUserPopup] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token"));
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const token = useSelector(getToken);
+  const user = useSelector(getUser);
 
 
   useEffect(() => {
@@ -28,11 +32,10 @@ const Header = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
+    dispatch(authActions.logout()); // clears user and token from Redux + localStorage
     setShowUserPopup(false);
     setIsMenuOpen(false);
-    navigate("/");
+    navigate("/"); // redirect to home
   };
 
   const handleUserClick = () => {
@@ -105,9 +108,20 @@ const Header = () => {
               {showUserPopup && token && (
                 <div className="absolute top-10 right-12 bg-white shadow-lg p-3 w-40">
                   <p className="text-xs text-gray-700 mb-2">You are logged in</p>
+
+                  {/* Show Dashboard link only for admin/superAdmin */}
+                  {["admin", "superAdmin"].includes(user?.role) && (
+                    <button
+                      onClick={() => navigate("/dashboard")}
+                      className="text-sm text-blue-600 hover:underline cursor-pointer mb-1 block"
+                    >
+                      Dashboard
+                    </button>
+                  )}
+
                   <button
                     onClick={handleLogout}
-                    className="text-sm text-red-600 hover:underline cursor-pointer"
+                    className="text-sm text-red-600 hover:underline cursor-pointer block"
                   >
                     Logout
                   </button>

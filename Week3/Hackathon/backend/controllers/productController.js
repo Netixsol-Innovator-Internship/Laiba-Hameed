@@ -2,58 +2,58 @@
 
 import Product from "../models/Product.js";
 import { errors, success } from "../utils/responses.js";
+import { v2 as cloudinary } from "cloudinary";
 
 import fs from "fs";
 
 export const createProduct = async (req, res) => {
   try {
-    let data = req.body;
+    const data = req.body
 
-    // Attach images paths
-    if (req.files) {
-      data.images = req.files.map((file) => file.path);
+    if (req.file) {
+      // Wrap Cloudinary upload_stream in a promise
+      const uploadResult = await new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream({ folder: "products" }, (error, result) => {
+          if (error) return reject(error)
+          resolve(result)
+        })
+        stream.end(req.file.buffer)
+      })
+      data.image = uploadResult.secure_url // Now the URL is guaranteed to exist
     }
 
-    let { name, slug } = data;
-    const existingProduct = await Product.findOne({
-      $or: [{ name }, { slug }],
-    });
+    const { name } = data
+
+    // Check duplicate
+    const existingProduct = await Product.findOne({ name })
     if (existingProduct) {
       return res.status(400).json({
         success: false,
-        message:
-          existingProduct.name === name
-            ? "Product name already exists"
-            : "Product slug already exists",
-      });
+        message: "Product name already exists",
+      })
     }
 
-    const product = await Product.create(data);
+    const product = await Product.create(data)
+
     return res.status(201).json({
       success: true,
       data: product,
       message: "Product created successfully",
-    });
+    })
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message })
   }
-};
-// Fetching all Products
+}
 
+// Fetching all Products
 export const getAllProducts = async (req, res) => {
   try {
-    const products = await Product.aggregate([
-      {
-        $facet: {
-          data: [{ $match: {} }],
-          count: [{ $count: "total" }],
-        },
-      },
-    ]);
-
+    const products = await Product.find();
+    const count = await Product.countDocuments();
     return res.status(200).json({
       success: true,
       data: products,
+      count,
       message: success.PRODUCTS_RETRIEVED,
     });
   } catch (error) {
@@ -92,7 +92,6 @@ export const getProductByID = async (req, res) => {
 };
 
 // Get Products by Slag
-
 export const getProductBySlug = async (req, res) => {
   try {
     const { slug } = req.params;
@@ -121,7 +120,6 @@ export const getProductBySlug = async (req, res) => {
 };
 
 // Filter Products
-
 export const getFilteredProductsByOption = async (req, res) => {
   try {
     let filteredQuery = req.query;
@@ -170,7 +168,6 @@ export const getFilteredProductsByOption = async (req, res) => {
 };
 
 // Filter Options
-
 export const getAvailableFilterOptions = async (req, res) => {
   try {
     const attributes = await Product.aggregate([
@@ -202,7 +199,6 @@ export const getAvailableFilterOptions = async (req, res) => {
 };
 
 // Delete all products
-
 export const deleteAllProducts = async (req, res) => {
   try {
     const result = await Product.deleteMany({});
@@ -234,7 +230,9 @@ export const deleteProductById = async (req, res) => {
     if (product.images && product.images.length > 0) {
       product.images.forEach((imgPath) => {
         if (fs.existsSync(imgPath)) {
-          fs.unlinkSync(imgPath);
+          fs.unlink(imgPath, (err) => {
+            if (err) console.error("Failed to delete image:", err);
+          });
         }
       });
     }
@@ -249,51 +247,52 @@ export const deleteProductById = async (req, res) => {
   }
 };
 
-// Update By ID
-
+// Update product (name, add/update/remove variants) (only title & price)
 export const updateProductById = async (req, res) => {
   try {
-    let data = req.body;
-
-    // Parse JSON if frontend sends nested objects
-    // if (typeof data.attributes === "string") {
-    //   data.attributes = JSON.parse(data.attributes);
-    // }
-    // if (typeof data.variants === "string") {
-    //   data.variants = JSON.parse(data.variants);
-    // }
+    const { name, addVariants, updateVariants, removeVariants } = req.body;
 
     const product = await Product.findById(req.params.id);
-
     if (!product) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Product not found" });
+      return res.status(404).json({ success: false, message: "Product not found" });
     }
 
-    // If new images are uploaded → delete old ones first
-    if (req.files && req.files.length > 0) {
-      if (product.images && product.images.length > 0) {
-        product.images.forEach((imgPath) => {
-          if (fs.existsSync(imgPath)) {
-            fs.unlinkSync(imgPath);
-          }
-        });
-      }
+    // update name
+    if (name) product.name = name;
 
-      data.images = req.files.map((file) => file.path);
+    // remove variants
+    if (removeVariants?.length) {
+      product.variants = product.variants.filter(
+        v => !removeVariants.includes(v._id.toString())
+      );
     }
 
+    // update variants
+    if (updateVariants?.length) {
+      updateVariants.forEach(({ variantId, weight, price }) => {
+        const variant = product.variants.find(v => v._id.toString() === variantId);
+        if (variant) {
+          if (weight) variant.weight = weight;
+          if (price !== undefined) variant.price = price;
+        }
+      });
+    }
+
+    // add variants
+    if (addVariants?.length) {
+      addVariants.forEach(({ weight, price }) => {
+        product.variants.push({ weight, price });
+      });
+    }
+
+    // ✅ instead of product.save()
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      data,
-      {
-        new: true,
-        runValidators: true,
-      }
+      { $set: { name: product.name, variants: product.variants } },
+      { new: true, runValidators: false } // disable full validation
     );
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       data: updatedProduct,
       message: "Product updated successfully",
@@ -303,11 +302,7 @@ export const updateProductById = async (req, res) => {
   }
 };
 
-
-
-
 // Get collections
-
 export const getCollections = async (req, res) => {
   try {
     const collections = await Product.aggregate([

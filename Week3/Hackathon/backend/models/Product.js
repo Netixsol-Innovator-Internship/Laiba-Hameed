@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import slugify from "slugify";
 
 const productSchema = new mongoose.Schema(
   {
@@ -14,13 +15,6 @@ const productSchema = new mongoose.Schema(
       type: Map,
       of: [String],
     },
-
-    steepingInstructions: {
-      servingSize: { type: [String] },
-      temperature: { type: [String] },
-      time: { type: [String] },
-      colorNote: { type: [String] },
-    },
     variants: [
       {
         weight: { type: String, required: true },
@@ -34,10 +28,19 @@ const productSchema = new mongoose.Schema(
     ingredients: {
       type: [String],
     },
-    images: { type: [String], required: true },
+    image: { type: String, required: true },
     stock: { type: Number, default: 0, min: [0, "Stock cannot be negative"] },
   },
   { timestamps: true }
 );
+
+
+productSchema.pre("save", function (next) {
+  if (this.isModified("name")) {
+    this.slug = slugify(this.name, { lower: true, strict: true });
+  }
+  next();
+});
+
 
 export default mongoose.model("Product", productSchema);

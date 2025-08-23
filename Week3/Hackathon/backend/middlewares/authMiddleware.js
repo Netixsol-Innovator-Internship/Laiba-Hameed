@@ -12,10 +12,21 @@ export const protect = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        // console.log("Decoded JWT:", decoded);
-        req.user = { id: decoded.id || decoded._id }; // store whole payload, not just id
+
+        if (decoded.blocked) {
+            return res.status(403).json({ success: false, message: "Your account is blocked. Contact admin." });
+        }
+
+        req.user = decoded; // includes id, role, blocked
         next();
     } catch (err) {
         res.status(401).json({ success: false, message: errors.INVALID_TOKEN });
     }
+};
+
+export const checkBlockedUser = (req, res, next) => {
+    if (req.user.blocked) {
+        return res.status(403).json({ success: false, message: "Your account is blocked." });
+    }
+    next();
 };

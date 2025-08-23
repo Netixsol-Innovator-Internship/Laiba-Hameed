@@ -6,9 +6,18 @@ import visa from "../../assets/cart/visa.png"
 import maestro from "../../assets/cart/maestro.png"
 import mastercard from "../../assets/cart/mastecard.png" // you wrote mastecard, typo?
 import ideal from "../../assets/cart/ideal.png"
+import { useDispatch } from 'react-redux'
+import { clearCart } from '../../redux/slices/cart/cartSlice'
+import { toast } from 'react-toastify'
 
 
-const OrderSummary = ({delivery,subtotal,total}) => {
+const OrderSummary = ({ delivery, subtotal, total }) => {
+  const dispatch = useDispatch()
+
+  const handleCheckout = () => {
+    dispatch(clearCart())
+    toast.success("Your order has been placed successfully 🎉")
+  }
   return (
     <div className='sm:w-[455px] font-montserrat py-3'>
       {/* ordersummary box */}
@@ -33,7 +42,7 @@ const OrderSummary = ({delivery,subtotal,total}) => {
         </div>
 
         <p className='text-[#282828c0] py-2'>Estimated shipping time: 2 days</p>
-        <Button className='bg-[#282828] text-white hover:bg-transparent border hover:text-[#282828] w-full mt-3'>Check out</Button>
+        <Button onClick={handleCheckout} className='bg-[#282828] text-white hover:bg-transparent border hover:text-[#282828] w-full mt-3'>Check out</Button>
       </div>
 
       {/* payment type */}

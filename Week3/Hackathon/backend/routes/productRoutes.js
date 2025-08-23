@@ -13,18 +13,23 @@ import {
 } from "../controllers/productController.js";
 
 import { upload } from "../multer/multer.js";
-import { validateID, validateProduct, validateSlug } from "../validators/productValidator.js";
+import { validateID, validateProduct } from "../validators/productValidator.js";
 import { validate } from "../middlewares/productValidate.js";
+import { protect } from "../middlewares/authMiddleware.js";
+import { authorizeRoles } from "../middlewares/roleMiddleware.js";
+import { parseJsonFields } from "../middlewares/parseJsonFields.js";
+
 const productRoutes = express.Router();
 
-
-
-// Create a new Product
+// Create a new Product (Admin + SuperAdmin only)
 productRoutes.post(
   "/",
+  protect,
+  authorizeRoles("admin", "superAdmin"),
+  upload.single("image"),
+  parseJsonFields,
   validateProduct,
   validate,
-  upload.array("images", 5),
   createProduct
 );
 
@@ -32,7 +37,7 @@ productRoutes.post(
 productRoutes.get("/", getAllProducts);
 
 // Get Collections
-productRoutes.get('/collections',getCollections)
+productRoutes.get("/collections", getCollections);
 
 // Get Filter Options
 productRoutes.get("/filters/options", getAvailableFilterOptions);
@@ -41,47 +46,24 @@ productRoutes.get("/filters/options", getAvailableFilterOptions);
 productRoutes.get("/filter/search", getFilteredProductsByOption);
 
 // Get product by ID
-productRoutes.get(
-  "/:id",
-  validateID,
-  validate,
-  getProductByID
-);
+productRoutes.get("/:id", validate, getProductByID);
 
 // Get product by slug
-productRoutes.get(
-  "/slug/:slug",
-  validateSlug,
-  validate,
-  getProductBySlug
-);
+productRoutes.get("/slug/:slug", validate, getProductBySlug);
 
+// Delete All Products (SuperAdmin only)
+productRoutes.delete("/", protect, authorizeRoles("superAdmin"), deleteAllProducts);
 
-// Delete All Products
+// Delete Product by id (SuperAdmin only)
+productRoutes.delete("/:id", protect, authorizeRoles("superAdmin"), validateID, validate, deleteProductById);
 
-productRoutes.delete("/", deleteAllProducts);
-
-// Delete Product by id
-productRoutes.delete(
+// Update product by ID (Admin + SuperAdmin only)
+productRoutes.patch(
   "/:id",
-  validateID,
-  validate,
-  deleteProductById
-);
-
-// Update by id
-
-productRoutes.put(
-  "/",
-  validateProduct,
-  validate,
-  upload.array("images", 5),
+  protect,
+  authorizeRoles("admin", "superAdmin"), 
   updateProductById
 );
-
-
-
-
 
 
 export default productRoutes;
