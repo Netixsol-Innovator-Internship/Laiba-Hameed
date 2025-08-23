@@ -19,7 +19,7 @@ const ProductCard = ({ image, title, price,weight,onClick }) => {
 
                 {/* Price */}
                 <p className="text-sm md:text-base font-medium text-black">
-                    ${price} <span className="text-gray-500 text-xs md:text-sm">/ {weight}</span>
+                    €{price} <span className="text-gray-500 text-xs md:text-sm">/ {weight}</span>
                 </p>
             </div>
         </div>
