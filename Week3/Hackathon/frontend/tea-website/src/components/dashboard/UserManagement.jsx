@@ -87,7 +87,7 @@ const UserManagement = () => {
 
   if (isLoading)
     return (
-      <div className="flex items-center justify-center min-h-64">
+      <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading users...</p>
@@ -171,10 +171,10 @@ const UserManagement = () => {
                     value={u.role}
                     onChange={(e) => changeRole(u._id, e.target.value, u.name, u.role)}
                     disabled={isChangingRole}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed bg-white text-gray-900"
+                    className="cursor-pointer w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed bg-white text-gray-900"
                   >
                     {getAvailableRoles(u).map((role) => (
-                      <option key={role} value={role}>
+                      <option key={role} value={role} className="cursor-pointer " >
                         {role.charAt(0).toUpperCase() + role.slice(1)}
                       </option>
                     ))}
@@ -187,7 +187,7 @@ const UserManagement = () => {
                   <button
                     onClick={() => toggleBlock(u._id, u.name, u.blocked)}
                     disabled={isBlockingUser}
-                    className={`w-full px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                    className={`cursor-pointer w-full px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                       u.blocked
                         ? "bg-green-600 hover:bg-green-700 text-white"
                         : "bg-red-600 hover:bg-red-700 text-white"

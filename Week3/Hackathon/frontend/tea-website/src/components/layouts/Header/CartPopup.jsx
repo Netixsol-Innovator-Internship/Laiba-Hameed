@@ -86,7 +86,7 @@ const CartPopup = ({ onClose }) => {
                                     {/* image - left*/}
                                     <div className="w-12 h-12 sm:w-[71px] sm:h-[71px]">
                                         <img
-                                            src={ product.image|| "/placeholder.svg"}
+                                            src={product.image || "/placeholder.svg"}
                                             className="h-full w-full object-cover rounded"
                                         />
                                     </div>
@@ -125,34 +125,40 @@ const CartPopup = ({ onClose }) => {
                         )}
                     </div>
                 </div>
-                <div className="flex-shrink-0 mt-6 sm:mt-0">
-                    {/* divider */}
-                    <div className="border-b border-[#A0A0A0] hidden sm:block my-4"></div>
-                    {/* sub total */}
-                    <div className="flex items-center justify-between w-full py-2">
-                        <span className="text-xs sm:text-base">Subtotal</span>
-                        <span className="font-medium text-base">€{subtotal}</span>
-                    </div>
-                    {/* delivery */}
-                    <div className="flex items-center justify-between w-full pb-2 pt-2">
-                        <span className="text-xs sm:text-base">Delivery</span>
-                        <span className="font-medium text-base">€{delivery}</span>
-                    </div>
-                    {/* divider */}
-                    <div className="border-b border-[#A0A0A0] my-4"></div>
-                    {/* total */}
-                    <div className="flex items-center justify-between w-full pb-2">
-                        <span className="font-medium text-base">Total</span>
-                        <span className="font-medium text-xl">€{total}</span>
-                    </div>
+                {
+                    cartProducts.length > 0 ? (
+                        <div className="flex-shrink-0 mt-6 sm:mt-0">
+                            {/* divider */}
+                            <div className="border-b border-[#A0A0A0] hidden sm:block my-4"></div>
+                            {/* sub total */}
+                            <div className="flex items-center justify-between w-full py-2">
+                                <span className="text-xs sm:text-base">Subtotal</span>
+                                <span className="font-medium text-base">€{subtotal}</span>
+                            </div>
+                            {/* delivery */}
+                            <div className="flex items-center justify-between w-full pb-2 pt-2">
+                                <span className="text-xs sm:text-base">Delivery</span>
+                                <span className="font-medium text-base">€{delivery}</span>
+                            </div>
+                            {/* divider */}
+                            <div className="border-b border-[#A0A0A0] my-4"></div>
+                            {/* total */}
+                            <div className="flex items-center justify-between w-full pb-2">
+                                <span className="font-medium text-base">Total</span>
+                                <span className="font-medium text-xl">€{total}</span>
+                            </div>
 
-                    <Button
-                        onClick={handlePurchaseBtn}
-                        className="bg-[#282828] text-white w-full my-3 hover:bg-transparent border hover:text-[#282828]"
-                    >
-                        purchase
-                    </Button>
-                </div>
+                            <Button
+                                onClick={handlePurchaseBtn}
+                                className="bg-[#282828] text-white w-full my-3 hover:bg-transparent border hover:text-[#282828]"
+                            >
+                                purchase
+                            </Button>
+                        </div>
+                    ) : (
+                        <p></p>
+                    )
+                }
             </div>
         </div>
     )

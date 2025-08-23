@@ -29,7 +29,14 @@ const ProductManagement = () => {
         }
     };
 
-    if (isLoading) return <div className="flex justify-center items-center min-h-screen text-lg font-semibold">Loading products...</div>
+    if (isLoading) return (
+        <div className="flex items-center justify-center min-h-screen">
+            <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading Products...</p>
+            </div>
+        </div>
+    )
     if (isError) return <div className="flex justify-center items-center min-h-screen text-red-600 font-medium">Failed to load products.</div>
     return (
         <div className="px-4 sm:px-8 lg:px-12 py-6">
@@ -38,7 +45,7 @@ const ProductManagement = () => {
                 <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-0">Product Management</h1>
                 <button
                     onClick={() => navigate("/dashboard/add-product")}
-                    className="px-6 py-2 bg-black text-white font-medium rounded-md shadow hover:bg-gray-800 transition"
+                    className="px-6 py-2 bg-black border text-white font-medium rounded-md shadow hover:bg-transparent hover:text-black transition cursor-pointer "
                 >
                     + Add Product
                 </button>
@@ -70,7 +77,7 @@ const ProductManagement = () => {
                                 <div className="mt-4 flex gap-2">
                                     <button
                                         onClick={() => navigate(`/dashboard/edit-product/${product._id}`)}
-                                        className="flex-1 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition"
+                                        className="cursor-pointer  flex-1 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition"
                                     >
                                         Edit
                                     </button>
@@ -82,7 +89,7 @@ const ProductManagement = () => {
                                                 setSelectedProduct(product); // save the whole product object
                                                 setIsModalOpen(true);
                                             }}
-                                            className="flex-1 py-2 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition"
+                                            className="cursor-pointer  flex-1 py-2 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition"
                                         >
                                             Delete
                                         </button>
@@ -107,13 +114,13 @@ const ProductManagement = () => {
                     <div className="flex justify-end gap-3">
                         <button
                             onClick={() => setIsModalOpen(false)}
-                            className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition"
+                            className=" cursor-pointer  px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition"
                         >
                             Cancel
                         </button>
                         <button
                             onClick={() => handleConfirmDelete(selectedProduct)}
-                            className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
+                            className="cursor-pointer  px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
                         >
                             Delete
                         </button>

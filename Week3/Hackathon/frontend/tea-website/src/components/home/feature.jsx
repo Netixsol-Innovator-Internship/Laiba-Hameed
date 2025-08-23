@@ -7,7 +7,7 @@ import Container from "../shared/common/Container";
 const Feature = () => {
   return (
     <>
-      <div className='flex flex-col items-center justify-center bg-[#F4F4F4]'>
+      <div className='flex flex-col items-center justify-center bg-[#F4F4F4] font-poppins'>
         <Container>
           {/* feaures section */}
           <div className="features-area w-full py-12  px-6 sm:px-10 lg:px-12 flex flex-col justify-center items-center gap-8 sm:gap-12">
@@ -36,7 +36,7 @@ const Feature = () => {
                     alt={item.text}
                     className="h-6 w-6 flex-shrink-0"
                   />
-                  <span className="text-base font-medium break-words">
+                  <span className="text-base font-medium break-words font-poppins">
                     {item.text}
                   </span>
                 </div>

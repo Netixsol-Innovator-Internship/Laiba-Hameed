@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+"use client"
+import { useState, useEffect, useRef } from "react"; // add useRef
 import Container from "../../shared/common/Container";
 import hamburgerIcon from "../../../assets/header/hamburger.svg";
 import { NavList, Icons } from "../../../constants/gernal";
@@ -19,11 +20,27 @@ const Header = () => {
   const token = useSelector(getToken);
   const user = useSelector(getUser);
 
+  const popupRef = useRef(null); // ref for popup
+  // Handle outside click
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setShowUserPopup(false);
+      }
+    }
+    if (showUserPopup) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showUserPopup]);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
         setIsMenuOpen(false);
+      }
+      if (window.innerWidth <= 768) {
+        setShowUserPopup(false);
       }
     };
 
@@ -106,10 +123,12 @@ const Header = () => {
 
               {/* Popup (only if logged in) */}
               {showUserPopup && token && (
-                <div className="absolute top-10 right-12 bg-white shadow-lg p-3 w-40">
+                <div
+                  ref={popupRef}
+                  className="absolute z-50 top-10 right-12 bg-white shadow-2xl border rounded-lg p-3 w-40"
+                >
                   <p className="text-xs text-gray-700 mb-2">You are logged in</p>
 
-                  {/* Show Dashboard link only for admin/superAdmin */}
                   {["admin", "superAdmin"].includes(user?.role) && (
                     <button
                       onClick={() => navigate("/dashboard")}
@@ -162,6 +181,7 @@ const Header = () => {
           <MobileMenu
             onClose={() => setIsMenuOpen(false)}
             setIsCartOpen={setIsCartOpen}
+            user={user}
             token={token}
             onLogout={handleLogout}
           />

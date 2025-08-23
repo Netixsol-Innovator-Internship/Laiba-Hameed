@@ -2,11 +2,11 @@ import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Icons, NavList } from "../../../constants/gernal";
 import logo from "../../../assets/header/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-
-export const MobileMenu = ({ onClose, setIsCartOpen, token, onLogout }) => {
+export const MobileMenu = ({ onClose, setIsCartOpen, token, onLogout, user }) => {
     const [isVisible, setIsVisible] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIsVisible(true);
@@ -18,7 +18,7 @@ export const MobileMenu = ({ onClose, setIsCartOpen, token, onLogout }) => {
     };
 
     const handleBagClick = () => {
-        onClose();
+        handleClose();
         setTimeout(() => setIsCartOpen(true), 300);
     };
 
@@ -53,12 +53,31 @@ export const MobileMenu = ({ onClose, setIsCartOpen, token, onLogout }) => {
                             <img
                                 className="absolute left-1 top-1/2 transform -translate-y-1/2 h-6 w-6"
                                 src={Icons.search.src}
-                                alt=""
+                                alt="Search"
                             />
                         </div>
 
                         {/* Profile + Bag */}
                         <div className="mt-4 space-y-4">
+                            {token && ["admin", "superAdmin"].includes(user?.role) && (
+                                <button
+                                    onClick={() => {
+                                        handleClose();
+                                        navigate("/dashboard");
+                                    }}
+                                    className="flex items-center gap-2 text-sm w-full text-left"
+                                >
+                                    <img src={Icons.user.src} alt="Dashboard" className="h-6 w-6" />
+                                    <p className="text-[11px] font-medium text-[#282828]">
+                                        DASHBOARD
+                                        <br />
+                                        <span className="text-xs text-[#A0A0A0] font-normal">
+                                            Access admin panel
+                                        </span>
+                                    </p>
+                                </button>
+                            )}
+
                             {!token ? (
                                 <Link
                                     to={Icons.user.path}
@@ -87,6 +106,7 @@ export const MobileMenu = ({ onClose, setIsCartOpen, token, onLogout }) => {
                                     </p>
                                 </button>
                             )}
+
                             <div
                                 className="flex items-center gap-2 text-sm cursor-pointer"
                                 onClick={handleBagClick}
@@ -102,6 +122,7 @@ export const MobileMenu = ({ onClose, setIsCartOpen, token, onLogout }) => {
                         </div>
 
                         <hr className="my-7" />
+
                         {/* Nav Links */}
                         <nav className="space-y-3">
                             {Object.entries(NavList).map(([key, item]) => (
@@ -120,15 +141,13 @@ export const MobileMenu = ({ onClose, setIsCartOpen, token, onLogout }) => {
                     {/* Footer area */}
                     <div className="bg-[#F4F4F4] py-8 px-4 flex flex-col gap-4">
                         <div className="brand flex justify-start items-center gap-2">
-                            <img src={logo} className="w-[18px] h-[18px]" alt="" />
+                            <img src={logo} className="w-[18px] h-[18px]" alt="Logo" />
                             <h2 className="font-medium text-[14px]">Brand Name</h2>
                         </div>
                         <p className="text-xs leading-4 text-[#282828]">
                             We offer loose tea leaves of the best quality for your business...
                         </p>
-                        <p className="text-xs text-[#A0A0A0]">
-                            ALL RIGHTS RESERVED BY Brand Name Co
-                        </p>
+                        <p className="text-xs text-[#A0A0A0]">ALL RIGHTS RESERVED BY Brand Name Co</p>
                     </div>
                 </div>
             </div>

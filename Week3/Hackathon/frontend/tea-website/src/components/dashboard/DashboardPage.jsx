@@ -17,7 +17,7 @@ const DashboardPage = () => {
                     </p>
                     <button
                         onClick={() => navigate("/")}
-                        className="px-3 py-1 border border-black hover:bg-black hover:text-white transition"
+                        className="cursor-pointer px-3 py-1 border border-black hover:bg-black hover:text-white transition"
                     >
                         Go to Store
                     </button>

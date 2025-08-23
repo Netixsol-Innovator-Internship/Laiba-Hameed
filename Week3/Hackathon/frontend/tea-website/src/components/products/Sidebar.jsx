@@ -61,11 +61,10 @@ const Sidebar = ({ onProductsFiltered }) => {
 
   if (isLoadingOptions) {
     return (
-      <div className="hidden lg:flex flex-col gap-4">
-        <div className="animate-pulse">
-          <div className="h-6 bg-gray-200 rounded mb-4"></div>
-          <div className="h-4 bg-gray-200 rounded mb-2"></div>
-          <div className="h-4 bg-gray-200 rounded mb-2"></div>
+      <div className="py-60 min-h-600">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading Filtes...</p>
         </div>
       </div>
     )

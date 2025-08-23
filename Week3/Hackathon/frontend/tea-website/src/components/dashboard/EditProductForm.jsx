@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { useUpdateProductMutation } from "../../redux/slices/product/productsApi"
-
+import {X} from 'lucide-react'
 const EditProductForm = ({ product, onClose }) => {
     // Prefill product data
     const [name, setName] = useState(product?.name || "")
@@ -124,18 +124,11 @@ const EditProductForm = ({ product, onClose }) => {
                                     </div>
                                     <button
                                         type="button"
-                                        className="mt-6 w-10 h-10 bg-red-100 hover:bg-red-200 text-red-600 hover:text-red-700 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-105"
+                                        className="cursor-pointer mt-6 w-10 h-10 bg-red-100 hover:bg-red-200 text-red-600 hover:text-red-700 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-105"
                                         onClick={() => handleRemoveVariant(variant._id, index)}
                                         title="Remove variant"
                                     >
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M6 18L18 6M6 6l12 12m0-6h6m-6 0H6"
-                                            />
-                                        </svg>
+                                        <X/>
                                     </button>
                                 </div>
                             </div>
@@ -145,7 +138,7 @@ const EditProductForm = ({ product, onClose }) => {
                     <button
                         type="button"
                         onClick={handleAddVariant}
-                        className="w-full py-3 px-4 border-2 border-dashed border-gray-300 hover:border-blue-400 text-gray-600 hover:text-blue-600 rounded-xl transition-all duration-200 hover:bg-blue-50 flex items-center justify-center gap-2 font-medium"
+                        className="cursor-pointer w-full py-3 px-4 border-2 border-dashed border-gray-300 hover:border-blue-400 text-gray-600 hover:text-blue-600 rounded-xl transition-all duration-200 hover:bg-blue-50 flex items-center justify-center gap-2 font-medium"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -158,14 +151,14 @@ const EditProductForm = ({ product, onClose }) => {
                     <button
                         type="button"
                         onClick={onClose}
-                        className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 font-medium"
+                        className="cursor-pointer px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 font-medium"
                     >
                         Cancel
                     </button>
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 disabled:transform-none"
+                        className="cursor-pointer px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 disabled:transform-none"
                     >
                         {isLoading ? (
                             <span className="flex items-center gap-2">

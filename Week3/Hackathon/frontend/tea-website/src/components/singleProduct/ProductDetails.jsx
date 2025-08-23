@@ -8,10 +8,13 @@ import Button from "../shared/buttons/button"
 import { toast } from "react-toastify"
 import { useDispatch } from "react-redux"
 import { addToCart } from "../../redux/slices/cart/cartSlice"
+import { useSelector } from "react-redux";
+import { getUser } from "../../redux/slices/auth/authSlice";
 
 const ProductDetails = ({ product }) => {
   const [quantity, setQuantity] = useState(1)
   const [selectedVariant, setSelectedVariant] = useState(null)
+  const user = useSelector(getUser);
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -130,8 +133,14 @@ const ProductDetails = ({ product }) => {
             +
           </button>
         </div>
+        {console.log(user?.role)}
         <Button
-          className="flex items-center gap-2 bg-[#282828] text-white hover:bg-transparent border hover:text-[#282828] justify-center max-w-[264px] md:h-[56px] h-[40px]"
+          disabled={user?.role === "admin" || user?.role === "superAdmin"}
+          className={`flex items-center gap-2 justify-center max-w-[264px] md:h-[56px] h-[40px] 
+              ${user?.role === "admin" || user?.role === "superAdmin"
+              ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+              : "bg-[#282828] text-white hover:bg-transparent border hover:text-[#282828]"
+            }`}
           onClick={handleAddBag}
         >
           <IoBagHandleOutline /> ADD TO BAG
