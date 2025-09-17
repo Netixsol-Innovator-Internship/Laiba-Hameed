@@ -13,7 +13,6 @@ const generateToken = (user) => {
   );
 };
 
-
 // POST /api/auth/register
 export const registerUser = async (req, res) => {
   try {
@@ -39,8 +38,6 @@ export const registerUser = async (req, res) => {
     });
 
     if (user) {
-   
-
       //   sending response
       res.status(201).json({
         success: true,
