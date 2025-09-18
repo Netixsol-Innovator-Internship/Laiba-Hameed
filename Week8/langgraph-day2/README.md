@@ -18,7 +18,7 @@ This project is a simple chatbot application built with Node.js.
 3. **Configure environment variables**  
     Create a `.env` file in the root directory and add your Gemini API key:
     ```
-    GEMINI_API_KEY=AIzaSyAYkChZqX4hh6eyUaD3SCz_hWmkSRI4xdA
+    GEMINI_API_KEY=
     ```
 
 4. **Run the application**  
@@ -77,7 +77,7 @@ This project extends the basic chatbot by providing a user-friendly web interfac
 3. **Configure environment variables**  
     Create a `.env` file in the root directory and add your Gemini API key:
     ```
-    GEMINI_API_KEY=AIzaSyAYkChZqX4hh6eyUaD3SCz_hWmkSRI4xdA
+    GEMINI_API_KEY=
     PORT=3000
     ```
 
