@@ -21,6 +21,11 @@ This project is a simple chatbot application built with Node.js.
     Create a `.env` file in the root directory and add your Gemini API key:
     ```
     GEMINI_API_KEY=
+    LANGCHAIN_API_KEY=
+    LANGSMITH_TRACING=true
+    LANGCHAIN_PROJECT=GeminiCalcBot
+    LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
+    LANGCHAIN_CALLBACKS_BACKGROUND=true
     ```
 
 4. **Run the application**  

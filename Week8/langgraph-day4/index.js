@@ -6,6 +6,21 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { StateGraph, MessagesAnnotation } from "@langchain/langgraph";
 import readline from "readline";
 import chalk from "chalk";
+import { evaluate } from "mathjs";
+
+import { Client as LangSmithClient } from "langsmith";
+import { LangChainTracer } from "langchain/callbacks";
+
+
+// --- Initialize LangSmith
+const langsmithClient = new LangSmithClient({
+    apiKey: process.env.LANGCHAIN_API_KEY,
+});
+const tracer = new LangChainTracer({
+    projectName: process.env.LANGCHAIN_PROJECT || "GeminiCalcBot",
+    client: langsmithClient,
+});
+
 
 // --- 1. Initialize Gemini model
 const model = new ChatGoogleGenerativeAI({
@@ -13,7 +28,7 @@ const model = new ChatGoogleGenerativeAI({
     model: "gemini-1.5-flash",
 });
 
-// --- 2. Tool: Calculator
+// --- 2. Tool: Calculator (using mathjs)
 function isMathExpression(input) {
     // crude check: only numbers, + - * / () .
     return /^[0-9+\-*/().\s]+$/.test(input);
@@ -22,8 +37,7 @@ function isMathExpression(input) {
 const calculator = async (state) => {
     const lastUser = state.messages[state.messages.length - 1].content;
     try {
-        // Safer than eval
-        const result = Function(`"use strict"; return (${lastUser})`)();
+        const result = evaluate(lastUser); // mathjs safely evaluates expressions
         return { messages: [{ role: "assistant", content: `Result: ${result}` }] };
     } catch (err) {
         return {
@@ -34,9 +48,10 @@ const calculator = async (state) => {
     }
 };
 
+
 // --- 3. Node: Gemini AI
 const callModel = async (state) => {
-    const response = await model.invoke(state.messages);
+    const response = await model.invoke(state.messages, { callbacks: [tracer] });
     return { messages: [response] };
 };
 
@@ -59,7 +74,7 @@ const graph = new StateGraph(MessagesAnnotation)
     });
 
 // Compile app
-const app = graph.compile();
+const app = graph.compile({ callbacks: [tracer] });
 
 // --- 6. CLI setup
 const rl = readline.createInterface({
