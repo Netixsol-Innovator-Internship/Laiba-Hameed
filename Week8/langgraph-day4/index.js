@@ -11,7 +11,6 @@ import { evaluate } from "mathjs";
 import { Client as LangSmithClient } from "langsmith";
 import { LangChainTracer } from "langchain/callbacks";
 
-
 // --- Initialize LangSmith
 const langsmithClient = new LangSmithClient({
     apiKey: process.env.LANGCHAIN_API_KEY,
@@ -21,21 +20,16 @@ const tracer = new LangChainTracer({
     client: langsmithClient,
 });
 
-
 // --- 1. Initialize Gemini model
 const model = new ChatGoogleGenerativeAI({
     apiKey: process.env.GEMINI_API_KEY,
-    model: "gemini-1.5-flash",
+    model: "gemini-2.5-flash",
 });
 
 // --- 2. Tool: Calculator (using mathjs)
-function isMathExpression(input) {
-    // crude check: only numbers, + - * / () .
-    return /^[0-9+\-*/().\s]+$/.test(input);
-}
-
 const calculator = async (state) => {
     const lastUser = state.messages[state.messages.length - 1].content;
+
     try {
         const result = evaluate(lastUser); // mathjs safely evaluates expressions
         return { messages: [{ role: "assistant", content: `Result: ${result}` }] };
@@ -48,23 +42,59 @@ const calculator = async (state) => {
     }
 };
 
-
-// --- 3. Node: Gemini AI
+// --- 3. Node: Gemini AI for normal chat
 const callModel = async (state) => {
     const response = await model.invoke(state.messages, { callbacks: [tracer] });
     return { messages: [response] };
 };
 
-// --- 4. Router: decide branch
-const router = async (state) => {
+// --- 4. Node: Math detector + expression parser (using LLM)
+const mathDetector = async (state) => {
     const lastUser = state.messages[state.messages.length - 1].content;
-    if (isMathExpression(lastUser)) {
-        return "calculator";
+
+    const prompt = `
+You are a math parser.
+Task: Decide if the user is asking a math calculation.
+If yes, return ONLY strict JSON: {"isMath": true, "expression": "<math expression>"}.
+If no, return {"isMath": false}.
+
+User input: "${lastUser}"
+`;
+
+    let parsed;
+    try {
+        const resp = await model.invoke([{ role: "user", content: prompt }], {
+            callbacks: [tracer],
+        });
+
+        // Try parsing JSON
+        parsed = JSON.parse(resp.content);
+
+        // Validate structure
+        if (parsed && parsed.isMath && typeof parsed.expression === "string") {
+            return {
+                messages: [
+                    { role: "user", content: parsed.expression }, // replace input with expression
+                ],
+                next: "calculator",
+            };
+        }
+    } catch (err) {
+        console.warn("⚠️ MathDetector fallback:", err.message);
     }
-    return "chatbot";
+
+    // fallback → normal chatbot
+    return { messages: state.messages, next: "chatbot" };
 };
 
-// --- 5. Build Graph
+
+// --- 5. Router using mathDetector
+const router = async (state) => {
+    const result = await mathDetector(state);
+    return result.next;
+};
+
+// --- 6. Build Graph
 const graph = new StateGraph(MessagesAnnotation)
     .addNode("chatbot", callModel)
     .addNode("calculator", calculator)
@@ -76,7 +106,7 @@ const graph = new StateGraph(MessagesAnnotation)
 // Compile app
 const app = graph.compile({ callbacks: [tracer] });
 
-// --- 6. CLI setup
+// --- 7. CLI setup
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -99,8 +129,7 @@ async function ask(state = { messages: [] }) {
                 messages: [...state.messages, { role: "user", content: input }],
             });
 
-            const lastMessage =
-                newState.messages[newState.messages.length - 1];
+            const lastMessage = newState.messages[newState.messages.length - 1];
             console.log(chalk.yellow("AI:"), lastMessage.content);
 
             ask(newState);
