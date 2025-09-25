@@ -67,14 +67,16 @@ User input: "${lastUser}"
             callbacks: [tracer],
         });
 
-        // Try parsing JSON
-        parsed = JSON.parse(resp.content);
+        // Clean response: remove markdown fences/backticks
+        let clean = resp.content.trim();
+        clean = clean.replace(/```json/i, "").replace(/```/g, "").trim();
 
-        // Validate structure
+        parsed = JSON.parse(clean);
+
         if (parsed && parsed.isMath && typeof parsed.expression === "string") {
             return {
                 messages: [
-                    { role: "user", content: parsed.expression }, // replace input with expression
+                    { role: "user", content: parsed.expression }, // clean expression
                 ],
                 next: "calculator",
             };
@@ -82,6 +84,7 @@ User input: "${lastUser}"
     } catch (err) {
         console.warn("⚠️ MathDetector fallback:", err.message);
     }
+
 
     // fallback → normal chatbot
     return { messages: state.messages, next: "chatbot" };
